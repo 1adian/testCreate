@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 注： 使用 `v-bind` 指定，可以使得 attrValue 也能使用「表达式」 -->
+      <a v-bind:href="link">{{title}}</a>
+
+      <!-- v-bind 的简写形式 -->
+      <h1 :title="title">{{title}}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 将 vue 的代码 生效的「挂载点」
+    data: {
+      link: "http://www.baidu.com",
+      title: "百度一下",
+    },
+  });
+</script>

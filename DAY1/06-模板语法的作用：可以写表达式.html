@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 注：其 双花括号的代码，不生效 -->
+    <p>{{content}}</p>
+    <div id="app">
+      <h1>{{content}} - {{message}}</h1>
+      <p>数组：{{arr}}</p>
+      <p>对象：{{obj}}</p>
+      <p>表达式 - 数组的map方法：{{arr.map(d => d + '1')}}</p>
+      <p>数字相加的表达式 {{11 + 22}}</p>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    // `el` 指的是 `<div id="app">` 的 DOM元素
+    el: "#app", // 将 vue 的代码 生效的「挂载点」
+    data: {
+      // model
+      //数据
+      content: "千锋数字智慧大前端",
+      message: "Hello Vue!",
+      arr: ["a", "b", "c"],
+      obj: {
+        name: "姓名",
+        age: 33,
+      },
+    },
+  });
+</script>

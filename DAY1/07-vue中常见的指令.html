@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 注： {{}} 需要被 vue 解析，所以 刷新的 瞬间 `{{}}` 会闪现，因为 vue 还没将 {{}} 解析完成 -->
+      <!-- 注：v-cloak 作用：解决 刷新时的 闪现问题 -->
+      <h1 v-cloak>{{content}} - {{message}}</h1>
+
+      <!-- v-pre 的作用：组织 vue 解析 大胡子中的 表达式 -->
+      <h1 v-pre>{{content}} - {{message}}</h1>
+
+      <!-- v-html 其作用 等价于 `innerHTML` -->
+      <div v-html="rawHtml"></div>
+
+      <!-- v-html 其作用 等价于 `innerText` -->
+      <div v-text="rawHtml"></div>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 将 vue 的代码 生效的「挂载点」
+    data: {
+      // model
+      //数据
+      content: "千锋数字智慧大前端",
+      message: "Hello Vue!",
+      rawHtml: `<p>我是 字符串的 p 文本</p>`,
+    },
+  });
+</script>
