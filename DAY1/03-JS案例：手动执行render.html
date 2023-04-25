@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 注 ：  h1 标签 必须 渲染在 #app 的 div 下面 -->
+      <!-- <h1>${model.content}</h1> -->
+    </div>
+  </body>
+</html>
+
+<script>
+  // render - 渲染/绘制
+
+  // 后端返回的数据：
+  const model = {
+    // 注：model 表示数据（data）
+    content: "千锋数字智慧大前端",
+  };
+
+  // 思路：写一个 render 函数，通过 执行 render 函数，将 后台返回的数据 绘制在页面中
+  function render() {
+    document.querySelector("#app").innerHTML = `
+        <h1>${model.content}</h1>
+      `;
+  }
+
+  // 页面刷新， 要执行一次 render()
+  render();
+</script>

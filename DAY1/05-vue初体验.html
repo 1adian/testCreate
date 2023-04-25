@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      MVVM -  
+        Model -> 数据层 -> data 中的属性，是「数据层」
+        View  -> 视图层 -> <div id="app"> 内部的 代码，被称为「视图层」
+        VM    -> 可以认为 VM就是 vue 的实例对象。
+    -->
+    <div id="app">
+      <!-- View 层 -->
+      <!-- 注意： vue 写 html 代码， 有第一个特性 - 双花括号 - `{{ JS代码 }}`  -->
+      <h1>{{content}}</h1>
+      <!-- content 即 data 对象属性的 content -->
+    </div>
+  </body>
+</html>
+
+<script src="../packages/vue.js"></script>
+<script>
+  // 可以写 vue 代码
+  // console.log(Vue);
+  const vm = new Vue({
+    // `el` 指的是 `<div id="app">` 的 DOM元素
+    el: "#app", // '#app' 指的是 上述 DOM 元素的 ID
+    data: {
+      // model
+      //数据
+      content: "千锋数字智慧大前端",
+      // 注：data 中的属性，会被直接挂载到 vm 中，称为 vm 的一个属性
+    },
+  });
+</script>
