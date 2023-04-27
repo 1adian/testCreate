@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 因为 `Vue({el: "#app"})` 使得 本 div 中，的 html 代码，具有了一些 vue 的写法/特性  -->
+      {{msg}}
+    </div>
+  </body>
+</html>
+
+<!-- 代码 体现 vue 的数据响应式 -->
+<script src="../packages/vue.js"></script>
+<script>
+  /* 为什么要学习 框架（vue）：
+  ->  高效
+    -> 为什么 框架它 高效？
+      框架提供了 原生 JS 所 没有的一些功能：
+        -> * 数据的响应式 *
+        -> 组件化 的开发方式
+        -> 渐进式 的开发方式
+*/
+
+  /* ！！！数据的响应式
+  什么是 数据的响应式?
+    -> JS中存储后端给的数据，将该数据 渲染/绘制 到浏览器的页面中。
+        若 JS 的数据变了， 页面中的内容自动跟随响应/变化，
+          那么，上述描述的过程，被称为 「数据的响应式」
+
+*/
+
+  // console.log(Vue); // Vue -> 「构造函数 / 类」，构造函数的用法 - `new Vue()`
+  const vm = new Vue({
+    el: "#app", // 即 css 选择器
+    data: {
+      msg: "Hello Vue!",
+    },
+  });
+
+  // 假设 - 后续 改变了 vm.msg = '新的数据'
+  // 因为是 vue 的代码，所以 数据被改变，页面自动 更新；
+  // 上述过程，即被称为「数据的响应式」。
+</script>

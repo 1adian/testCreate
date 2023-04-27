@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{msg}}</div>
+  </body>
+</html>
+
+<!-- 代码 体现 vue 的数据响应式 -->
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 即 css 选择器
+    data: {
+      msg: "Hello Vue!",
+    },
+  });
+
+  /* Vue 的数据响应式原理是 什么？
+    Vue 的数据响应式原理 使用了 `MVVM 设计模式`：
+
+      MVVM -> M - V - VM
+        - Model  ->  数据：即 data 对象中的数据
+        - View   ->  视图：即 #app 标签下的 html语法
+        - ViewModel ->  指的是 `new Vue()` -> 的实例对象 `vm`
+
+      其运作机制：
+        1）若数据（Model）改变了，vm 自动更新视图(View)
+        2）若视图被改变了，vm自动更新 数据(Model)
+          举例：<input /> 中输入新的字符，即视图被改变了
+
+      上述 机制，又被称为「双向数据绑定」。
+  */
+</script>
