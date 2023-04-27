@@ -1,0 +1,1273 @@
+# 一、Vue 基础
+
+## 1、 框架 前置
+
+### 1.1 为什么要学习流行框架？
+
+企业为了提高效率，时间就是金钱。
+
+开发人员：提高了开发效率
+
+```js
+思考： 为什么 原生JS开发 不高效？
+
+-> 举例： 点击 某个 DOM元素，但 要阻止冒泡：
+
+  const box = document.querySelector(".box");
+
+  // 考虑 浏览器的兼容性
+  box.addEventListener("click", (e) => {
+    // 事件对象 的 兼容性 写法：
+    e = e || window.event;
+
+    // 阻止 冒泡 - 阻止事件冒泡也 需要兼容性写法：
+    e.stopPropagation(); // 阻止事件冒泡
+    e.cancelBubble = true; // 阻止事件冒泡 的 兼容性写法
+
+    console.log("点击了 box...");
+  });
+```
+
+JS => JQuery => 框架时代（React、Vue）
+
+- JS：原生 JS 直接操作 DOM 元素
+- JQuery 库（流行事件 2005 年~2015 年）：提供的大量的**函数**简化操作 DOM 并且解决 DOM 操作的浏览器兼容性问题。
+- 框架（Angular - 谷歌出品 - 现在国内几乎不使用了、React - Facebook 出品、Vue）：提供了一整套全新的、高效的前端开发方案：
+
+### 1.3 前端框架与库的区别？
+
+- 功能层面
+
+  jquery 库：操作 DOM + 网络请求后端数据
+
+  框架：提供全方位功能，齐全
+
+  如果把库比作肯德基的小套餐的话，框架就类似于 KFC 的全家桶级别的。
+
+- 代码层面
+
+  库：是为了实现某个页面功能，而调用某个函数；
+
+  框架：在框架**提供的自己语法**和规则下完成页面功能的开发
+
+- 总结
+
+  库：在 JS 的基础上，引入和使用库的各种函数；
+
+  框架：大而沉，有自己完整的语法，相比库的学习成本更高，但开发效率也更高。
+
+### 框架所提供的重要功能和特性：
+
+- 如 **数据的响应式（数据驱动视图）**
+- 组件化
+- 渐进式
+- ...
+
+### 1.4 思考：前端的的主要工作内容？
+
+```js
+工作中：前端的主要工作内容？
+
+-> 后端给咱前端数据，将后端给的数据，绘制到 页面中。
+```
+
+> ##### 01-原生 JS 如何将数据渲染在页面中.html
+>
+> ```html
+> <script>
+>   // 后端返回的数据：
+>   const model = {
+>     // 注：model 表示数据（data）
+>     content: "千锋数字智慧大前端",
+>   };
+> </script>
+>
+> // 思考1：如何 使用 JS 将 model 中的数据，以下述形式 绘制到 视图（页面）中 //
+> -> 使用 `render` 函数实现
+> <div id="app">
+>   <h1>${model.content}</h1>
+> </div>
+> ```
+>
+> ```html
+> <script>
+>   // 思考2：若 model 的数据发生改变，如何 将改变后的数据，更新至 视图（页面）中
+>   //  -> 再执行一次 render 函数，（render 函数的 作用：根据 model 绘制页面）
+>   const model = {
+>     // 注：model 表示数据（data）
+>     content: "数据被更新...",
+>   };
+> </script>
+>
+> <div id="app">
+>   <h1>${model.content}</h1>
+> </div>
+>
+> // 思考：上述JS操作缺点是什么？ -> 数据被改变了，需要 人工/手动 执行 render
+> 函数。 - -> 不能自动执行，所以 非常麻烦。 // 理想状态，应该怎样？ // ->
+> 数据被改变，自动 执行 render 函数； -> 上述的自动化的过程，即
+> 「数据的响应式（数据驱动视图）」。
+> ```
+
+### 1.5 MVVM 架构模式（Vue 实现 数据响应式 的 设计模式）
+
+目标：理解 MVVM 设计模式的思想 与 作用
+
+![MVVM](images/MVVM.png)
+
+MVVM 其实是指三部分：
+
+- **M** 指的是：**M**odel 层 是数据模型，即用来存储后端返回的数据；
+- **V** 指的是：**V**iew 层 是视图（即浏览器页面），展示 Model 层的数据。
+- **VM** 指的是：**V**iew**M**odel(视图模型)，其同时监测 Model 层和 View 层，只要一方发生变化，则 VM 便会自动更改另一方；最终使两方的内容保持一致。
+
+```vue
+<script>
+// Model 层
+const model = {
+  // 注：model 表示数据（data）
+  content: "数据被更新...",
+};
+</script>
+
+// View 层
+<div id="app">
+  <h1>${model.content}</h1>
+</div>
+```
+
+##### 特性：
+
+1. **数据驱动视图**
+
+   好处：当 Model 层发生数据变化时，页面会自动重新渲染。开发人员只维护好数据的变化，页面结构会被 VM 会自动渲染出来。
+
+2. 双向数据绑定
+
+   举个栗子：当视图中有 <input /> 若其值发生变化，则 vm 会自动把最新的值取出来，更新到数据。
+
+   好处：开发人员不再需要手动操作 DOM 元素，来获取表单元素输入的最新值；js 数据的变化，会被自动渲染到页面上。
+
+Vue.js 是一个提供了 MVVM 风格的双向数据绑定的 Javascript 库，专注于 View 层。
+
+ 它的核心是 MVVM 中的 **VM**，也就是 ViewModel。
+
+ ViewModel 负责连接 View 和 Model，保证视图和数据的一致性，这种轻量级的架构让前端开发更加高效、便捷。
+
+## 2、Vue 介绍
+
+### 2.1 简介
+
+Vue 是一个国产框架，之前所学的 JQuery 库、Bootstrap，基本都诞生于国外。像 Vue 这种优秀的国产框架少之又少，它的作者是国内大神—尤雨溪。
+
+![img](images/EvanYou.jpg)
+
+Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的**渐进式框架**。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。**Vue** **的核心库只关注视图层**，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
+
+![logo](images/01.png)
+
+**兼容性**：**Vue 不支持 IE8 及以下版本**，因为 Vue 使用了 IE8 无法模拟的 ECMAScript 5 特性。但它支持所有兼容 ECMAScript 5 的浏览器。
+
+**IE：它是一个用来下载其他浏览器的好工具**
+
+![ie](images/ie.png)
+
+### 2.2 市场地位
+
+Vue.js 是前端的**主流框架之一**，和 Angular.js、React.js 一起，并成为前端三大主流框架！
+
+- React 和 Vue 有许多相似之处，它们都有：
+
+  - 使用 Virtual DOM
+  - 提供了 响应式 (Reactive) 和 组件化 (Composable) 的视图组件。
+  - 将注意力集中保持在核心库，而将其他功能如路由和全局状态管理交给相关的库。
+
+- Vue.js 的优点：
+
+  1. 体积小，压缩后只有 33kb
+
+  2. 更高的运行效率，基于虚拟 dom 原理。
+
+     一种可以预先通过 JavaScript 进行各种计算，把最终的 DOM 操作计算出来并优化的技术，由于这个 DOM 操作属于预处理操作，并没有真实的操作 DOM，所以叫做虚拟 DOM。
+
+  3. 双向数据绑定原理。
+
+     让开发者不用再去操作 dom 对象，把更多精力投入到业务逻辑上
+
+  4. 生态丰富、学习成本低。
+
+     市面上成熟、稳重的基于 vue.js 的 UI 框架、常用组件多。
+
+     基于以上原因，Vue.js 对初学者友好，容易上手。国内中小企业用的较多。
+
+### 2.3 Vue2 和 Vue3
+
+- \*\* Vue2 官网：https://v2.cn.vuejs.org/
+- Vue3 官网：https://cn.vuejs.org/
+- 授课路线：先 vue2 再 vue3
+  - Vue2 的编程范式(风格)：典型的 面向对象 -> `new 构造函数()`
+  - Vue3 的编程范式(风格)：面向对象 + 面向函数
+
+## 3、Vue 初体验
+
+### 3.1 Vue 使用方式
+
+- 方式一：直接 CDN 引入
+
+  以选择引入开发环境版本还是生产环境版本
+
+  ```html
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 生产环境版本，优化了尺寸和速度 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  ```
+
+- 方式二：下载并引入（**==初学者推荐==**）
+
+  开发环境 ：https://v2.cn.vuejs.org/js/vue.js
+
+  生产环境 ：https://v2.cn.vuejs.org/js/vue.min.js
+
+### 3.2 Vue 基本使用
+
+Vue.js 的 html 代码写法，是一个允许采用简洁的 模板语法 来声明式地将数据渲染进 DOM 的系统。
+
+```html
+<div id="app">
+  <h1>{{content}}</h1>
+</div>
+```
+
+每个 Vue 应用都是通过用 `Vue` 函数创建一个新的 **Vue 实例**开始的：
+
+```javascript
+const vm = new Vue({
+  // Vue实例
+  el: "#app", //目的地，挂载点
+  data: {
+    //数据
+    content: "千锋数字智慧大前端",
+  },
+});
+```
+
+我们已经成功创建了第一个 Vue 应用！
+
+看起来这跟渲染一个字符串模板非常类似，但是 Vue 在背后做了大量工作。
+
+现在数据和 DOM 已经被建立了关联，所有东西都是**响应式的**。
+
+```vue
+// 我们要怎么确认呢？
+```
+
+> ##### 01.vue 初体验.html
+>
+> ```html
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head>
+>     <meta charset="UTF-8" />
+>     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>     <title>Document</title>
+>   </head>
+>   <body>
+>     <div id="app">
+>       <h1>{{content}}</h1>
+>     </div>
+>   </body>
+> </html>
+> <script src="./vue.js"></script>
+> <script>
+>   var vm = new Vue({
+>     // Vue实例
+>     el: "#app", //目的地，挂载点
+>     data: {
+>       //数据
+>       content: "千锋数字智慧大前端",
+>     },
+>   });
+> </script>
+> ```
+
+#### 总结：
+
+1. 引入 vue.js
+2. 在 body 中创建一个挂载点
+3. new Vue，挂载到挂载点上
+
+> 使用 vue 的第一个好处：但凡 data 中声明的 属性 均可被挂载到 `{{  }}` 中，且 data 中的属性具有 **数据的响应式** 。
+
+### 3.3 开发者工具
+
+在使用 Vue 时，我们推荐在你的浏览器上安装 **Vue Devtools**。它允许你在一个更友好的界面中审查和调试 Vue 应用
+
+##### 安装 chrome 插件的方式：
+
+![devtools不显示0](images/安装chrome插件的方式.png)
+
+##### devtools 不显示处理方式：
+
+![devtools不显示0](images/devtools不显示0.png)
+
+![devtools不显示.png](images/devtools不显示.png)
+
+## 4、模板语法
+
+ Vue.js 使用了基于 HTML 的模板语法 -> “Mustache”语法，胡须 - 被俗称为 **「大胡子」**
+
+ 模板语法的作用：new Vue 下很多 JS 数据可以直接在 模板语法中被使用 -> 如 data 中的属性，且 模板语法中的数据具有响应性。
+
+数据绑定最常见的形式就是使用“Mustache”语法 (双大括号) 的文本插值：
+
+```html
+<div id="app">{{ message }}</div>
+```
+
+```js
+var vm = new Vue({
+  el: "#app",
+  data: {
+    message: "Hello Vue!",
+  },
+});
+```
+
+效果：
+
+ ![logo](images/3Mustache.png)
+
+#### 4.1 {{ 表达式 }} 可以放什么？
+
+- data 中的 任意数据类型
+
+```vue
+- 数组 - 对象
+```
+
+- 表达式
+  - 什么是 表达式？
+
+```vue
+-> ['a', 'b', 'c'].map(d => d + '1'); // 也是表达式 -> 123 + 111 // 也是表达式
+```
+
+> 06-模板语法的作用：可以写表达式
+>
+> ```vue
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head>
+>     <meta charset="UTF-8" />
+>     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>     <title>Document</title>
+>   </head>
+>   <body>
+>     <!-- 注：其 双花括号的代码，不生效 -->
+>     <p>{{ content }}</p>
+>     <div id="app">
+>       <h1>{{ content }} - {{ message }}</h1>
+>       <p>数组：{{ arr }}</p>
+>       <p>对象：{{ obj }}</p>
+>       <p>表达式 - 数组的map方法：{{ arr.map((d) => d + "1") }}</p>
+>       <p>数字相加的表达式 {{ 11 + 22 }}</p>
+>     </div>
+>   </body>
+> </html>
+> <script src="../packages/vue.js"></script>
+> <script>
+> const vm = new Vue({
+>   // `el` 指的是 `<div id="app">` 的 DOM元素
+>   el: "#app", // 将 vue 的代码 生效的「挂载点」
+>   data: {
+>     // model
+>     //数据
+>     content: "千锋数字智慧大前端",
+>     message: "Hello Vue!",
+>     arr: ["a", "b", "c"],
+>     obj: {
+>       name: "姓名",
+>       age: 33,
+>     },
+>   },
+> });
+> </script>
+> ```
+
+## 5、指令语法
+
+```vue
+// 概念约定： 标签的属性：属性名、 标签的属性值 分别的英文 和 简写
+
+<div title="xxx">
+  <!-- 
+		title 被称为：「属性名」
+			->  英文 和 简写： attribute
+				-> attrName
+
+		'xxx' 被称为：「属性值」
+			-> 英文 和 简写
+				->  attrValue
+	-->
+  
+</div>
+```
+
+vue 中定义好的一些以"v-"开头+具体的名称的 属性，这些属性都有特定的功能。
+
+- 说明
+
+  指令加在标签，在 Vue 中凡是以 `v-` 开头的都叫做「指令」，加上就会有特定的功能。
+
+- 常见用法
+
+  ```html
+  <div v-xx></div>
+    
+  <div v-xx="表达式 或 data中的属性"></div>
+  <div v-xx:yy="表达式"> </div>
+  ```
+
+- 注意
+
+  指令分：自定义指令和内置指令（Vue 自带）
+
+ 内置指令：Vue 自带 的，能直接使用的 指令
+
+ 自定义指令：就是用户自己定义的。扩展功能
+
+下述列举 常用的 内置指令：
+
+### 5.1 文本绑定
+
+#### v-html、v-text
+
+双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML，需要用到 v-html
+
+```html
+<p>Using mustaches: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+<!-- v-text -->
+<p>Using v-text directive: <span v-text="rawHtml"></span></p>
+```
+
+#### v-cloak
+
+cloak ：[kləuk] 笼罩，覆盖；隐藏，掩饰的意思
+
+用于隐藏尚未完成编译的 DOM 模板。 {{}}
+
+当使用直接在 DOM 中书写的模板时，可能会出现一种叫做“未编译模板闪现”的情况：用户可能先看到的是还没编译完成的双大括号标签，直到挂载的组件将它们替换为实际渲染的内容。
+
+`v-cloak` 会保留在所绑定的元素上，直到相关组件实例被挂载后才移除。配合像 `[v-cloak] { display: none }` 这样的 CSS 规则，它可以在组件编译完毕前隐藏原始模板。
+
+```html
+<style>
+  [v-cloak] {
+    display: none;
+  }
+</style>
+
+<!-- 直到编译完成前，`<div>` 将不可见。 -->
+<div v-cloak>{{ message }}</div>
+```
+
+#### v-pre
+
+元素内具有 `v-pre`，所有 Vue 模板语法都会被保留并按原样渲染。最常见的用例就是显示原始双大括号标签及内容。
+
+```html
+<div v-pre>{{ rawHTML }}</div>
+```
+
+> 07-vue 中常见的指令.html
+>
+> ```vue
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head>
+>     <meta charset="UTF-8" />
+>     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>     <title>Document</title>
+>     <style>
+>       [v-cloak] {
+>         display: none;
+>       }
+>     </style>
+>   </head>
+>   <body>
+>     <div id="app">
+>       <!-- 注： {{}} 需要被 vue 解析，所以 刷新的 瞬间 `{{}}` 会闪现，因为 vue 还没将 {{}} 解析完成 -->
+>       <!-- 注：v-cloak 作用：解决 刷新时的 闪现问题 -->
+>       <h1 v-cloak>{{ content }} - {{ message }}</h1>
+>
+>       <!-- v-pre 的作用：组织 vue 解析 大胡子中的 表达式 -->
+>       <h1 v-pre>{{ content }} - {{ message }}</h1>
+>
+>       <!-- v-html 其作用 等价于 `innerHTML` -->
+>       <div v-html="rawHtml"></div>
+>
+>       <!-- v-html 其作用 等价于 `innerText` -->
+>       <div v-text="rawHtml"></div>
+>     </div>
+>   </body>
+> </html>
+> <script src="../packages/vue.js"></script>
+> <script>
+> const vm = new Vue({
+>   el: "#app", // 将 vue 的代码 生效的「挂载点」
+>   data: {
+>     // model
+>     //数据
+>     content: "千锋数字智慧大前端",
+>     message: "Hello Vue!",
+>     rawHtml: `<p>我是 字符串的 p 文本</p>`,
+>   },
+> });
+> </script>
+> ```
+
+### 5.2 属性绑定 - `v-bind`
+
+思考：若 给标签的 属性值 也能像 `{{ 表达式 }}` 一样，具有响应性，岂不美哉...
+
+-> 而 `v-bind:attrName="表达式"` 就是 为了 实现 标签属性的 响应性的
+
+- v-bind 的简写方式： `:attrName="表达式"` 其是 `v-bind:attrName="表达式"` 的简写形式。
+
+> 绑定属性.html
+>
+> ```vue
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head>
+>     <meta charset="UTF-8" />
+>     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>     <title>Document</title>
+>   </head>
+>   <body>
+>     <div id="app">
+>       <!-- 注： 使用 `v-bind` 指定，可以使得 attrValue 也能使用「表达式」 -->
+>       <a v-bind:href="link">{{ title }}</a>
+>
+>       <!-- v-bind 的简写形式 -->
+>       <h1 :title="title">{{ title }}</h1>
+>     </div>
+>   </body>
+> </html>
+> <script src="../packages/vue.js"></script>
+> <script>
+> const vm = new Vue({
+>     el: "#app", // 将 vue 的代码 生效的「挂载点」
+>     data: {
+>       link: "http://www.baidu.com",
+>       title: "百度一下",
+>     },
+> });
+> </script>
+> ```
+
+#### 5.2.1 动态绑定类属性
+
+操作元素的 class 列表和内联样式是数据绑定的一个常见需求。
+
+但字符串拼接 class 和 style ，操作麻烦且容易出错。
+
+因此，在将 v-bind 用于 class 和 style 时，Vue.js 做了专门的增强。
+
+表达式结果的类型除了字符串之外，还可以是**对象**或**数组**。
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+
+      .bold {
+        font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- vue 的 v-bind，对 class 和 style 做了优化：
+        其可以是 字符串，也可以是 「对象」和「数组」！  
+      -->
+
+      <!-- class 可以是 对象，若 对象的 key 的 value 是 true，则 该 DOM 有 className 为 key 的 class -->
+      <div v-bind:class="{ box: flag, bold: true }">对象方式</div>
+
+      <!-- class 的数组写法：类比为 DOM.classList
+        注： class 为 数组的时候，此种写法 非常常用！！！
+      -->
+      <div :class="['box', isBold ? 'bold' : '']">数组形式的 class</div>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+const vm = new Vue({
+  el: "#app", // 将 vue 的代码 生效的「挂载点」
+  data: {
+    flag: true,
+    isBold: true,
+  },
+});
+</script>
+```
+
+##### 注意：
+
+==在 vue 当中 静态 class 和 动态绑定 class 可以同时存在==
+
+```vue
+<!-- 注意：在vue 当中 静态class和动态绑定class可以同时存在 -->
+<div class="title" v-bind:class="{ box: flag, size: 3 > 2 }">对象方式</div>
+```
+
+#### 5.2.2 动态绑定 style 属性
+
+- 对象语法
+
+  `v-bind:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名：
+
+  ```html
+  <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+  ```
+
+  ```js
+  data: {
+    activeColor: 'red',
+    fontSize: 30
+  }
+  ```
+
+- 数组语法
+
+  `v-bind:style` 的数组语法==可以将多个样式对象==应用到同一个元素上：
+
+  ```html
+  <div v-bind:style="[baseStyles, overridingStyles]"></div>
+  ```
+
+  > style 的用法.html
+  >
+  > ```html
+  > <!DOCTYPE html>
+  > <html lang="en">
+  >   <head>
+  >     <meta charset="UTF-8" />
+  >     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  >     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  >     <title>Document</title>
+  >   </head>
+  >   <body>
+  >     <div id="app">
+  >       <!-- style 是 对象 的写法 更常用！！！ -->
+  >       <div v-bind:style="{ color: 'red', fontSize: fontSize }">
+  >         对象方式
+  >       </div>
+  >
+  >       <div :style="[baseStyles, overridingStyles]">数组的写法</div>
+  >     </div>
+  >   </body>
+  > </html>
+  > <script src="../packages/vue.js"></script>
+  > <script>
+  >   const vm = new Vue({
+  >     el: "#app", // 将 vue 的代码 生效的「挂载点」
+  >     data: {
+  >       fontSize: "50px",
+  >       baseStyles: {
+  >         color: "blue",
+  >         fontSize: 15,
+  >       },
+  >       overridingStyles: {
+  >         background: "black",
+  >         color: "white", // 注： 数组中的 对象，其 属性 若发生了 重复，则 后面的 会 覆盖前面的属性
+  >       },
+  >     },
+  >   });
+  > </script>
+  > ```
+
+
+
+<hr />
+
+### 预讲：事件简介
+
+```vue
+<button @事件类型="赋值语句"></button>
+```
+
+
+
+<hr />
+
+
+
+### 5.3 条件渲染
+
+原生 js : 条件分支  if 判断
+
+```js
+if(true){
+    //....
+}else if(){
+
+}else if(){
+
+}else{
+
+}
+```
+
+在 Vue 当中，条件渲染用 v-if、v-else-if、v-else、v-show。
+
+#### 5.3.1 v-if
+
+`v-if` 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 true 的时候被渲染
+
+```html
+<h1 v-if="awesome">Vue is awesome!</h1>
+```
+
+也可以用 `v-else` 添加一个“else 块”：
+
+```html
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no</h1>
+```
+
+**在 template 上使用**
+
+因为 `v-if` 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 `<template>` 元素当做==不可见的包裹元素==，并在上面使用 `v-if`。最终的渲染结果将不包含 `<template>` 元素。 只起包裹作用
+
+```html
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+```
+
+#### 5.3.2 v-else
+
+你可以使用 `v-else` 指令来表示 `v-if` 的“else 块”：
+
+```html
+<div v-if="flag">Now you see me</div>
+<div v-else>Now you don't</div>
+```
+
+`v-else` 元素必须紧跟在带 `v-if` 或者 `v-else-if` 的元素的后面，否则它将不会被识别。
+
+`v-else-if`，顾名思义，充当 `v-if` 的“else-if 块”，可以连续使用：
+
+```html
+<div v-if="type === 'A'">A</div>
+<div v-else-if="type === 'B'">B</div>
+<div v-else-if="type === 'C'">C</div>
+<div v-else>Not A/B/C</div>
+```
+
+#### 5.3.3 v-show
+
+另一个用于根据条件展示元素的选项是 `v-show` 指令。用法大致一样：
+
+```vue
+<h1 v-show="ok">Hello!</h1>
+```
+
+不同的是带有 `v-show` 的元素始终会被渲染并保留在 DOM 中。`v-show` 只是简单地切换元素的 CSS property `display`
+
+**v-if 与 v-show 比较**
+
+- 渲染模式：
+- 开销/性能：
+- 如何选择：
+
+#### 总结：
+
+1. 语法：
+
+   ```vue
+   <div v-if='条件1'>条件1成立</div>
+   <div v-else-if='条件2'>条件2成立</div>
+   <div v-else>条件1，2都不成立</div>
+   ```
+
+2. v-if 功能：添加、删除元素；切换频率不高，用v-if
+
+![v-if](/Users/mark/Downloads/day18_课件/images/v-if.png)
+
+3. v-else-if 、v-else 要配合 v-if 一起使用，不能单独使用
+
+4. v-show 语法:
+
+   ```vue
+   <div v-show='条件'>显示</div>
+   ```
+
+5. 特点：控制元素的display属性是否none；切换比较频繁，建议使用v-show
+
+   应用场景：切换开销比较高就用 v-show
+
+
+
+### 5.4 列表渲染
+
+原生JS  遍历数组  for 
+
+
+
+我们可以用 `v-for` 指令基于一个数组来渲染一个列表。`v-for` 指令需要使用 `item in items` 形式的特殊语法，其中 `items` 是源数据数组，而 `item` 则是被迭代的数组元素的**别名**。
+
+```html
+<ul id="app">
+  <li v-for="item in items" :key="item.name">
+    {{ item.name }}
+  </li>
+</ul>
+
+```
+
+```js
+var example1 = new Vue({
+  el: '#app',
+  data: {
+    items: [
+      { name: '千千' },
+      { name: '小峰' }
+    ]
+  }
+})
+```
+
+
+
+>嵌套渲染
+>
+>```vue
+><!DOCTYPE html>
+><html lang="en">
+>  <head>
+>    <meta charset="UTF-8" />
+>    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>    <title>Document</title>
+>  </head>
+>  <body>
+>    <ul id="app">
+>      <li v-for="item in items">
+>        {{item.name}}
+>        <ol>
+>          <li v-for="child in item.children">{{child.name}}</li>
+>        </ol>
+>      </li>
+>    </ul>
+>  </body>
+></html>
+><script src="../packages/vue.js"></script>
+><script>
+>  const vm = new Vue({
+>    el: "#app",
+>    data: {
+>      items: [
+>        {
+>          name: "aa",
+>          children: [
+>            { name: "aa - 1" },
+>            { name: "aa - 2" },
+>            { name: "aa - 3" },
+>          ],
+>        },
+>        {
+>          name: "bb",
+>          children: [
+>            { name: "bb - 1" },
+>            { name: "bb - 2" },
+>            { name: "bb - 3" },
+>          ],
+>        },
+>      ],
+>    },
+>  });
+></script>
+>
+>```
+>
+>
+
+
+
+##### 作业：嵌套列表渲染
+
+<img src="/Users/mark/Downloads/day18_课件/images/作业：嵌套列表渲染.jpg" alt="img" style="zoom:67%;" />
+
+
+
+
+
+## 6、事件处理
+
+### 前置知识：
+
+1. Vue2 典型的面向对象写法
+
+2. Vue的 函数 - methods
+
+   注：因为 vue 是「面向对象」写法，所以 函数中，可以使用 `this`。
+
+
+
+
+
+### 6.1 监听事件 - 基础写法：
+
+注：（vue 的事件绑定，一共三种写法）
+
+可以用 `v-on` 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。
+
+- 语法：
+
+```html
+<div id="example-1">
+  <button v-on:click="counter += 1">Add 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
+</div>
+```
+
+```js
+var example1 = new Vue({ 
+    el: '#example-1',
+    data: {  
+        counter: 0 
+    } 
+})
+```
+
+​	![logo](/Users/mark/Downloads/day18_课件/images/7.png)
+
+
+
+- 事件绑定的简写：
+
+`v-on:click = "JS语句"` 的简写方式： `@click = "JS语句"`
+
+
+
+### 6.2 事件 触发 回调函数
+
+```html
+<div id="example-2">  
+    <!-- `greet` 是在下面定义的方法名 -->  
+    <button v-on:click="greet">Greet</button>
+</div>
+```
+
+```js
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    name: 'Vue.js'
+  },
+  // 在 `methods` 对象中定义方法
+  methods: {
+    greet: function (event) {
+      // `this` 在方法里指向当前 Vue 实例
+      alert('Hello ' + this.name + '!')
+      // `event` 是原生 DOM 事件
+      if (event) {
+        alert(event.target.tagName)
+      }
+    }
+  }
+})
+
+```
+
+
+
+### 6.3 事件传递参数
+
+```html
+<div id="example-3">
+  <button v-on:click="say('hi')">Say hi</button>
+  <button v-on:click="say('what')">Say what</button>
+</div>
+```
+
+```js
+new Vue({
+  el: '#example-3',
+  methods: {
+    say: function (message) {
+      alert(message)
+    }
+  }
+})
+```
+
+
+
+##### 小结：
+
+事件相关：1、this 指向   2、传参  3、事件对象
+
+
+
+1. this 指向： 指向当前 vm实例对象
+
+2. 传参：  ` v-on:click="say('Hi')"`
+
+3. 事件对象：
+
+   不带参数:接受到的第一个参数就是事件对象 
+
+   带参数：又要用事件对象时，必须写成$event！！！！！
+
+
+
+### 6.4 事件修饰符
+
+在事件处理程序中调用 `event.preventDefault()` 或 `event.stopPropagation()` 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。
+
+为了解决这个问题，Vue.js 为 `v-on` 提供了**事件修饰符**。之前提过，修饰符是由点开头的指令后缀来表示的。
+
+#### 6.4.1 事件修饰符
+
+- `.stop`
+- `.prevent`
+- `.capture`
+- `.self`
+- `.once`
+- .passive
+
+```html
+<!-- 阻止单击事件继续传播 -->
+<a v-on:click.stop="doThis"></a>
+
+<!-- 提交事件不再重载页面 -->
+<form v-on:submit.prevent="onSubmit"></form>
+
+<!-- 修饰符可以串联 -->
+<a v-on:click.stop.prevent="doThat"></a>
+
+<!-- 只有修饰符 -->
+<form v-on:submit.prevent></form>
+
+<!-- 添加事件监听器时使用事件捕获模式 -->
+<!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+<div v-on:click.capture="doThis">...</div>
+
+<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+<!-- 即事件不是从内部元素触发的 -->
+<div v-on:click.self="doThat">...</div>
+```
+
+#### 
+
+
+
+```vue
+<!-- 案例： 阻止冒泡  和  阻止浏览器的默认行为 -->
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body,
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .blue {
+    width: 300px;
+    height: 300px;
+    background-color: blue;
+  }
+  .green {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+  }
+  .red {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+</style>
+
+<div id="app">
+  <div class="blue" @click.stop="handleClickBlue">
+    <div class="green" @click.stop="handleClickGreen">
+      <div
+           class="red"
+           @click.stop="handleClickRed"
+           @contextmenu="handleContextMenuRed"
+           ></div>
+    </div>
+  </div>
+</div>
+```
+
+#### 6.4.2 按键修饰符
+
+在监听键盘事件时，我们经常需要检查详细的按键。Vue 允许为 `v-on` 在监听键盘事件时添加按键修饰符：
+
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+
+```html
+<input v-on:keyup.enter="submit">
+```
+
+#### 6.4.3 系统修饰键
+
+可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。
+
+- `.ctrl`
+- `.alt`
+- `.shift`
+- `.meta`
+
+```html
+<!-- Alt + C -->
+<input v-on:keyup.alt.67="clear">
+
+<!-- Ctrl + Click -->
+<div v-on:click.ctrl="doSomething">Do something</div>
+```
+
+
+
+
+
+### 6.5 案例：点击高亮
+
+要求：
+
+1. 动态渲染列表
+2. 点谁高亮，谁高亮
+
+![image-点击高亮](/Users/mark/Downloads/day18_课件/images/点击高亮.png)
+
+
+
+
+
+
+
+
+
+
+
+### vue底层知识 补充：
+
+- 对象声明的“第二种形式”
+  - 对象的 getter 和 setter
+
+- Vue 响应式原理：
+  - 用 setter 和 getter 实现 vue 的响应式原理
+
+### 
+
+
+
+### 6.6 v-for一定要绑定key属性
+
+#### v-for 为什么一定要绑定key?
+
+> 有相同父元素的子元素必须有**独特的 key**。重复的 key 会造成渲染错误。
+
+https://v2.cn.vuejs.org/v2/api/#key
+
+##### 结论：
+
+设置key的目的，就是为了让列表中当前节点得到复用。像vue、react、还有小程序当中，只要用了遍历，生成同样结构的数据，必须要给每个结构加一个唯一性的标识。
+
+
+
+#### 为什么需要虚拟DOM？
+
+数据渲染到界面要经历创建虚拟DOM的过程，才能真正上DOM树。
+
+1. 真实DOM太重，属性太多。虚拟DOM轻。
+2. 新旧虚拟DOM之间的对比，效率更高。
+
+![虚拟DOM](/Users/mark/Downloads/day18_课件/images/虚拟DOM.png)
+
+**虚拟Dom**：是真实Dom的映射，即用 JS 对象来描述真实DOM节点，本质上就是在 JS 和 DOM 之间做了一个缓存。
+
+真实DOM：
+
+```vue
+<ul id='list'>
+    <li class='item'>aa</li>
+    <li class='item'>bb</li>
+    <li class='item'>cc</li>
+</ul>
+```
+
+虚拟DOM：
+
+```js
+{
+    tagName:'ul',//节点标签名
+    props:{//dom的属性，用一个对象存储键值对
+        id:'list'
+    },
+    children:[//该节点的子节点
+        {tagName:'li',props:{class:'item'},children:['aa']}，
+        {tagName:'li',props:{class:'item'},children:['bb']},
+        {tagName:'li',props:{class:'item'},children:['cc']}
+    ]
+}
+```
+
+别名：vdom、vnode、virtual dom、virtual node
+
+
+
+**diff 算法**：比较两棵虚拟 DOM 树的差异，最小量变化
+
+**patch**：将两个虚拟 DOM 对象的差异应用到真正的 DOM 树。
+
+
+
+#### 为什么key属性最好不要用下标
+
+
+
+
+
+#### 总结：          
+
+1. 列表渲染一定要绑定key！！！！
+2. 设置key的目的，就是为了让列表中当前节点得到复用
+3. 原则：尽量不要用下标，用后台提供的唯一标识！
+
