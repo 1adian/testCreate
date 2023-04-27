@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        vue 中， html 代码，几乎都 具有的 JS的特性： 
+          - 条件分支（逻辑）
+          - 循环
+      -->
+
+      <!-- 需求：
+        循环 li 标签，显示： items 中的 每个 name
+       -->
+      <ul>
+        <!-- 
+          v-for循环的作用：item 表示 遍历 items 数组中的 每个元素
+          
+          `:key` 的作用：为了 提高 vue 循环渲染的性能，所以建议使用。
+            -> 其 attrValue 的值，一定要是 不重复的值（唯一值）。
+              具体原因：后续会讲到；
+
+            
+         -->
+        <li v-for="item in items" :key="item.name">{{item.name}}</li>
+      </ul>
+      <hr />
+      <!-- 嵌套循环： -->
+
+      <h1>嵌套循环</h1>
+      <ul>
+        <li v-for="item in arr" :key="item.name">
+          <h1>{{item.name}}</h1>
+          <!-- 基于 item. -->
+          <p v-for="d in item.children" :key="d.name">{{d.name}}</p>
+        </li>
+      </ul>
+
+      <!-- 循环中的下标： -->
+      <hr />
+      <h1>循环的下标</h1>
+      <ul>
+        <li v-for="(item, index) in items" :key="item.name">
+          <!-- item 可以认为是 “形参”，该形参 在 本标签内部都有效 -->
+          下标：{{index}} - 具体值：{{item.name}}
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 即 css 选择器，选择 vuehtml代码的「挂载点」
+    data: {
+      items: [
+        { name: "千千" }, // 下标为 0
+        { name: "小峰" }, // 下标为 1
+        { name: "扣丁" }, // 下标为 2
+        { name: "小课堂" }, // 下标为 3
+      ],
+      arr: [
+        {
+          name: "aa",
+          children: [
+            { name: "aa - 1" },
+            { name: "aa - 2" },
+            { name: "aa - 3" },
+          ],
+        },
+        {
+          name: "bb",
+          children: [
+            { name: "bb - 1" },
+            { name: "bb - 2" },
+            { name: "bb - 3" },
+          ],
+        },
+      ],
+    },
+  });
+</script>
