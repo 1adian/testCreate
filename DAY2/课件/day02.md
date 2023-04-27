@@ -798,9 +798,11 @@ if(true){
 
 **v-if 与 v-show 比较**
 
-- 渲染模式：
-- 开销/性能：
+- 渲染模式：v-if 控制DOM元素的 销毁与创建； v-show 是控制 css 的 display。
+- 开销/性能：v-if 因为需要 销毁和创建，而 v-show 只是控制 display 的 css，所以 v-show 对性能开销更低。
 - 如何选择：
+  - 若是要控制大量元素的显示与隐藏，v-if开销更大，不建议使用。
+  - 但 若要有 条件分支的逻辑：if - else / if - else ... if，只能用 v-if；因为 v-show 没有其他的 v-else 的逻辑。
 
 #### 总结：
 

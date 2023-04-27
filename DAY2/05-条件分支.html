@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        v-if="JS表达式"
+
+          作用：若 表达式返回值是 true，则 显示该 DOM元素
+            否则，销毁该DOM元素
+       -->
+      <h1 v-if="flag">静态文本：{{msg}}</h1>
+
+      <!-- 
+        v-if + v-else 的用法：
+          强调： v-else 必须 和 v-if 同时出现：
+
+       -->
+      <h1 v-if="flag">你好</h1>
+      <h1 v-else>我好</h1>
+      <button @click="flag = !flag">点我</button>
+
+      <!-- 
+        若 希望通过 v-if 批量处理 多个 标签的 显示与隐藏，
+        可以将 这些标签 统一放入 <template> 中
+
+       -->
+      <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+
+      <button @click="ok = !ok">批量显示与隐藏</button>
+
+      <hr />
+
+      <!-- 条件分支：
+          v-if + v-else-if + v-else
+       -->
+      <p>条件分支：v-if + v-else-if + v-else</p>
+      <div v-if="type === 'A'">A</div>
+      <div v-else-if="type === 'B'">B</div>
+      <div v-else-if="type === 'C'">C</div>
+      <div v-else>Not A/B/C</div>
+
+      <hr />
+      <!-- v-show
+          作用：其与 v-if 类似，都是控制DOM元素的 显示与隐藏
+
+          但其与v-if 有区别的是：
+            v-if 隐藏/显示 DOM元素，是 「销毁」/「创建」DOM元素
+
+            v-show 隐藏/显示 DOM元素，是 控制 css- display 来控制DOM元素的显示与否。
+       -->
+      <h1 v-show="isShow">v-show演示</h1>
+      <button @click="isShow = !isShow">Show与否</button>
+    </div>
+  </body>
+</html>
+
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 即 css 选择器，选择 vuehtml代码的「挂载点」
+    data: {
+      msg: "Hello Vue!",
+      flag: true,
+      ok: true,
+      type: null,
+      isShow: true,
+    },
+  });
+</script>
