@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* css 定义了 一个 v-cloak 的指令，其作用：解决刷新值 “闪现问题” */
+      [v-cloak] {
+        display: none;
+      }
+      .big-font {
+        font-size: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 表达式：
+        什么是表达式： 但凡可以放到 `等号` 右侧的 代码，都可以被称为 表达式。
+        
+        var data = 123; // `123` 即是 表达式
+        data = 1 + 2 + 3; // `1 + 2 + 3` 是表达式
+        data = [1, 2, 3].map(d => d * 10); // 也是 表达式
+        data = true ? '你好' : '我好'; // 三木运算符也是 表达式
+
+
+        // Expression expected -> `表达式被期待`
+        // 强调：for 循环 不是 表达式
+        var data = for (var i = 0; i < 10; i++) {
+          console.log(i)
+        }
+
+        // Expression expected -> `表达式被期待`
+        // 强调：if 条件分支 不是 表达式
+        var data = if (true) {
+          console.log('YO~~')
+        }
+
+        // 单独强调： 只要是 函数执行，本质也是 表达式
+        // 但 若函数 ，没有返回值，则 返回的返回值是 `undefined`，
+        // 其 是表达式，但没有意义；
+        // 所以，强调：vue 的大胡子中， 不能写 返回值为 undefined 的函数
+        const data = [1, 2, 3].forEach((d) => {
+          console.log(d);
+        });
+        console.log(data);
+     -->
+    <div id="xxx">
+      <!-- 
+        `大胡子 - 模板语法` 的用法：
+          1）大胡子中，能识别 data 中声明的数据，且其数据具有「响应性」。
+          2）大胡子中，可以写 JS 表达式
+       -->
+      <h1 v-cloak>静态文本：{{msg}}</h1>
+      <h2 v-cloak>过滤出数字的偶数：{{ arr.filter(d => d % 2 === 0) }}</h2>
+
+      <!-- 
+        vue 指令：其本质/写法 是 标签中的 attribute 
+      
+        属性名：`href`
+        属性值：`link`
+          注：只要 使用了 `v-bind` 指令，则可将 属性值，变为 data 当中的数据
+            且其具有「数据的响应性」。
+
+        强调：`v-bind:attrName = "attrValue"`  因为   `v-bind` 太过常用，所以有简写：
+          `:attrName="attrValue"`
+      -->
+      <!-- <a v-bind:href="link">{{ title }}</a> 的简写形式： -->
+      <a
+        :class="[flag && 'big-font']"
+        v-bind:style="{color: 'red'}"
+        :href="link"
+        >{{ title }}</a
+      >
+
+      <!-- 指令中的 style 和 class
+          因为 style 和 class 太过常用，所以 vue 单独设置，其两者 可以 使用 数组 和 对象的两种形式。
+
+          强调：
+            :style 中常用的 是 对象的形式
+            :class 中常用的 是 数组的形式
+       -->
+    </div>
+  </body>
+</html>
+
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#xxx", // 即 css 选择器，选择 vuehtml代码的「挂载点」
+    // 注：挂载点 内部的 html代码，都是 可以用 vue写法的html代码
+    data: {
+      msg: "Hello Vue!",
+      arr: [9, 8, 7, 6, 5],
+      link: "http://www.baidu.com",
+      title: "百度一下",
+      flag: true,
+    },
+  });
+</script>
