@@ -1046,7 +1046,7 @@ new Vue({
 
 
 
-### 6.4 事件修饰符
+### 6.4 事件修饰符（本质 就是 一些 “快捷键”）
 
 在事件处理程序中调用 `event.preventDefault()` 或 `event.stopPropagation()` 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。
 
@@ -1054,9 +1054,9 @@ new Vue({
 
 #### 6.4.1 事件修饰符
 
-- `.stop`
-- `.prevent`
-- `.capture`
+- `.stop` 阻止事件事件冒泡
+- `.prevent`  阻止浏览器的默认行为
+- `.capture` 开启 捕获模式
 - `.self`
 - `.once`
 - .passive
@@ -1155,7 +1155,7 @@ new Vue({
 - `.ctrl`
 - `.alt`
 - `.shift`
-- `.meta`
+- `.meta`  windows 下，指的是 windows键；macos下，指的是 command 键；
 
 ```html
 <!-- Alt + C -->
