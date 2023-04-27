@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>num: {{num}}</h2>
+
+      <!-- 事件监听的写法1： 事件中 执行 JS代码 -->
+      <!-- <button v-on:click="num += 1">将{{num}}加一</button> -->
+
+      <!-- 事件 执行的 简写：可以将 `v-on` 简写为 `@` -->
+      <button @click="num += 1">将{{num}}加一</button>
+
+      <hr />
+      <h2>点击事件绑定函数</h2>
+      <!-- 事件监听的写法2：`@click="methods中的函数"`   -->
+      <button @click="add2Num">加2</button>
+
+      <hr />
+      <h3>点击执行回调函数时，传递参数</h3>
+      <!-- 若 希望 传递参数的时候，还传递 事件对象 - `$event` -->
+      <button @click="fn($event, '111', '222')">点击传参</button>
+    </div>
+  </body>
+</html>
+
+<script src="../packages/vue.js"></script>
+<script>
+  // 面向对象写法：
+  const vm = new Vue({
+    el: "#app", // 即 css 选择器，选择 vuehtml代码的「挂载点」
+    data: {
+      num: 0,
+    }, // data 中放的是 数据
+
+    // 函数放在： `methods`
+    methods: {
+      // ES6 函数声明的简写方式：
+      // 注：vue2 中 函数中，都有 this，this 指的是 `vm`
+      // this 能获取到 data 中的数据，和 methods 中声明的函数
+      add1Num() {
+        // this.num // 即指的是 data 中声明的 num
+        this.num++;
+      },
+      add2Num(event) {
+        console.log(event); // 事件对象
+        this.num += 2;
+      },
+
+      fn(event, b, c) {
+        console.log("传递来的参数", event, b, c);
+      },
+    },
+  });
+</script>
