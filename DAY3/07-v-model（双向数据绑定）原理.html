@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 注：此种写法： `:value="iptVal"`
+        视图被改变 - 即用户在 input 中输入信息，
+          数据并未发生改变...
+
+        所以，谈不上「双向数据绑定」...
+        <input type="text" v-bind:value="iptVal" />
+      -->
+
+      <!-- 
+        思考： 
+          以现在的 知识，如何 让 用户在 input 中输入的信息(视图被改变)
+            直接更新 数据 `iptVal` 要被改变...
+      -->
+
+      <!-- 双向数据绑定：
+        第一向：
+          `:value="iptVal"`  即 数据变了，视图被改变 
+
+        第二向：
+          `@input="updateIptVal"` 即 视图变了，数据被改变
+
+
+        因为 表单的 双向数据绑定，使用 非常频繁，
+          所以：`vue 提供了 一个语法糖`
+        <input type="text" :value="iptVal" @input="updateIptVal" />
+      -->
+
+      <!-- 「」
+        什么是「语法糖」：
+          即原理不变，只是 变了一种写法； 这种写法称为语法糖。
+      -->
+
+      <!-- 即 
+        <input type="text" :value="iptVal" @input="updateIptVal" /> 
+        写法的语法糖  -->
+      <input type="text" v-model="iptVal" v-xxx />
+
+      <h1>11 - {{iptVal}} -- {{iptVal}}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* vue 响应式
+  双向的数据绑定：
+
+  用户改变视图：（表单相关），是用户能改变的视图
+    -> 其视图对应的数据，要 自动跟随响应
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      iptVal: "abc",
+    },
+    methods: {
+      updateIptVal(event) {
+        // event.target.value 能获取到 用户在 input 中输入的文本信息..
+        this.iptVal = event.target.value; // 将 实时的 input 信息，赋值给 data
+
+        // console.log(event.target.value);
+      },
+    },
+  });
+</script>
