@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: cadetblue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 回顾事件（二阶段）： 
+      事件必须要有的三要素：
+        案例：绑定 box，点击 box - alert('Yo~');
+      /* 事件的三要素总结：
+          - `box` - 被称为 `target`，即触发 事件的 元素/目标。
+          - `'click'` - 被称为 `type`，即触发 事件的类型。
+          - `回调函数` - 即触发事件，实行的代码。
+
+        // 案例：绑定 box，点击 box - alert('Yo~');
+
+        const box = document.querySelector(".box");
+        box.addEventListener("click", () => {
+          console.log("YO~");
+        });
+
+        <div class="box"></div>
+      */
+    -->
+    <div id="app">
+      <!--  -->
+      <!-- 三阶段 - vue 绑定事件，需求：点击 box ，alert('yo') -->
+
+      <!-- 单独强调：如 alert 等原生 JS的函数，是 不能在 Vue 的模板语法中直接使用  -->
+      <!-- <div class="box" v-on:click="alert('yo')"></div> -->
+
+      <!-- 事件绑定的第一种写法： `method 中声明的函数`
+          <div class="box" v-on:click="say"></div>      
+      -->
+
+      <!-- 事件绑定的 第二种写法： `method 中声明的函数同时执行函数` 
+        好处：可以在函数执行的 时候，指定 实参
+
+        注：若 传参要传递 事件对象，需要使用 `$event` 进行事件对象的传参。
+        <div class="box" v-on:click="say($event, 'HI~~')"></div>
+      -->
+
+      <!-- 事件绑定的 第三种写法： 执行一条 基本JS的语句
+        <h1>num:{{num}}</h1>
+        <div class="box" v-on:click="num += 1"></div>
+    --></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      num: 1,
+    },
+    methods: {
+      say(event, data) {
+        console.log(event, data); // HI~~
+        alert(data);
+      },
+    },
+  });
+</script>
