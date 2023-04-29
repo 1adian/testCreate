@@ -40,11 +40,15 @@
       <!-- <div class="box" v-on:click="alert('yo')"></div> -->
 
       <!-- 事件绑定的第一种写法： `method 中声明的函数`
+          注：此种写法， 第一个形参， 默认就是 事件对象
           <div class="box" v-on:click="say"></div>      
       -->
 
       <!-- 事件绑定的 第二种写法： `method 中声明的函数同时执行函数` 
         好处：可以在函数执行的 时候，指定 实参
+
+          注：此种写法，哪个形参，具体是什么值，
+            需要由 函数执行的时候，的对应位置的 实参决定的。
 
         注：若 传参要传递 事件对象，需要使用 `$event` 进行事件对象的传参。
         <div class="box" v-on:click="say($event, 'HI~~')"></div>
@@ -64,15 +68,8 @@
       num: 1,
     },
     methods: {
-      say(event, data) {
-        /* 事件对象的作用：
-            e.stopPropagation(); // 阻止事件冒泡
-            e.preventDefault(); // 阻止浏览器的默认行为
-            e.target // 事件源
-            // ...
-        */
-        console.log(event, data); // HI~~
-        alert(data);
+      say(event, x) {
+        console.log(event, x); // HI~~
       },
     },
   });
