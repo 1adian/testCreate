@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* Vue 非常容易被问题的面试问题：
+  - 什么是 `虚拟DOM` / 虚拟DOM的作用？
+    -> 虚拟DOM就是 一个 JS对象，其用于 描述 真实的DOM元素。
+      -> 作用1：虚拟DOM元素，比真实的DOM元素 属性值 少的多。
+      -> 作用2：vue的数据若发生了更新，会 生成新的 虚拟DOM元素。
+        新/老 虚拟DOM元素，进行对比(diff算法)，从而找出 新老虚拟DOM元素的不同。
+
+          最后，找出 不同之后，然后通过 patch（定点）更新 真实的DOM元素。
+            从而，节省 计算机的性能。
+
+
+  - 什么是 `diff算法` / `diff算法`的作用？
+
+
+  - v-for循环时，为什么要加 `:key`？
+      -> 能 辅助 diff 算法（v-for循环的情况下），帮助其确定 需要 定点(patch) 
+        更新哪些真实的DOM元素。
+*/
+
+  /* 为什么要有「虚拟DOM」：
+  1. 代码演示：为什么 真实的 DOM 更重
+    // 注：JS 中 '一切皆为对象' - `div 标签，也是 对象`
+    const div = document.createElement("div");
+    
+    for (const key in div) {
+      console.log(key);
+    }
+
+  2. 若 Vue 中 data 的数据被改变，
+    则生成了 新的 虚拟DOM树；
+
+      Vue 通过 `diff算法`，通过 对比 新/旧 的 虚拟DOM
+        找出 新/旧 虚拟DOM的不同，然后 根据 不同内容，进行页面(视图)的修改/更新。
+          从而 实现了 更低的性能消耗。
+
+*/
+
+  /* 
+  若只使用 虚拟DOM 有的缺点：`以 'aa', 'bb', 'cc' 删除 'bb' 为例`
+    若 只能 虚拟DOM，vue 会进行两步：
+      旧的虚拟DOM `'aa', 'bb', 'cc'`
+      新的虚拟DOM `'aa', 'cc'`
+
+      1. 根据 新/旧 虚拟DOM的对比：
+        将 旧的 虚拟DOM 的 'bb' 改为 'cc'。
+
+      2. 将 旧的 虚拟DOM的 'cc' 删除。
+
+
+  理想状态：
+    1. 将 旧的 'bb' 删除。
+      现在，做不到（只 单纯地 通过 虚拟DOM，做不到...）
+
+
+  // ------- 
+  思考：如何 实现「理想状态」
+    -> ':key' 的作用
+
+
+  若引入 :key="唯一值"
+
+  若  虚拟DOM + :key，vue 会进行两步：
+    旧的虚拟DOM `
+      'aa' 单独给 'aa' 增加唯一值 `aa`   (保留)
+      
+      'bb' 单独给 'bb' 增加唯一值 `bb`   （因为 新的虚拟DOM，没有唯一值 `bb`，所以要被删除）
+
+      'cc' 单独给 'cc' 增加唯一值 `cc`   (保留)
+
+
+    新的虚拟DOM 
+     'aa' 单独给 'aa' 增加唯一值 `aa`
+      
+
+    'cc' 单独给 'cc' 增加唯一值 `cc`
+*/
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      arr: ["a", "b", "c"],
+    },
+  });
+</script>

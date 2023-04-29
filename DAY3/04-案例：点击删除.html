@@ -9,7 +9,11 @@
   </head>
   <body>
     <div id="app">
-      <li v-for="(item, index) in arr" :key="item">
+      <!-- 
+          强调： :key=值，其 值 不能重复。
+          若 无 唯一值，可以用 `index` 替代，以避免报错。  
+      -->
+      <li v-for="(item, index) in arr" :key="index">
         {{item}}
         <button @click="handleDelete(index)">删除</button>
       </li>
@@ -21,7 +25,7 @@
   const vm = new Vue({
     el: "#app",
     data: {
-      arr: ["a", "b", "c", "d", "e", "Z", "H", "0"],
+      arr: ["a", "a", "a", "d", "e", "Z", "H", "0"],
     },
     methods: {
       /* 强调： 在 Vue 的开发中，不要 直接操作DOM元素
