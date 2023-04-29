@@ -65,6 +65,12 @@
     },
     methods: {
       say(event, data) {
+        /* 事件对象的作用：
+            e.stopPropagation(); // 阻止事件冒泡
+            e.preventDefault(); // 阻止浏览器的默认行为
+            e.target // 事件源
+            // ...
+        */
         console.log(event, data); // HI~~
         alert(data);
       },
