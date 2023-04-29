@@ -31,8 +31,10 @@
   const vm = new Vue({
     el: "#app",
     data: {
-      arr: ["a", "b", "c", "d", "e"],
-      activeIndex: 0, // 注： activeIndex 其 index 值为什么，则 对应 的li标签，要高亮
+      arr: ["a", "b", "c", "d", "e", "Z", "H", "0"],
+      activeIndex: null, // 注： activeIndex 其 index 值为什么，则 对应 的li标签，要高亮
+      // 注：若 需要 声明某个 key，但不需要给其 赋初始值，则将其 设为 `null`
+      // 即表示 占位 但不赋值
     },
     methods: {
       // handleXXX   注： handleXXX 一般表示 绑定到 事件中的 回调函数

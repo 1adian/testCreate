@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <li v-for="(item, index) in arr" :key="item">
+        {{item}}
+        <button @click="handleDelete(index)">删除</button>
+      </li>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      arr: ["a", "b", "c", "d", "e", "Z", "H", "0"],
+    },
+    methods: {
+      /* 强调： 在 Vue 的开发中，不要 直接操作DOM元素
+        而是 要 操作数据。
+
+        因为 Vue是 数据响应式
+
+          即 数据被改变了， vm 直接更新对应的 DOM元素。
+
+          // -----------
+
+        所以，上述的案例需求，不是 考虑 删除DOM元素，
+          而是考虑 对应的数据的删除即可。
+      */
+      handleDelete(index) {
+        // 增加需求： 点击删除按钮，跳出弹窗，询问：
+        // “您确定要删除 XX 吗？删除后，数据无法恢复！”
+
+        const isDelete = confirm(
+          `您确定要删除 ${this.arr[index]} 吗？删除后，数据无法恢复！`
+        );
+        if (isDelete) {
+          this.arr.splice(index, 1); // 删除对应的数据
+          console.log("删除...", index);
+        }
+      },
+    },
+  });
+</script>
