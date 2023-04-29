@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li
+          :class="[(activeIndex === index) && 'active']"
+          v-for="(item, index) in arr"
+          :key="item"
+          @click="handleClickLi(index)"
+        >
+          {{item}}
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      arr: ["a", "b", "c", "d", "e"],
+      activeIndex: 0, // 注： activeIndex 其 index 值为什么，则 对应 的li标签，要高亮
+    },
+    methods: {
+      // handleXXX   注： handleXXX 一般表示 绑定到 事件中的 回调函数
+      handleClickLi(index) {
+        this.activeIndex = index; //
+
+        // 希望 点击 li 标签，打印出 其对应的 index
+        console.log("handleClickLi", index, this); // this 即 vm 的实例对象
+      },
+    },
+  });
+</script>
