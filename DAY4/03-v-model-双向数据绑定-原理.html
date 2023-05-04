@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 什么是 双向数据绑定：
+        第一向： model（数据）改变了，视图跟随变化
+        第二向：view（视图）改变了，model 也跟随变化
+          注：即 用户改变了 input 
+       -->
+      <!-- <input type="text" v-model="val" /> -->
+      <!-- 
+        v-model 的实现原理： 
+          ->  `:value="val"` 实现了：第一向： model（数据）改变了，视图跟随变化
+
+          ->  ` @input="updateValue"` 实现了：第二向：view（视图）改变了，model 也跟随变化
+
+
+          总结： v-model 本质是： `:value="val"` + ` @input="updateValue"`
+            即 v-model 是上述两者的「语法糖」。
+        
+        
+        面试问题：
+          什么是「语法糖」？
+            即 效果/原理 一致，只是换了一个写法而已；
+              那么 换了一个写法，即称为 原写法的语法糖。
+      -->
+      <input type="text" :value="val" @input="updateValue" />
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      val: "aaa",
+    },
+    methods: {
+      updateValue(event) {
+        this.val = event.target.value;
+      },
+    },
+  });
+</script>

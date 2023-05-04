@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>自动手机表单数据</h1>
+      <div>
+        用户名：
+        <input type="text" v-model="userInfo.username" />
+      </div>
+      <div>
+        密码：
+        <input type="password" v-model="userInfo.pwd" />
+      </div>
+      <div>
+        性别： 男
+        <input
+          type="radio"
+          name="gender"
+          value="boy"
+          v-model="userInfo.gender"
+        />
+        女
+        <input
+          type="radio"
+          name="gender"
+          value="girl"
+          v-model="userInfo.gender"
+        />
+      </div>
+      <div>
+        爱好： ⚽️
+        <input
+          type="checkbox"
+          name="hobby"
+          v-model="userInfo.hobby"
+          value="1"
+        />
+        🏀
+        <input
+          type="checkbox"
+          name="hobby"
+          v-model="userInfo.hobby"
+          value="2"
+        />
+        🏓
+        <input
+          type="checkbox"
+          name="hobby"
+          v-model="userInfo.hobby"
+          value="3"
+        />
+      </div>
+      <button @click="handleSubmit">提交</button>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      // 表单中，关于用户的数据，统统放入该 对象中
+      userInfo: {
+        username: "", // 用户名
+        pwd: "", // 密码
+        gender: "",
+        hobby: [], // 强调：复选框，因为能多选，所以 需要是数组
+      },
+    },
+    methods: {
+      handleSubmit() {
+        console.log("点击提交 按钮", this.userInfo);
+      },
+    },
+  });
+</script>

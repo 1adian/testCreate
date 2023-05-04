@@ -24,8 +24,8 @@
 
       <!-- todolist 以 ul > li 的形式显示 -->
       <ul>
-        <li v-for="(item, index) in todolist" :key="item">
-          {{item}}
+        <li v-for="(item, index) in todolist" :key="item.name">
+          {{item.name}}
 
           <!-- 
             只要点击 删除按钮，则删除对应的 li 标签 ，
@@ -44,7 +44,7 @@
     el: "#app", // 该元素下面的 ，均可以 识别 vue 的语法
     data: {
       // 数据 - model
-      todolist: ["吃饭", "睡觉", "打豆豆"], // 注：只要的 待做项，统统放入该数组中
+      todolist: [{ name: "吃饭" }, { name: "睡觉" }], // 注：只要的 待做项，统统放入该数组中
     },
     methods: {
       // 方法 - function
@@ -61,7 +61,9 @@
         console.log(event, event.target.value);
 
         // 将 input 中的数据，塞入 todolist 的数组中
-        this.todolist.push(event.target.value);
+        this.todolist.push({
+          name: event.target.value,
+        });
 
         event.target.value = ""; // 将 input 中输入的内容，清空
       },
