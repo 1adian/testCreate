@@ -45,6 +45,7 @@
     const vm = {};
 
     for (const key in data) {
+      // 每一次 循环的 key，都可被 认为是 新声明出来的
       Object.defineProperty(vm, key, {
         get() {
           // 获取值，即 vm.xx 的返回值
