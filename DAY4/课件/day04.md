@@ -1333,7 +1333,10 @@ https://v2.cn.vuejs.org/v2/api/#key
 在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了[上述](https://cn.vuejs.org/v2/guide/forms.html#vmodel-ime-tip)输入法组合文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件_之后_进行同步：
 
 ```html
-<!-- 在“change”时而非“input”时更新 -->
+<!-- 
+	在“change”时而非“input”时更新 
+		即，光标丢失 且value内容发生了改变，才会触发 change 事件
+-->
 <input v-model.lazy="msg">
 ```
 

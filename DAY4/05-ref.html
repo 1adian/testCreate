@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        注： vue 的JS代码中，如何 获取到 该DOM元素：
+
+          `this.$refs.userName`
+            -> 其返回值是 该DOM元素
+
+          强调：Vue 中，不要直接使用  `document.querySelector()` 这样的功能，
+            因为 Vue 的开发，提倡 不直接操作DOM，而是 操作数据。
+      -->
+      <input type="text" ref="userName" />
+      <button @click="handleClick">点我</button>
+
+      <hr />
+
+      <div class="box" ref="box"></div>
+      <button @click="handleGetBoxDOM">获取Box的DOM元素</button>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 英文
+  refer - 指（指向） / 参考
+
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {
+      handleClick() {
+        console.log(this.$refs.userName.value); // 即 所有的 ref 统统在此
+      },
+      handleGetBoxDOM() {
+        console.log("获取Box的DOM元素", this.$refs.box);
+      },
+    },
+  });
+</script>
