@@ -1384,11 +1384,11 @@ v-model 是什么。语法糖 :value + @input。还要分为两种情况
 
 ### Object.defineProperty()
 
-Vue中很多地方都用到了它，比如说Vue中的数据劫持、数据代理、计算属性等都用到了这个方法。
+Vue2 中很多地方都用到了它，比如说Vue中的 数据劫持、数据代理、计算属性 等都用到了这个方法。
 
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
-作用：为对象添加或者修改属性，使之变为==响应式的==。  数据劫持，拦截了做点儿啥事儿。
+作用：为 对象 添加 或者 修改属性，使之变为==响应式的==。  数据劫持，拦截了做点儿啥事儿。
 
 #### Object.defineProperty - 基本用法
 

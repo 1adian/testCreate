@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 
+  面试问题： vue2 的 `响应式原理` 的基本实现？
+    -> 用到的 核心/基本 技术：`Object.defineProperty()`
+
+
+  什么是响应式原理：
+    即数据改变，视图自动跟随响应。
+
+
+*/
+
+  /* 07-Object.defineProperty 的基本用法：
+  作用：为 `对象` 添加 或者 修改属性，
+
+
+*/
+
+  // 声明的 对象
+  const data = {
+    content: "你好",
+  };
+
+  Object.defineProperty(data, "key1", {
+    value: "即表示给 key1 的value 值", // 作用：给 key1 增加 属性值
+    enumerable: true, // enumerable - 即是否可被 for...in 循环遍历（默认值是 false）
+    writable: true, // writable - 即 该key 的value值能否被修改（默认值是 false）
+    configurable: true, // configurable - 即 该key 能否被 `delete` 将该 key 删除（默认值是 false）
+  });
+
+  /* 遍历
+    for (const key in data) {
+      console.log("key", key);
+    }
+  */
+
+  // 修改
+  // data.key1 = "xxx 修改 key1 的值...";
+
+  // 删除
+  // delete data.key1;
+
+  console.log(data);
+
+  /* Object.defineProperty 的基本用法： 其有三个参数：
+
+  Object.defineProperty(obj, PropertyKey, {
+
+  });
+
+  - 第一个参数：obj，表示 已存在的 对象
+  - 第二个参数：PropertyKey，表示要 添加/修改 该 obj 的 属性名
+  - 第三个参数：是一个对象，其中有 很多 配置 属性。
+      即 对象中，可以写 一些 固定用法的 key。
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      msg: "你好~~~", // model - 数据
+    },
+    methods: {},
+  });
+</script>
