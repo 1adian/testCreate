@@ -1392,7 +1392,48 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 #### Object.defineProperty - 基本用法
 
-```vue
+```js
+  const data = {
+    content: "你好",
+  };
+
+  Object.defineProperty(data, "key1", {
+    value: "即表示给 key1 的value 值", // 作用：给 key1 增加 属性值
+    enumerable: true, // enumerable - 即是否可被 for...in 循环遍历（默认值是 false）
+    writable: true, // writable - 即 该key 的value值能否被修改（默认值是 false）
+    configurable: true, // configurable - 即 该key 能否被 `delete` 将该 key 删除（默认值是 false）
+  });
+```
+
+```js
+  // 声明的 对象 - Model（数据）
+  const data = {
+    content: "你好",
+    age: 333,
+  };
+
+
+  const vm = {}; // 表示 vm 的实例对象
+
+  Object.defineProperty(vm, "age", {
+    // 注：defineProperty 的对象，还有 两项 配置项：get函数 和 set函数
+    get() {
+      // get 函数 ，又被称为 `getter`，get 不能与 `value` 共用
+      // 注：该函数的作用： 只要执行 `vm.age` 表示 查询该key的 value
+      // 则 `vm.age` 的返回值是 本 get 函数的`返回值`
+      console.log("vm - age 的 get 函数执行 了...");
+      return data.age;
+    },
+    set(val) {
+      // set 函数，又被称为 `setter`，set 不能与 `writable` 共用
+      // 只要执行了 `vm.age = 新的value值`，即表示 data 的数据要被更新
+      // 注：该函数的作用： 只要执行 `vm.age = 新的value值`，即赋值
+      // 则会执行 set 函数，val 代表的是 `新的value值`
+
+      console.log("vm - age 的 set 函数执行了 ...", val);
+      data.age = val; // 数据被更新
+    },
+  });
 
 ```
 
@@ -1466,6 +1507,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 ```vue
 <div id="example">
   <!-- 将 message 字符串反转 -->
+  <h1>{{ message.split('').reverse().join('') }}</h1>
 </div>
 ```
 
@@ -1473,7 +1515,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 在这个地方，模板不再是简单可读的代码。你必须看一段时间才能意识到（代码的可读性差），这里是想要显示变量 `message` 的翻转字符串。当你想要在模板中的多处包含此翻转字符串时，就会更加难以处理。
 
-所以，对于任何复杂逻辑，你都应当使用**计算属性**。
+所以，对于任何复杂数据处理逻辑，你都应当使用**计算属性**。
 
 **例子**
 

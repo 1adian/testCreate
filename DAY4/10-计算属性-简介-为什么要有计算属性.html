@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        需求：在 页面中 将 message 字符串 反转：
+          `字符串的不可变性`；即 没有 任何 实例方法，能改变 字符串本身。
+
+        字符串反转的思路：
+          1. 将 字符串 转成 数组
+          2. 将数组“反转”
+          3. 将反转之后的数组，在拼接成 字符串
+      -->
+
+      <!-- 思考：下述写法，会很容易 造成 `阅读障碍`，
+        即别人，必须要阅读 代码逻辑，还能知道这段代码的 作用； 即 “可读性差”。
+      -->
+      <h1>表达式写法： {{ message.split('').reverse().join('') }}</h1>
+
+      <!-- 强调：计算属性在大胡子 或 其他的地方使用，必须要 写 `()` -->
+
+      <!-- 计算属性的好处： 见名知意，即 代码的可读性强 -->
+      <h1>计算属性写法：{{ reversedMessage }}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /*
+    为什么 要有 计算属性？
+  */
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      //
+      message: "你好，我是一个前端程序员",
+    },
+    methods: {},
+    // 计算属性
+    computed: {
+      // 反转 message
+      // 注：计算属性的简写形式：
+      reversedMessage() {
+        // `this` 指向 vm 实例
+        return this.message.split("").reverse().join("");
+      },
+    },
+  });
+</script>
