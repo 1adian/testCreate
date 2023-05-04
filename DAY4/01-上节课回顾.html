@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 面试问题：
+    1）v-for 中 : `:key` 的作用：
+        -> 是为了 提高 vue 渲染页面的性能。
+
+
+    2）为什么 `:key` 就能 提高 vue 渲染页面的性能？
+
+        -> 面试官，在给您说 "提高 vue 渲染页面的性能" 之前，
+          请允许我给您介绍一下 vue 的渲染机制：
+            - 虚拟DOM
+            - diff算法
+            - patch
+    
+
+          上述，描述的 渲染机制/vue的渲染流程：
+            有一个 bug/漏洞：
+              第一步：将 'bb' 改成 'cc'
+              第二步：将 老的虚拟DOM的 'cc'， 删除
+            
+            漏洞即为：有更优化的解决办法：
+              直接将 老的 虚拟DOM 的 'bb' 直接删除，才更高效！！
+              但 vue默认的 diff 算法，做不到！
+                所以，需要在 v-for 循环的时候，只用 `:key` 给 虚拟DOM 指定 唯一值
+                  以便  diff算法，能直接 将 " 老的 虚拟DOM 的 'bb' 直接删除"。
+
+
+    3）万一  就是 没有 唯一值，怎么办？
+      :key 只在 v-for 循环的时候使用，所以 肯定会有 唯一值 `index`
+        <li v-for="(item, index) in data" :key="index">{{item}}</li>
+
+      一定要给 面试官强调： `:key="index"` index，加与没加，效果 没有区别...
+
+
+*/
+</script>

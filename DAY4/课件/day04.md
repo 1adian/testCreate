@@ -1377,13 +1377,93 @@ v-model 是什么。语法糖 :value + @input。还要分为两种情况
 
 ##### 
 
+## 8、数据劫持与代理
+
+### Object.defineProperty()
+
+Vue中很多地方都用到了它，比如说Vue中的数据劫持、数据代理、计算属性等都用到了这个方法。
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+
+作用：为对象添加或者修改属性，使之变为==响应式的==。  数据劫持，拦截了做点儿啥事儿。
+
+#### Object.defineProperty - 基本用法
+
+```vue
+
+```
 
 
-## 8、计算属性
+
+### 案例：使属性变成响应式
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  function render() {
+    document.querySelector("#app").innerHTML = `
+      <h1>${vm.msg}</h1>
+      <h1>${vm.content}</h1>
+    `;
+  }
+
+  const data = {
+    msg: "你好",
+    content: "千锋",
+  };
+
+  function createVm(data) {
+    const vm = {};
+
+    for (const key in data) {
+      Object.defineProperty(vm, key, {
+        get() {
+          return data[key];
+        },
+        set(val) {
+          data[key] = val;
+          render();
+        },
+      });
+    }
+
+    return vm;
+  }
+
+  const vm = new createVm(data);
+
+  render();
+</script>
+
+```
+
+
+
+提示：Vue2使用Object.defineProperty() 无法给 对象中新增的key 实现数据的响应性
+
+
+
+## 9、计算属性
 
 案例：显示反转字符串
 
 ```vue
+<div id="example">
+  <!-- 将 message 字符串反转 -->
+</div>
 ```
 
 上述写法（大胡子中的表达式写过多业务逻辑）的缺点：
@@ -1408,7 +1488,7 @@ var vm = new Vue({
     message: 'Hello'
   },
   computed: {
-    // 计算属性的 getter
+    // 计算属性的 的简写getter
     reversedMessage() {
       // `this` 指向 vm 实例
       return this.message.split('').reverse().join('')
@@ -1508,7 +1588,7 @@ var vm = new Vue({
 
 
 
-## 9、侦听器
+## 10、侦听器
 
 又名 监视器。
 
@@ -1718,83 +1798,6 @@ watch: {
 ```
 
 
-
-## 10、数据劫持与代理
-
-### Object.defineProperty()
-
-Vue中很多地方都用到了它，比如说Vue中的数据劫持、数据代理、计算属性等都用到了这个方法。
-
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-
-作用：为对象添加或者修改属性，使之变为==响应式的==。  数据劫持，拦截了做点儿啥事儿。
-
-#### Object.defineProperty - 基本用法
-
-```vue
-
-```
-
-
-
-### 案例：使属性变成响应式
-
-```vue
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style></style>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
-<script src="../packages/vue.js"></script>
-<script>
-  function render() {
-    document.querySelector("#app").innerHTML = `
-      <h1>${vm.msg}</h1>
-      <h1>${vm.content}</h1>
-    `;
-  }
-
-  const data = {
-    msg: "你好",
-    content: "千锋",
-  };
-
-  function createVm(data) {
-    const vm = {};
-
-    for (const key in data) {
-      Object.defineProperty(vm, key, {
-        get() {
-          return data[key];
-        },
-        set(val) {
-          data[key] = val;
-          render();
-        },
-      });
-    }
-
-    return vm;
-  }
-
-  const vm = new createVm(data);
-
-  render();
-</script>
-
-```
-
-
-
-提示：Vue2使用Object.defineProperty() 无法给 对象中新增的key 实现数据的响应性
 
 
 

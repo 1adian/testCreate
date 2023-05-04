@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>todolist</h1>
+      <!-- 
+        新增需求：
+          在 input 中输入 内容，按下 `Enter` 即将 input 的内容，
+            显示在 todolist 列表中
+
+       -->
+      <input
+        type="text"
+        placeholder="请输入待做项"
+        @keydown.enter="handleKeydownEnter"
+      />
+
+      <!-- todolist 以 ul > li 的形式显示 -->
+      <ul>
+        <li v-for="(item, index) in todolist" :key="item">
+          {{item}}
+
+          <!-- 
+            只要点击 删除按钮，则删除对应的 li 标签 ，
+            因为 vue 的 MVVM - 数据响应式的
+              所以，只需要考虑 删除 todolist 数组中 对应的元素即可
+          -->
+          <button @click="handleDelete(index)">删除</button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app", // 该元素下面的 ，均可以 识别 vue 的语法
+    data: {
+      // 数据 - model
+      todolist: ["吃饭", "睡觉", "打豆豆"], // 注：只要的 待做项，统统放入该数组中
+    },
+    methods: {
+      // 方法 - function
+      handleDelete(index) {
+        this.todolist.splice(index, 1); // 删除 对应的 数据
+      },
+
+      // 在 input 中输入内容，按下回车，即触发本回调函数
+      // 注：若 事件绑定的时候，直接绑定的是 函数名，则函数会有 第一个默认参数 - 事件对象
+      handleKeydownEnter(event) {
+        // event.target - 指的是 触发事件的 DOM元素
+        // event.target.value
+        // 若 event.target 是 <input /> 则 event.target.value  为 input 上 输入的内容
+        console.log(event, event.target.value);
+
+        // 将 input 中的数据，塞入 todolist 的数组中
+        this.todolist.push(event.target.value);
+
+        event.target.value = ""; // 将 input 中输入的内容，清空
+      },
+    },
+  });
+</script>
