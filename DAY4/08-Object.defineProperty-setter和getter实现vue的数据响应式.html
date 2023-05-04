@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <h1>{{content}}</h1>
+      <h1>{{age}}</h1> -->
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  // 声明的 对象 - Model（数据）
+  const data = {
+    content: "你好",
+    age: 333,
+  };
+
+  // 注： vue / react，其都有 render 函数
+  // render函数的作用：只要执行 render 函数，即刷新页面/更新视图
+  function render() {
+    document.querySelector("#app").innerHTML = `
+        <h1>${data.content}</h1>
+        <h1>${data.age}</h1>
+      `;
+  }
+
+  // 思考： vm 提供了 实例对象，只要 vm.age = 新的数据，即 更新属兔
+
+  // MV VM
+  const vm = {}; // 表示 vm 的实例对象
+
+  Object.defineProperty(vm, "age", {
+    // 注：defineProperty 的对象，还有 两项 配置项：get函数 和 set函数
+    get() {
+      // get 函数 ，又被称为 `getter`，get 不能与 `value` 共用
+      // 注：该函数的作用： 只要执行 `vm.age` 表示 查询该key的 value
+      // 则 `vm.age` 的返回值是 本 get 函数的`返回值`
+      console.log("vm - age 的 get 函数执行 了...");
+      return data.age;
+    },
+    set(val) {
+      // set 函数，又被称为 `setter`，set 不能与 `writable` 共用
+      // 只要执行了 `vm.age = 新的value值`，即表示 data 的数据要被更新
+      // 注：该函数的作用： 只要执行 `vm.age = 新的value值`，即赋值
+      // 则会执行 set 函数，val 代表的是 `新的value值`
+
+      console.log("vm - age 的 set 函数执行了 ...", val);
+      data.age = val; // 数据被更新
+
+      // 数据响应式的 思路： vm.xx = 更新数据，
+      // 数据更新后，要 自动更新视图
+      render(); // 执行 render 函数，自动更新数据
+    },
+  });
+
+  /*  defineProperty 的基本用法：
+  Object.defineProperty(data, "key1", {
+    value: "即表示给 key1 的value 值", // 作用：给 key1 增加 属性值
+    enumerable: true, // enumerable - 即是否可被 for...in 循环遍历（默认值是 false）
+    writable: true, // writable - 即 该key 的value值能否被修改（默认值是 false）
+    configurable: true, // configurable - 即 该key 能否被 `delete` 将该 key 删除（默认值是 false）
+  }); 
+  */
+</script>

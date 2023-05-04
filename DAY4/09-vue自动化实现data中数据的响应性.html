@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <h1>{{content}}</h1>
+      <h1>{{age}}</h1> -->
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  // 声明的 对象 - Model（数据）
+  const data = {
+    content: "你好",
+    age: 111,
+  };
+
+  // View (视图)
+  function render() {
+    document.querySelector("#app").innerHTML = `
+        <h1>${data.content}</h1>
+        <h1>${data.age}</h1>
+      `;
+  }
+
+  render(); // 即刷新页面，默认渲染视图
+  /* 需求：
+    如何 给 vm ，自动地为 data 中的 每个 key ，都绑定 getter 和 setter 函数
+      进而 实现数据的 响应性
+  
+  */
+
+  // VM
+  const vm = createVm(data);
+  // 作用：vm 即 是 vue 的 实例，vm中的 属性都具有 `响应性`
+
+  function createVm(data) {
+    const vm = {};
+
+    for (const key in data) {
+      Object.defineProperty(vm, key, {
+        get() {
+          // 获取值，即 vm.xx 的返回值
+          return data[key];
+        },
+        set(val) {
+          // 设置值，即 `vm.xx = 新的value值` 会执行 set 函数
+          data[key] = val; // 将新的 value值 赋值给 data，即变更数据
+
+          // 数据变更后，重新渲染视图
+          render();
+        },
+      });
+    }
+
+    return vm;
+  }
+
+  /* 
+  
+    // 思考： vm 提供了 实例对象，只要 vm.age = 新的数据，即 更新属兔
+    const vm = {}; // 表示 vm 的实例对象
+
+    Object.defineProperty(vm, "age", {
+      // 注：defineProperty 的对象，还有 两项 配置项：get函数 和 set函数
+      get() {
+        return data.age;
+      },
+      set(val) {
+        data.age = val; // 数据被更新
+        render(); // 执行 render 函数，自动更新数据
+      },
+    });
+  
+  
+  */
+</script>
