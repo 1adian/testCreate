@@ -8,7 +8,14 @@
     <style></style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- 
+        此处写的 元素标签，即是 render 函数...
+          即 render 函数是 vue的作者写的（尤雨溪）
+            我们作为 vue 的使用者，一般情况下 根本就不会 写 render 函数。
+      
+      -->
+    </div>
   </body>
 </html>
 <script src="../packages/vue.js"></script>
@@ -32,6 +39,12 @@
     methods: {},
   });
 
+  vm.xxx = "新数据。。。"; // 改变的是 data 中的数据
+  // vm对象，本质不是 data 对象；
+  // 而 vm.xxx = '新数据'， 是改变了 data.xxx 的数据
+  // 我们则称 vm对象，对 data对象 - 「数据劫持」。
+
+  // ------ 底层技术原理， 描述：
   const data = {
     xxx: "value...", // 注 data 变量 虚指 Vue 中的 `data`
   };

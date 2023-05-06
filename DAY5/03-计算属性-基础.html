@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        大胡子中，只要出现 `计算逻辑`，便 影响其他人的 代码阅读 
+        
+        所以，为了 方便阅读：大胡子中，最好不要出现 计算逻辑；
+          而是用 `计算属性` 取代。
+
+        不推荐使用
+      -->
+      <h1>全名(计算逻辑)： {{firstName + lastName}}</h1>
+
+      <!-- 
+        注：计算属性的使用， 写法和 变量/属性 一致 
+
+        推荐使用：可读性高 + 性能好
+      -->
+      <h1>全名(计算属性)： {{fullName}}</h1>
+
+      <!-- 
+        注：对大胡子中 数据的 `再加工`，要用 计算属性，
+          而不要用 函数。
+
+          因为：计算属性 会对 data 中的数据，进行 `缓存`。
+
+          即 data 中的数据，重复出现， 而重复出现的数据
+            计算属性，不再做计算，直接 缓存的结果值。
+            而 函数，还需要重新计算。
+
+        不推荐使用
+       -->
+      <h1>全名(函数)：{{fN()}}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      lastName: "江",
+      firstName: "宋",
+    },
+    methods: {
+      fN() {
+        return this.firstName + this.lastName;
+      },
+    },
+    // 计算属性
+    // 作用：对 data 中的数据，进行`再加工`；
+    computed: {
+      fullName() {
+        return this.firstName + this.lastName;
+      },
+    },
+  });
+</script>
