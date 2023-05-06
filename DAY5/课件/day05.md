@@ -1313,7 +1313,11 @@ https://v2.cn.vuejs.org/v2/api/#key
   ```html
   <input type='text' ref='userInfo' />  <!--相当于给input框取个名字，相当于id-->
   
-  this.$refs.userInfo
+  // JS 代码，在函数中 ，获取到 对应的 DOM 元素
+  // 再次强调：Vue 中，切记，不要直接操作DOM元素；则 不要 document.querySelector()...
+  // 因为 vue/react 的思想，都是 「数据驱动视图」，即考虑如何操作数据，而不是操作DOM元素。
+  
+  this.$refs.userInfo 
   ```
 
 - 应用

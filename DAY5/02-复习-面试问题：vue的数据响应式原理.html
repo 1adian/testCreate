@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 面试问题：Vue 的响应式原理：
+  什么是 vue的响应式原理？
+    -> 即 数据发生改变，则 DOM元素自动跟随改变。
+
+  vue 中，数据，都被放到了 data - 对象中。
+
+  而 vm 操作数据，其实是 操作 vm.xxx 的数据，而不是 操作 data 中的对象。
+    因为 vm 对 data 对象的数据，进行了「数据劫持」。
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      // 数据
+      xxx: "value...",
+    },
+    methods: {},
+  });
+
+  const data = {
+    xxx: "value...", // 注 data 变量 虚指 Vue 中的 `data`
+  };
+
+  const vm2 = {}; // 注 vm2 虚指（代指） vm
+
+  Object.defineProperty(vm2, "xxx", {
+    get() {
+      // getter 函数  ->  vm2.xxx 即执行 getter 函数，其return 值是 `vm2.xxx` 的返回值
+      return data.xxx;
+    },
+    set(val) {
+      // setter 函数
+      // vm2.xxx = 新值； 其本质是 执行了 setter 函数
+      data.xxx = val; // 数据在此发生改变
+      // Vue 的响应式核心是：数据发生改变，自动更新视图
+
+      render(); // 只要执行 render 函数，本质是 将 数据 在 页面中重新渲染
+      // 即更新视图！！！
+    },
+  });
+</script>
