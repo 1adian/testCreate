@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>todolist</h1>
+      <div>
+        对todolist的词条进行模糊搜索：
+        <input type="text" v-model="search" />
+      </div>
+      <input
+        type="text"
+        placeholder="请输入待做项"
+        @keydown.enter="handleKeydownEnter"
+      />
+
+      <!-- todolist 以 ul > li 的形式显示 -->
+      <ul>
+        <li v-for="(item, index) in showList" :key="item.name">
+          {{item.name}}
+          <button @click="handleDelete(index)">删除</button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  // 给 todoList 增加搜索项
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      todolist: [{ name: "吃饭" }, { name: "睡觉" }], // 注：只要的 待做项，统统放入该数组中
+      search: "", // search 中的内容是对 todolist 进行 筛选/模糊搜索
+    },
+    methods: {
+      // 方法 - function
+      handleDelete(index) {
+        this.todolist.splice(index, 1); // 删除 对应的 数据
+      },
+
+      handleKeydownEnter(event) {
+        this.todolist.push({
+          name: event.target.value,
+        });
+
+        event.target.value = ""; // 将 input 中输入的内容，清空
+      },
+    },
+
+    computed: {
+      // 本计算属性的作用：用于 li 的显示
+      // 基于 search 搜索的内容，多 todolist 进行 过滤
+      showList() {
+        return this.todolist.filter((d) => {
+          return d.name.includes(this.search); // '吃饭' 包含 '吃'
+        }); // 对 todolist 进行过滤
+      },
+    },
+  });
+</script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        姓：<input type="text" v-model="firstName" /> 名：<input
+          type="text"
+          v-model="lastName"
+        />
+      </div>
+      <!-- 计算 `属性` -->
+      <p>{{fullName}}</p>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      firstName: "迪丽",
+      lastName: "热巴",
+    },
+    computed: {
+      // fullName() { // 简写： getter
+      //   return this.firstName + "-" + this.lastName;
+      // },
+
+      // 计算属性 的完整写法：
+      fullName: {
+        get() {
+          // getter - `fullName` 的返回值 即该函数的 return 值
+          return this.firstName + "~~" + this.lastName;
+        },
+        set(val) {
+          // 只要执行  fullName = 新值； 则会触发 本函数
+          // fullName 赋值，也被 赋予到了 firstName 和 lastName 中
+          // 需求： fullName = '萨拉~~热窝'
+          // this.firstName = val.split("~~")[0]; // ['萨拉', '热窝']
+          // this.lastName = val.split("~~")[1];
+
+          // 用ES6 - 解构赋值，改写上述代码：
+          [this.firstName, this.lastName] = val.split("~~");
+        },
+      },
+    },
+    methods: {},
+  });
+</script>
