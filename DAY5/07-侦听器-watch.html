@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="msg" />
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      msg: "1111",
+      obj: {
+        name: "小明",
+        child: {
+          name: "小小明",
+        },
+      },
+    },
+    computed: {},
+    methods: {},
+    watch: {
+      // 作用：用于 监测 data 中 属性的改变
+      // 即 data 中，若监测该属性，该属性发生了变化，即触发回应的回调函数
+
+      /* 写法1：(相对 更常用)
+        msg(newValue, oldValue) {
+          // 即表示 真侦听 data 中 msg 的变化；若 msg 变化了则触发本函数
+          // 注：msg 有两个参数
+          console.log("watch - msg", newValue, oldValue);
+        },
+      */
+
+      //
+      /* 写法2：
+        作用：可以增强 其他的功能：immediate + deep
+        msg: {
+          immediate: true, // 可选参
+          deep: true, // 可选参
+          handler(newValue, oldValue) {
+            console.log("handler", newValue, oldValue);
+          },
+        }
+      */
+      msg: {
+        // 新增需求：刷新的时候，执行一次 回调函数
+        handler(newValue, oldValue) {
+          console.log("handler", newValue, oldValue);
+        },
+      },
+      obj: {
+        // vm.obj.name = '小红'，执行该代码，并不会 触发 回调函数
+        // 因为 默认监听， obj 指向的内存空间。
+        // 若 vm.obj.xx 的值发生了改变，obj 存的 内存地址并未被改变
+        // 即不会被 默认的 watch 到（即 浅监听）
+        handler(newValue, oldValue) {
+          console.log("handler - obj", newValue, oldValue);
+        },
+        // deep: true, // 只要 deep 为 true，则 由 浅监听，改变为 深度监听
+        // 深度监听的作用：任何 obj 的后代属性被改变了，都会触发回调函数
+        // 注：尽量不要使用 深度监听；因为 可能非常消耗计算机性能
+
+        // immediate: true, // 刷新的时候，立即执行一次回调函数
+      },
+
+      // 写法3：具体监听 对象的指定key
+      // 需求：监听 obj.child.name 的变化
+      // 注：该写法，也较常用，如果需要监听 指定的 key ，则用该写法
+      // 好处：不占用计算机过多资源
+      "obj.child.name": {
+        handler(newValue, oldValue) {
+          console.log("obj.child.name", newValue, oldValue);
+        },
+      },
+    },
+  });
+</script>
