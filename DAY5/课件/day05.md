@@ -2178,7 +2178,8 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 ### 思考：编写代码的技术进阶（中级/高级程序员），最需要考虑的几点：
 
 ```vue
-
+1. 代码的可读性 （注：代码是给人读的）
+2. 代码的可复用性（千万不要不断地 粘贴复制代码）
 ```
 
 
@@ -2186,14 +2187,23 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 ### 在框架之前，组织代码的最小单元：
 
 ```vue
-
+什么是 代码的最小单元：
+  思考：前端中 任何一个小功能，必须有 html + css + js 三种代码才能组成。
 ```
 
 
 
+![image-20230506225643485](/Users/mark/Library/Application Support/typora-user-images/image-20230506225643485.png)
+
 
 
 ### 组件的作用：
+
+组件的概念：组件是 在 `xx.html` 能组成 html+css+js 代码 其基础上，更小的代码单元。
+
+即 一个 页面中，可以有 多个组件，每个组件 都有 html+css+js 的代码组合。
+
+组件的好处：在一个页面中，可以实现 `html+css+js` 三者组成的代码的 复用。
 
 
 
