@@ -63,4 +63,9 @@
       },
     },
   });
+
+  // ----- 缓存原理：
+  const cache = {}; // 缓存：
+  // lastName = 'a' ，计算属性通过计算 得到的值为 'zaaaaa';
+  cache.a = "zaaaaa"; // 即通过该写法 即可以做到缓存。
 </script>
