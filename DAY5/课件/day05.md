@@ -1821,6 +1821,10 @@ watch: {
 
 ### computed VS watch
 
+什么时候用计算属性：需要对 data 的数据 进行 `再加工` 的时候，用计算属性。
+
+什么时候用 watch：需要监听 data 的数据发生了改变，则用 watch。
+
 **相同**：computed 和 watch 都会因为data中的数据变化而执行响应的函数。
 
 **不同**：
@@ -1838,13 +1842,7 @@ watch: {
 
 
 
-
-
-
-
-
-
-## 11、重要的实例API
+## 11、重要的实例 API
 
 ### 11.1 对象更新检测
 
@@ -1857,8 +1855,6 @@ Vue对对象数据的检测：
 
 
 
-
-
 #### 实现对象视图同步更新
 
 1. Vue.set( target, propertyName/index, value )
@@ -1867,21 +1863,43 @@ Vue对对象数据的检测：
        {string | number} propertyName/index
        {any} value
        返回值：设置的值。
+
+   作用：
+
+   ​	若 某个 key 在初始的时候，并未在 data 中声明，要为后续添加的key，使其具有数据响应性；则可使用该方法。
+
    用法：
        向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
+
+   
 
    组件内部：
 
    ```js
-   this.$set(this.obj,'age',18)
+   // 写法1：Vue 静态方法：
+   Vue.set(vm.ming, 'height', '1999cm')
+   
+   // 写法2：this 等同于 vm
+   vm.$set(vm.ming, 'height', '2000cm')
+   this.$set(this.obj,'age',18) // 函数中 this 等同于 vm
+   
    ```
 
 2. Vue.delete(target, propertyName/index);
 
+   出现的原因：delete vm.key ，其方法 不具有数据响应性。
+
+   作用：使得 删除key，也具有数据的响应性。
+
    组件内部：
 
    ```js
+   // 写法1：
    this.$delete(this.obj, 'name');
+   vm.$delete(vm.ming, 'name');
+   
+   // 写法2：
+   Vue.delete(vm.ming, 'name')
    ```
 
    

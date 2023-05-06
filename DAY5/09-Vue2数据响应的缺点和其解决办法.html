@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <p>姓名：{{ming.name}}</p>
+      <p>年龄：{{ming.age}}</p>
+      <!-- 期待：后续 后端给了数据，则 将 height 自动显示在页面中 -->
+      <p>身高：{{ming.height}}</p>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 新增 或 删除 key，使其具有响应性 的方法：
+  1. Vue.set( target, propertyName/index, value )
+    参数：
+        {Object | Array} target
+        {string | number} propertyName/index
+        {any} value
+        返回值：设置的值。
+
+    作用：
+
+    ​	若 某个 key 在初始的时候，并未在 data 中声明，要为后续添加的key，使其具有数据响应性；则可使用该方法。
+
+    用法：
+        向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
+
+    
+
+    组件内部：
+
+    ```js
+    // 写法1：Vue 静态方法：
+    Vue.set(vm.ming, 'height', '1999cm')
+    
+    // 写法2：this 等同于 vm
+    vm.$set(vm.ming, 'height', '2000cm')
+    this.$set(this.obj,'age',18) // 函数中 this 等同于 vm
+    
+    ```
+
+  2. Vue.delete(target, propertyName/index);
+
+    出现的原因：delete vm.key ，其方法 不具有数据响应性。
+
+    作用：使得 删除key，也具有数据的响应性。
+
+    组件内部：
+
+    ```js
+    // 写法1：
+    this.$delete(this.obj, 'name');
+    vm.$delete(vm.ming, 'name');
+    
+    // 写法2：
+    Vue.delete(vm.ming, 'name')
+    ```
+
+    
+
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      ming: {
+        name: "小明",
+        age: 33,
+        // 注：若 初始的时候，没有 `height`
+        // 则 无法给 `height` 在 vm 上，绑定 setter 和 getter
+        // 则 vm.height 不具有 数据的响应性
+        // height: '180cm'
+      },
+    },
+    computed: {},
+    methods: {},
+  });
+</script>
