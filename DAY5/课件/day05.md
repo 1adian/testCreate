@@ -1633,159 +1633,13 @@ var vm = new Vue({
 
 
 
-## 10、侦听器
-
-又名 监视器。
-
-- 说明
-
-  监视的是已有数据。
-
-  作用：监听**单个数据的变化**，一旦数据有变化执行相应的方法。
-
-  
-
-- 用法1：监视基本的数据类型： 属性(新值,旧值)
-
-```js
-watch: {
-  key(newValue, oldValue) {
-    只要 key 的第一层数据被改变，即触发了 本回调函数函数
-      注：其无法 deep 监听
-  },
-}
-```
-
-- 用法2：handler （可配置：immediate 、deep）
-
-```js
-watch: {
-  key: {
-    handler(newValue, oldValue) {
-      本为 回调函数
-    },
-    immediate: true, 默认值为 false；设为 true，即刷新的时候会触发一次 回调函数
-    deep: true, 设为 true，即开发对 key 的深度 监听
-      注：开启深度监听，非常占用计算机资源
-  }
-}
-```
-
-- 用法3：深入监听具体key的变化：
-
-```js
-watch: {
-  `key1.key2.xxx`: {
-    handler() {
-      // 即监听指定 key 的变化
-    }
-  }
-}
-```
-
-
-
-### computed VS watch
-
-**相同**：computed和watch都会因为data中的数据变化而执行响应的函数。
-
-**不同**：
-
-**computed**：是计算属性，依赖其它属性值
-
-1. 支持缓存，只有依赖数据发生改变，才会重新进行计算
-2. 不支持异步（只能同步写法）
-
-**watch**：没有缓存性，更多的是==观察==的作用，类似于某些数据的监听回调，每当监听的数据变化时都会执行回调进行后续操作；
-
-1. 不支持缓存，数据变，直接会触发相应的操作；
-2. watch支持异步
-3. 监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值
-
-
-
-
-
-### 案例1：todolist+模糊搜索
+### 案例：todolist+模糊搜索
 
 ```vue
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style></style>
-  </head>
-  <body>
-    <!-- 用户不能注册的用户名有： ['admin', 'abc', 'aaa', 'bbb', 'ccc'] -->
-    <div id="app">
-      <h1>todolist</h1>
-
-      <div>
-        模糊搜索：
-        <input type="text" v-model="search" />
-      </div>
-      <hr />
-      <div>
-        请输入待办项：
-        <input type="text" v-model="todoItem" @keydown.enter="handleEnter" />
-      </div>
-      <ul>
-        <li v-for="item in showList" :key="item">{{item}}</li>
-      </ul>
-    </div>
-  </body>
-</html>
-<script src="../packages/vue.js"></script>
-<script>
-  const vm = new Vue({
-    el: "#app",
-    data: {
-      todolist: [],
-      todoItem: "",
-      search: "",
-    },
-    methods: {
-      handleEnter() {
-        if (this.todolist.includes(this.todoItem)) {
-          alert(`“${this.todoItem}” 已存在于待办项中`);
-          return;
-        }
-
-        this.todolist.push(this.todoItem);
-        this.todoItem = "";
-      },
-    },
-    computed: {
-      status: {
-        get() {
-          const isRegistered = this.registeredList.includes(this.username);
-
-          if (this.username === "") {
-            return "a";
-          } else if (isRegistered) {
-            return "b";
-          } else {
-            return "c";
-          }
-        },
-      },
-      showList() {
-        return this.todolist.filter((item) => item.includes(this.search));
-      },
-    },
-  });
-</script>
 
 ```
 
-
-
-
-
-### 案例2：验证用户名是否可用
+### 案例：验证用户名是否可用
 
 用户名是admin，不可以注册；只要不是 admin，就可以注册
 
@@ -1841,6 +1695,83 @@ watch: {
 </script>
 
 ```
+
+
+
+
+
+## 10、侦听器
+
+又名 监视器。
+
+- 说明
+
+  监视的是已有数据。
+
+  作用：监听**单个数据的变化**，一旦数据有变化执行相应的方法。
+
+  
+
+- 用法1：监视基本的数据类型： 属性(新值,旧值)
+
+```js
+watch: {
+  key(newValue, oldValue) {
+    只要 key 的第一层数据被改变，即触发了 本回调函数函数
+      注：其无法 deep 监听
+  },
+}
+```
+
+- 用法2：handler （可配置：immediate 、deep）
+
+```js
+watch: {
+  key: {
+    handler(newValue, oldValue) {
+      本为 回调函数
+    },
+    immediate: true, 默认值为 false；设为 true，即刷新的时候会触发一次 回调函数
+    deep: true, 设为 true，即开发对 key 的深度 监听
+      注：开启深度监听，非常占用计算机资源
+  }
+}
+```
+
+- 用法3：深入监听具体key的变化：
+
+```js
+watch: {
+  `key1.key2.xxx`: {
+    handler() {
+      // 即监听指定 key 的变化
+    }
+  }
+}
+```
+
+
+
+### computed VS watch
+
+**相同**：computed 和 watch 都会因为data中的数据变化而执行响应的函数。
+
+**不同**：
+
+**computed**：是计算属性，依赖其它属性值
+
+1. 支持缓存，只有依赖数据发生改变，才会重新进行计算
+2. 不支持异步（只能同步写法）
+
+**watch**：没有缓存性，更多的是==观察==的作用，类似于某些数据的监听回调，每当监听的数据变化时都会执行回调进行后续操作；
+
+1. 不支持缓存，数据变，直接会触发相应的操作；
+2. watch支持异步
+3. 监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值
+
+
+
+
 
 
 

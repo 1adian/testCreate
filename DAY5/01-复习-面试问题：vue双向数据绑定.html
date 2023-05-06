@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 第一向 Model 改变 View 跟随改变 -->
+      <!-- 第二向 View 改变 Model 跟随改变，即 input 中内容改变了， 数据跟随改变 -->
+      <input type="text" v-bind:value="val" @input="updateVal" />
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 面试问题：
+  vue 的「双向数据绑定」，是什么？ / 能介绍一下吗？
+    1. 关键词 `v-model`
+      -> v-model 即 vue 的双向数据绑定。
+
+
+  v-model 的实现原理是什么？
+    -> 具体见： html + js 中的代码；
+      本质： v-model 就是 上述代码的「语法糖」。
+
+
+
+*/
+  // 面试问题： v-model 是 双向数据绑定 ；到底是什么意思？
+  //     -> 首先 vue 的设计模式是 `M V VM`， 即 Model  <--> vm <--> View
+  //       双向数据绑定的 第一向： Model发生了变化， 即 vm 自动 更新 View。
+  //       双向数据绑定的 第二向： View发生了变化， 即 vm 自动 更新 Model。
+
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      val: "111",
+    },
+    methods: {
+      // 只要 input 中输入内容，则会触发本回调函数
+      updateVal(e) {
+        this.val = e.target.value; // 实时获取 input 中输入的内容
+      },
+    },
+  });
+</script>
