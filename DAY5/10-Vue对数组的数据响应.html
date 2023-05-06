@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>数组：{{arr}}</h1>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* vue 中 数组并未被 数据劫持
+
+    vue2 -> 数据响应的原理 使用了 Object.defineProperty 给对象的 setter 和 getter 进行绑定（数据劫持）
+      使得 对象的数据 具有响应性。
+
+      但，Object.defineProperty 不能给 数组的 index 进行 setter 和 getter 的绑定。
+  */
+
+  /* 给数组的某个 元素，赋值，使其具有响应性 办法：
+    一、通过Vue对象调用 ：
+
+    ```js
+    Vue.set(vm.items,indexOfItem,newValue) 
+    ```
+
+    二、通过vue示例调用
+
+    ```js
+    vm.$set(vm.items,indexOfItem,newValue)
+    ```
+  */
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      arr: [1, 2, 3, 4, 5],
+    },
+    methods: {
+      // 需求：arr.map  -> 对数组 中 每个元素，均乘以 2
+      // 将页面中的 [1, 2, 3, 4, 5]  变成 [2, 4, 6, 8, 10]
+      fn() {
+        // 注：map实例方法，并不会 改变 this.arr 本身
+        console.log(this.arr.map((d) => d * 2));
+
+        // 注：直接 改变 arr ，是具有 数据响应性的
+        this.arr = this.arr.map((d) => d * 2);
+      },
+    },
+  });
+</script>
