@@ -35,7 +35,7 @@
     el: "#app",
     data: {
       todolist: [{ name: "吃饭" }, { name: "睡觉" }], // 注：只要的 待做项，统统放入该数组中
-      search: "", // search 中的内容是对 todolist 进行 筛选/模糊搜索
+      search: ``, // search 中的内容是对 todolist 进行 筛选/模糊搜索
     },
     methods: {
       // 方法 - function
@@ -44,11 +44,26 @@
       },
 
       handleKeydownEnter(event) {
-        this.todolist.push({
-          name: event.target.value,
-        });
+        // 新需求：若input中，没有 任何 输入，回车，则无效
+        // if (event.target.value !== "") { // 简化写法
+        if (event.target.value) {
+          // '' 不能执行 if 的代码块
 
-        event.target.value = ""; // 将 input 中输入的内容，清空
+          // 新需求：todolist 中，不能 重复出现 相同的词条
+          // 如果 event.target.value 已经出现在的 todolist 中，则不执行 下述代码
+          const isNotExist = this.todolist.every((item) => {
+            return item.name !== event.target.value;
+          });
+
+          if (isNotExist) {
+            this.todolist.push({
+              name: event.target.value,
+            });
+            event.target.value = ""; // 将 input 中输入的内容，清空
+          } else {
+            alert(`${event.target.value} 已经出现在 todolist 中`);
+          }
+        }
       },
     },
 
