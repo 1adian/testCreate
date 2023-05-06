@@ -19,8 +19,6 @@
         placeholder="请输入待做项"
         @keydown.enter="handleKeydownEnter"
       />
-
-      <!-- todolist 以 ul > li 的形式显示 -->
       <ul>
         <li v-for="(item, index) in showList" :key="item.name">
           {{item.name}}
@@ -63,5 +61,19 @@
         }); // 对 todolist 进行过滤
       },
     },
+  });
+
+  // ------------
+  // 数组 回调函数的 参数：
+  ["a", "b", "c"].forEach(function (item) {
+    // item 依次为 'a', 'b', 'c'
+  });
+
+  ["a", "b", "c"].forEach((item) => {
+    // item 依次为 'a', 'b', 'c'
+  });
+
+  ["a", "b", "c"].forEach((d) => {
+    // d 依次为 'a', 'b', 'c'
   });
 </script>
