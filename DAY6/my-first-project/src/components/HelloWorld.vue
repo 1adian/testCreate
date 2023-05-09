@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import { add } from "@/utils/add.js"; // @ 等同于 `src`
+console.log("add", add(1, 9));
+// 此处能执行 JS 代码
 export default {
   name: "HelloWorld",
   methods: {

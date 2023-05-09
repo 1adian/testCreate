@@ -2473,6 +2473,8 @@ vue create my-project（自定义项目名）
 
 ####VSCode 配置：
 
+`设置`中搜 `save`
+
 ![image-20230209212703435](/Users/mark/Downloads/day18_课件/images/image-20230209212703435.png)
 
 

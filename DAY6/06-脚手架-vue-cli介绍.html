@@ -80,7 +80,18 @@
     main.js 作用：刷新页面，首先执行 main.js
   
   .gitignore：
-    作用：
+    作用：只要是 该文件中，声明的 文件/文件夹，其均不会被上传到 git 服务器上。
+      如： gitee.com
+
+  jsconfig.json：
+    因为该文件中有： 
+      "paths": {
+        "@/*": [
+          "src/*"
+        ]
+      },
+    所以，后续 import 的路径，只要写 `@` 则等同于写 `src`
+
 
 */
 </script>

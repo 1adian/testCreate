@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 
+    vue 脚手架创建的项目： npm run serve
+      作用：本地开发代码，使用的“环境”。
+
+    若代码开发完毕，需要放到服务器上（部署/上线），
+      则需要将 脚手架的代码，打包成 浏览器认识的代码。
+
+
+    打包的命令/写法：
+      1）cd 到 vue项目的文件夹中
+          ->  cd  my-first-project
+
+      2) 打包的命令：
+        `npm run build`
+
+      3）生成 /dist 文件夹
+        将 `/dist 文件夹，给 服务器，则 其他浏览器便可以访问该代码了...
+  
+      
+  */
+  const vm = new Vue({
+    el: "#app",
+    data: {},
+    computed: {},
+    methods: {},
+    watch: {},
+  });
+</script>
