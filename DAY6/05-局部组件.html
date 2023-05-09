@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        默认 `.html` 文件中，标签名 对 大小写 不敏感
+
+        所以， 组件标签，无法识别 驼峰式命名，只能通过 '-' 将两个单词相连。
+              注： `-` 的写法，业内被称为 "烤串式" 写法。
+       -->
+
+      <!-- 局部组件 - 使用 -->
+      <comp-a></comp-a>
+      <comp-a></comp-a>
+      <comp-a></comp-a>
+      <comp-a></comp-a>
+      <comp-a></comp-a>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<!-- ES6 - ESM 模块化的引入 -->
+<script type="module">
+  import CompA from "./CompA.js"; // 局部组件的 「引入」
+
+  /* 局部组件（重点）
+    其使用分为 四步：
+      - 定义、
+      - 引入、
+      - 注册、
+      - 使用
+
+    局部组件的作用：
+      只能让 组件在 本 vue文件的代码中有效。
+        但有效的前提，必须是 该组件被注册了。
+  */
+  const vm = new Vue({
+    el: "#app",
+    components: {
+      // 组件，都在 此 被注册~
+      // CompA: CompA ES6 简写：
+      CompA, // 局部组件的注册
+    },
+    data: {},
+    computed: {},
+    methods: {},
+    watch: {},
+  });
+</script>

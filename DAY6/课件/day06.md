@@ -2276,7 +2276,7 @@ Vue.component('MyComponentName', { /* 内容配置 */ })
 
 当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时==两种命名法都可以使用==。也就是说 `<my-component-name>` 和 `<MyComponentName/>` 都是可接受的。注意，
 
-尽管如此，**直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case 是有效的**。
+尽管如此，**直接在 DOM (即非字符串的模板，即 html文件中) 中使用时只有 kebab-case 是有效的**。
 
 到目前为止，我们只用过 `Vue.component` 来创建组件：
 
@@ -2308,10 +2308,10 @@ new Vue({ el: '#app' })
 
 #### 总结：
 
-1. 名字规范：不能是HTML标签名
+1. 名字规范：不能是 HTML标签名
 2. template内部必须包含一个根节点
 3. 组件内部的data，必须写成一个函数。
-4. html 文件中的写法有所局限：如 组件的使用，只能写 烤串式
+4. html 文件中的写法有所局限：如 组件的使用，只能写 烤串式标签命名
 
 
 
@@ -2319,28 +2319,66 @@ new Vue({ el: '#app' })
 
 四部曲：定义、引入、注册、使用
 
-#####  1、定义 局部组件 XXX.js:
+#####  1、定义 局部组件 CompA.js:
 
 ```js
+// 将 对象以 默认的形式导出
+// 注：该对象，本质就是 `组件`
+// 组件的声明/定义：
+export default {
+  template: `
+    <div style="border: 1px solid blue;">
+      <h1 @click="handleClick">doubleCount - {{doubleCount}}</h1>
+      <p>我是一段 文本内容。。。</p>
+      <button @click="count++">点我将 count + 1</button>
+    </div>
+  `,
+  data() {
+    return {
+      // 注：data 函数必须返回 对象
+      count: 1,
+    };
+  },
 
+  methods: {
+    handleClick() {
+      alert("Yo ~ 你点击了 h1 标签");
+    },
+  },
+
+  computed: {
+    doubleCount() {
+      return this.count * 2;
+    }
+  }
+}
 ```
 
 ##### 2、哪里需要哪里引入：
 
 ```js
-
+import CompA from "./CompA.js"; // 局部组件的 「引入」
 ```
 
 ##### 3、注册：
 
 ```js
-
+components: {
+  // 组件，都在 此 被注册~
+  // CompA: CompA ES6 简写：
+  CompA, // 局部组件的注册
+},
 ```
 
 ##### 4、使用：
 
 ```vue
-
+<!-- 局部组件 - 使用 -->
+<comp-a></comp-a>
+<comp-a></comp-a>
+<comp-a></comp-a>
+<comp-a></comp-a>
+<comp-a></comp-a>
 ```
 
 
