@@ -2200,7 +2200,7 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 
 ### 组件的作用：
 
-组件的概念：组件是 在 `xx.html` 能组成 html+css+js 代码 其基础上，更小的代码单元。
+组件的概念：组件是 在 `xx.html` 能组成 html+css+js 代码 其基础上，`更小的代码单元`。
 
 即 一个 页面中，可以有 多个组件，每个组件 都有 html+css+js 的代码组合。
 
