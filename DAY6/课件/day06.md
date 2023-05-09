@@ -1796,7 +1796,8 @@ watch: {
 watch: {
   key: {
     handler(newValue, oldValue) {
-      本为 回调函数
+      // 本为 回调函数
+      // 只要是 函数，在 vue 中，就可以使用 this
     },
     immediate: true, 默认值为 false；设为 true，即刷新的时候会触发一次 回调函数
     deep: true, 设为 true，即开发对 key 的深度 监听
@@ -1988,7 +1989,7 @@ data: {
 对数组的修改，除了用上面提供的API之后，还可以通过索引直接操作数组。但是==通过索引操作并不是响应式的==。
 
 ```js
-this.arr[2]='新值'
+this.arr[2]='新值' // 这种写法不具有数据响应性！！！
 ```
 
 
@@ -2271,7 +2272,9 @@ Vue.component('my-component-name', { /* 内容配置 */ })
 Vue.component('MyComponentName', { /* 内容配置 */ })
 ```
 
-当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时==两种命名法都可以使用==。也就是说 `<my-component-name>` 和 `<MyComponentName/>` 都是可接受的。注意，尽管如此，直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case 是有效的。
+当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时==两种命名法都可以使用==。也就是说 `<my-component-name>` 和 `<MyComponentName/>` 都是可接受的。注意，
+
+尽管如此，**直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case 是有效的**。
 
 到目前为止，我们只用过 `Vue.component` 来创建组件：
 
@@ -2290,6 +2293,7 @@ Vue.component('component-c', { /* ... */ })
 
 new Vue({ el: '#app' })
 <div id="app">
+  <!-- 注：html 中，只能写 烤串式 -->
   <component-a></component-a>
   <component-b></component-b>
   <component-c></component-c>
@@ -2303,186 +2307,39 @@ new Vue({ el: '#app' })
 #### 总结：
 
 1. 名字规范：不能是HTML标签名
-
 2. template内部必须包含一个根节点
-
 3. 组件内部的data，必须写成一个函数。
-
-4. 
-
+4. html 文件中的写法有所局限：如 组件的使用，只能写 烤串式
 
 
 
-
-#### ==步骤：==
-
-
-
-> ##### 25_全局组件.html
->
-> ```vue
-> <!DOCTYPE html>
-> <html lang="en">
-> 
-> <head>
-> <meta charset="UTF-8">
-> <meta http-equiv="X-UA-Compatible" content="IE=edge">
-> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-> <title>25_全局注册组件</title>
-> </head>
-> 
-> <body>
-> <div id="app">
-> <!-- 4、使用组件两种方式：（1）大驼峰式 （2）短横线式 在html文件中只能使用 短横线式  -->
-> <!-- 为了方便，Vue 支持将模板中使用 kebab-case 的标签解析为使用 PascalCase 注册的组件。
-> 这意味着一个以 `MyComponent` 为名注册的组件，在模板中可以通过 `<MyComponent>` 或 `<my-component>` 引用。
->   这让我们能够使用同样的 JavaScript 组件注册代码来配合不同来源的模板。 -->
-> <my-header></my-header>
-> <!-- <MyHeader></MyHeader> -->
-> </div>
-> </body>
-> <!-- 1、 定义组件的模板 -->
-> <template id="header">
-> <header>头部-{{msg}} - {{ reverseMsg }}</header>
-> </template>
-> 
-> <script src="vue.js"></script>
-> <script>
-> // 2、定义组件 - 首字母大写
-> const Header = {
-> //template:'<div> <h2>我是一个全局组件</h2> <p>{{ msg }}</p></div>',
-> template: '#header', // 绑定页面的模板 --- 必不可少
-> // 可以写任意的属于vue的选项
-> data() { // vue2中的所有的组件的 data 必须是函数
-> return {
->   msg: 'hello header'
-> }
-> },
-> computed: {
-> reverseMsg() {
->   return this.msg.split('').reverse().join('')
-> }
-> }
-> }
-> // 3、全局注册组件 --- 要在 new Vue 实例 之前
-> // Vue.component('MyHeader', Header) // 大驼峰式
-> Vue.component('my-header', Header) // 短横线式
-> 
-> new Vue({}).$mount('#app')
-> </script>
-> 
-> </html>
-> ```
-
-
-
-
-
-### 12.3 局部组件
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>27_vue2局部注册组件</title>
-</head>
-
-<body>
-  <div id="app">
-    <!--4、 使用组件 大驼峰式 短横线式  在html文件中只能使用 短横线式  -->
-    <!-- 为了方便，Vue 支持将模板中使用 kebab-case 的标签解析为使用 PascalCase 注册的组件。
-      这意味着一个以 `MyComponent` 为名注册的组件，在模板中可以通过 `<MyComponent>` 或 `<my-component>` 引用。
-        这让我们能够使用同样的 JavaScript 组件注册代码来配合不同来源的模板。 -->
-    <my-header></my-header>
-    <!-- <MyHeader></MyHeader> -->
-  </div>
-</body>
-<!-- 1、 定义组件的模板 -->
-<template id="header">
-  <header>头部-{{msg}} - {{ reverseMsg }}</header>
-</template>
-<script src="lib/vue.js"></script>
-<script>
-  // 2、定义组件 - 首字母大写
-  const Header = {
-    template: '#header', // 绑定页面的模板 --- 必不可少
-    // 可以写任意的属于vue的选项
-    data() { // vue2中的所有的组件的 data 必须是函数
-      return {
-        msg: 'hello header'
-      }
-    },
-    computed: {
-      reverseMsg() {
-        return this.msg.split('').reverse().join('')
-      }
-    }
-  }
-
-  new Vue({
-    components: { // 3、 局部注册组件
-      // MyHeader: Header
-      'my-header': Header
-    }
-  }).$mount('#app')
-</script>
-
-</html>
-```
-
-
+### 12.3 局部组件（重点）
 
 四部曲：定义、引入、注册、使用
 
-#####  1、定义局部组件 comB.js:
+#####  1、定义 局部组件 XXX.js:
 
 ```js
-let comB = {
-  template: '<h2>comB</h2>'
-}
 
-export default comB
 ```
 
-
-
-##### 2、App.vue 哪里需要哪里引入：
+##### 2、哪里需要哪里引入：
 
 ```js
-import comB from "@/components/comB.js";
+
 ```
 
 ##### 3、注册：
 
 ```js
-export default {
-  name: "App",
-  //注册组件
-  components: {
-    comB:comB
-  },
-};
+
 ```
 
 ##### 4、使用：
 
 ```vue
-<comB/>
-#或者
-<comB></comB>
+
 ```
-
-
-
-
-
-https://v2.cn.vuejs.org/v2/guide/single-file-components.html
-
-
 
 
 
@@ -2547,7 +2404,7 @@ vue create my-project
 
 ​	1）cd 至 项目文件夹
 
-​	2）npm run serve：开发
+​	2）npm run serve：本地启动项目
 
 
 
@@ -2577,4 +2434,183 @@ vue create my-project
 ####VSCode 配置：
 
 ![image-20230209212703435](/Users/mark/Downloads/day18_课件/images/image-20230209212703435.png)
+
+
+
+## 14、组件传值
+
+### 14.1 prop传值
+
+最基本、最简单的组件通信方式。
+
+适用场合：适用于父子之间
+
+父可以给子传递==非函数数据==和==函数数据==
+
+
+
+#### 14.1.1 传递普通数据（非函数数据）
+
+**语法**：
+
+调用子组件时通过属性形式定义传递的数据
+
+` <Son title='标题' />`
+
+在子级组件中,通过props属性接收,不写接收是接收不到的
+
+```js
+export default{
+	props:['title']
+ }
+```
+
+​    在子级组件中使用props数据：直接当变量使用 title
+
+**1.** **静态props，动态的props**
+
+​    静态props  `<Son title='标签'>`
+
+​    动态的props ` <Son :title='mytitle'/>`
+
+**2.** **props类型**
+
+​    props:{ title:String }
+
+
+
+#### 14.1.2 父向子传递函数数据
+
+父可以给子传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲	
+
+```vue
+
+```
+
+
+
+#### 总结：
+
+1. Props 最基础的通信，用的也是比较多的，所以必须搞定
+2. 父可以给子传递==函数数据==和==非函数数据==
+   (1) 传递非函数数据，本质就是父亲给儿子传数据
+   (2) 传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲	
+
+3. 不足（不是父子就很麻烦） 兄弟关系，就必须先把一个数据给了父亲，然后通过父亲再给另一个
+
+### 14.2 props 校验
+
+我们可以为组件的 prop 指定验证要求，例如你知道的这些类型。如果有一个需求没有被满足，则 Vue 会在浏览器控制台中警告你。这在开发一个会被别人用到的组件时尤其有帮助
+
+```js
+Vue.component('my-component', {
+  props: {
+    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+    propA: Number,
+    // 多个可能的类型
+    propB: [String, Number],
+    // 必填的字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 带有默认值的数字
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 带有默认值的对象
+    propE: {
+      type: Object,
+      // 对象或数组默认值必须从一个工厂函数获取
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    }
+  }
+})
+```
+
+**类型校验**
+
+当 prop 验证失败的时候，(开发环境构建版本的) Vue 将会产生一个控制台的警告。
+
+`type` 可以是下列原生构造函数中的一个：
+
+- `String`
+- `Number`
+- `Boolean`
+- `Array`
+- `Object`
+- `Date`
+- `Function`
+- `Symbol`
+
+额外的，`type` 还可以是一个自定义的构造函数，并且通过 `instanceof` 来进行检查确认。
+
+
+
+### 14.3 自定义事件
+
+**由来：**父组件通过props传递给子组件的数据，子组件不能修改。但是可以通过自定义事件，由子组件通知父组件，让父组件自行修改。
+
+#### 步骤：
+
+1. 子组件中，通过this.$emit('自定义事件名'，'传参数') 触发
+
+2. 父组件中，通过v-on 来监听子组件事件
+
+   语法 ：
+
+3. 子组件定义事件 
+
+   ```js
+   this.$emit('自定义事件名',this.msg)
+   ```
+
+ 4. 父组件-调用子组件上面接受自定义事件
+
+    ```html
+    <子组件 @自定义事件名='函数名'/>
+    
+    methods:{
+        函数名(val){
+            this.xx = val;
+        }
+    }
+    ```
+
+==不足之处：只能应用在父子之间==
+
+
+
+#### 自定义事件命名规范
+
+不同于组件和 prop，事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。举个例子，如果触发一个 camelCase 名字的事件：
+
+```js
+this.$emit('myEvent')
+```
+
+则监听这个名字的 kebab-case 版本是不会有任何效果的：
+
+```html
+<!-- 没有效果 -->
+<my-component v-on:my-event="doSomething"></my-component>
+```
+
+
+
+不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 `v-on` 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 `v-on:myEvent` 将会变成 `v-on:myevent`——导致 `myEvent` 不可能被监听到。
+
+因此，我们推荐你**始终使用 kebab-case 的事件名**。
+
+
 

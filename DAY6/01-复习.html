@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>doubleCount {{doubeCount}}</h1>
+      <!-- 只要点击 按钮，即将 count 值 ++ -->
+      <button @click="count++">addCount</button>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 复习：
+    计算属性：
+      作用：是对 data 中的数据/属性，进行“再加工”。
+      例子：对 data 中的数字，进行 double 
+
+
+    侦听器： watch
+      作用：是用于 监测 data 中的数据/属性，若数据/属性，发生了改变，则触发对应的回调函数。
+  */
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      // vue2 中，若数据 没有在 data 中进行初始化，则其数据 没有响应性
+      // 若 后续 新增了 某个key，要让它具有 数据的响应性，则需要 使用 `Vue.set` 或者 `vm/this.$set`
+      count: 1,
+      // num: 123
+    },
+    // 计算 属性
+    computed: {
+      // 最常用的 计算属性的写法
+      doubeCount() {
+        return this.count * 2;
+      },
+    },
+    methods: {},
+    watch: {
+      count(newValue, oldValue) {
+        // 函数
+        console.log("watch - count", this.count, newValue, oldValue);
+      },
+    },
+  });
+</script>
