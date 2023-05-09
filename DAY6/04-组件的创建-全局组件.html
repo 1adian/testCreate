@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 
+        因为 全局注册了组件，所以 因为 vue，
+        可以在 #app中，使用 注册过的 组件
+
+        使用方法：直接将 组件名，以 标签名的形式 使用
+       -->
+      <my-component-name></my-component-name>
+      <my-component-name></my-component-name>
+      <my-component-name></my-component-name>
+      <my-component-name></my-component-name>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 使用组件的 三个基本步骤：
+
+  * 定义/声明 组件
+    将 html + css + js 代码 「封装」至组件。
+
+  * 注册组件
+    编写好的代码（组件），需要被注册，才能被使用。
+
+  * 使用组件
+*/
+
+  // 全局组件：
+  // 全局组件的作用： 在 前端项目中，各个页面都能被使用的组件，叫 「全局组件」。
+
+  // 组件名：`my-component-name`
+  // 注册 并声明了 全局组件，其组件名是 `my-component-name`
+  Vue.component("my-component-name", {
+    // 本对象，等同于 new Vue 中的对象
+    // 在 本对象中，进行对「组件」的封装：html / css / js
+    // html 代码写在 `template` 中：以字符串的形式写 html 代码
+
+    // 注1(强调重点)：组件中template 写的标签代码，必须有 根节点！！！
+    template: `
+      <div style="border: 1px solid black;">
+        <h1 @click="handleClick">count - {{count}}</h1>
+        <p>我是一段 文本内容。。。</p>
+        <button @click="count++">点我将 count + 1</button>
+      </div>
+    `,
+    // 报错信息： "data" option should be a function that returns a per-instance value in component definitions.
+    // 注2（强效重点）：组件中，data 必须是 函数的返回值，其函数返回一个 data 对象
+    data() {
+      // 面试问题：为什么 组件中 data 必须是函数？？？
+      // -> 每次 `组件执行` <my-component-name></my-component-name> 的时候，
+      // 执行一次 data 函数，可以给 每个组件的执行，都单独创造一个 单独的 对象
+      // 从而 做到了  多组件之间的 数据隔离！
+      return {
+        // 注：data 函数必须返回 对象
+        count: 1,
+      };
+    },
+    // data: {
+    //   // 若 data 是 对象，复杂数据类型，则 组件若被使用了 N 次
+    //   // 而所有组件中的 data 都共享 同一个  堆内存。
+    //   // 那么，会造成 所有的组件，数据被改变，会一齐被改变！！！
+    //   // 那么，各个组件之间的数据，无法被「数据隔离」。
+    //   count: 1,
+    // },
+    methods: {
+      handleClick() {
+        alert("Yo ~ 你点击了 h1 标签");
+      },
+    },
+  });
+
+  const vm = new Vue({
+    el: "#app",
+    data: {},
+    computed: {},
+    methods: {},
+    watch: {},
+  });
+</script>

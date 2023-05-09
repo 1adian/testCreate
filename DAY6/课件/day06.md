@@ -2220,7 +2220,7 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 
 ### 12.1 组件创建
 
-通常一个应用会以一棵嵌套的组件树的形式来组织：
+通常一个应用会以一棵嵌套的**组件树**的形式来组织：
 
 例如，你可能会有页头、侧边栏、内容区等组件，每个组件又包含了其它的像导航链接、博文之类的组件。
 
@@ -2243,6 +2243,8 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 ### 12.2 全局组件
 
 在注册一个组件的时候，我们始终需要给它一个名字。比如在全局注册的时候我们已经看到了：
+
+可以将 组件类比为 '函数'
 
 ```
 Vue.component('my-component-name', { /* ... */ })
