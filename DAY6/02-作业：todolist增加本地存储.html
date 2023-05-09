@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>todolist</h1>
+      <div>
+        对todolist的词条进行模糊搜索：
+        <input type="text" v-model="search" />
+      </div>
+      <input
+        type="text"
+        placeholder="请输入待做项"
+        @keydown.enter="handleKeydownEnter"
+      />
+      <ul>
+        <li v-for="(item, index) in showList" :key="item.name">
+          {{item.name}}
+          <button @click="handleDelete(index)">删除</button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 面试问题：localStorage 和 sessionStorage 的相同点和不同点：
+    需求：增加 localStorage 的本地存储
+
+    localStorage 和 sessionStorage 的相同点和不同点：
+      - 相同点：
+        1）都是将数据存储到 硬盘中；
+        2）其存储大小 基本在在 5M 左右。
+
+      - 不同点：
+        localStorage 存在硬盘中，关机、关浏览器数据都不会丢失。
+        sessionStorage 只要关闭 浏览器的 tab页面，则数据就会丢失。
+  */
+
+  // 增加 - localStorage 去存储数据
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      // 只要刷新，则必会执行本代码
+      // 即将 localStorage 中的数据，赋值给 `todolist`
+      todolist: JSON.parse(localStorage.getItem("todo-list")) || [],
+      search: ``, // search 中的内容是对 todolist 进行 筛选/模糊搜索
+    },
+    methods: {
+      // 方法 - function
+      handleDelete(index) {
+        this.todolist.splice(index, 1); // 删除 对应的 数据
+      },
+
+      handleKeydownEnter(event) {
+        if (event.target.value) {
+          const isNotExist = this.todolist.every((item) => {
+            return item.name !== event.target.value;
+          });
+
+          if (isNotExist) {
+            this.todolist.push({
+              name: event.target.value,
+            });
+            event.target.value = ""; // 将 input 中输入的内容，清空
+          } else {
+            alert(`${event.target.value} 已经出现在 todolist 中`);
+          }
+        }
+      },
+    },
+
+    // 观察 `todolist`
+    watch: {
+      todolist(newValue, oldValue) {
+        // newValue, oldValue 其两个变量，本质是 存储的 同一 堆内存地址
+        // 因为 todolist 是复杂数据类型：所以 newValue, oldValue 两个变量 指向同一内存空间
+
+        // newValue, oldValue 典型的 应用场景：
+        // 若 watch 的是 `基础数据类型`，则 newValue, oldValue 是能体现出区别
+        // 而 复杂数据类型，newValue, oldValue 则不能体现出区别。
+
+        console.log(newValue, oldValue);
+        // 只要是 todolist 数据发生改变，则会触发本回调函数
+        // console.log(this.todolist);
+
+        // 需求：若 todolist 发生了改变，则将新的 数据，存储到 localStorage 中
+        // 前端后交互数据/本地存储，都只能 存储 字符串
+        localStorage.setItem("todo-list", JSON.stringify(this.todolist));
+      },
+    },
+
+    computed: {
+      // 本计算属性的作用：用于 li 的显示
+      // 基于 search 搜索的内容，多 todolist 进行 过滤
+      showList() {
+        return this.todolist.filter((d) => {
+          return d.name.includes(this.search); // '吃饭' 包含 '吃'
+        }); // 对 todolist 进行过滤
+      },
+    },
+  });
+</script>
