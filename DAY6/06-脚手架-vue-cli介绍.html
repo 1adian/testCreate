@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  const add = 1 + 1;
+  /* 脚手架的 作用：
+  vue 的脚手架 - `vue-cli`
+    作用：迅速搭建出一套 现代的前端项目的 代码基本结构。
+
+
+  `xxx.html` 这种代码的写法，是「远古写法」，实例的 工作/项目中，基本已经放弃 这么写了。
+    为什么 ->  这种写法 ，弊端非常多。
+
+  「现代写法」：通过 vue/react  +  脚手架，直接搭建出 一套  现代的前端项目的基本结构。
+    
+*/
+
+  /* vue - 脚手架的用法：
+  1. 打开「终端」，输入 `npm install -g @vue/cli`
+    -> 全局安装 vue 的脚手架
+    注：windows下即 `power shell`
+
+  2. cd 到 指定文件夹中
+
+  3. vue create `my-first-project`（自定义项目名）
+
+  4. Manually select features
+    -> 回车
+
+  5. 使用默认：
+    -> Babel：将 高版本的JS代码，转成低版本的JS代码，以便 浏览器识别。
+    -> Linter / Formatter：自动格式化代码
+      -> 回车
+
+  6. 选择 `2.x`：选择 vue2 的代码
+    -> 回车
+
+  7. 选择 `ESLint + Prettier `：自动格式化代码
+    -> 回车
+
+  8. 选择 `Lint on save`：选择 保存代码（ctrl+s）时，自动格式化代码。
+    -> 回车
+
+  9. 选择 `In package.json`
+    -> 回车
+
+  10. cd my-first-project
+
+  11. npm run serve：启动 开发服务器
+    注：命令行/power shell 不能被关闭，若被关闭，则服务器则被关闭。
+
+  12. 根据 提示的网站，使用浏览器打开：
+    小技巧： 按住 ctrl + 点击，直接 以浏览器 打开 脚手架创建的项目
+
+        -> 至此，则通过 脚手架，成功 创建出 vue 的现代化的项目。
+    
+*/
+
+  /* vue 脚手架 创建的项目 目录介绍：
+  /node_modules：作用：npm 安装的三方库/三方依赖，统一放于 该文件夹中
+
+  /public：作用：等同于 项目的根目录
+    （注：暂且不重要）
+
+  /src：后续写的代码，均在该文件夹中
+    （注：非常重要）
+    /assets：作用：静态资源（图片/视频/字体/音频...）都被称为静态资源
+    /components：作用：组件的声明，统一被放入该文件夹中
+    App.vue：作用：即 vue 的「组件」
+      注： `xxx.vue` 文件，浏览器默认并不认识，而是 vue的脚手架，集成了 `webpack`
+        通过 webpack 将 `xxx.vue` 文件 解析成 JS对象，进一步才被 浏览器识别。
+    main.js 作用：刷新页面，首先执行 main.js
+  
+  .gitignore：
+    作用：
+
+*/
+</script>

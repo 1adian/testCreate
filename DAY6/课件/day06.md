@@ -2416,7 +2416,7 @@ vue --version
 
 #### 创建项目
 
-vue create my-project
+vue create my-project（自定义项目名）
 
 项目名称最好是英文，不能包含驼峰命名法
 
