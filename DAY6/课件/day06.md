@@ -2383,7 +2383,7 @@ components: {
 
 
 
-## 13、脚手架创建vue项目
+## 13、脚手架 创建vue项目
 
 <img src="images/脚手架.png" alt="img" style="zoom:50%;" />
 
