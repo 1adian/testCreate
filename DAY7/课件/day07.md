@@ -150,9 +150,9 @@ const model = {
 
 Vue.js 是一个提供了 MVVM 风格的双向数据绑定的 Javascript 库，专注于 View 层。
 
-它的核心是 MVVM 中的 **VM**，也就是 ViewModel。
+ 它的核心是 MVVM 中的 **VM**，也就是 ViewModel。
 
-ViewModel 负责连接 View 和 Model，保证视图和数据的一致性，这种轻量级的架构让前端开发更加高效、便捷。
+ ViewModel 负责连接 View 和 Model，保证视图和数据的一致性，这种轻量级的架构让前端开发更加高效、便捷。
 
 ## 2、Vue 介绍
 
@@ -316,9 +316,9 @@ const vm = new Vue({
 
 ## 4、模板语法
 
-Vue.js 使用了基于 HTML 的模板语法 -> “Mustache”语法，胡须 - 被俗称为 **「大胡子」**
+ Vue.js 使用了基于 HTML 的模板语法 -> “Mustache”语法，胡须 - 被俗称为 **「大胡子」**
 
-模板语法的作用：new Vue 下很多 JS 数据可以直接在 模板语法中被使用 -> 如 data 中的属性，且 模板语法中的数据具有响应性。
+ 模板语法的作用：new Vue 下很多 JS 数据可以直接在 模板语法中被使用 -> 如 data 中的属性，且 模板语法中的数据具有响应性。
 
 数据绑定最常见的形式就是使用“Mustache”语法 (双大括号) 的文本插值：
 
@@ -337,7 +337,7 @@ var vm = new Vue({
 
 效果：
 
-![logo](images/3Mustache.png)
+ ![logo](images/3Mustache.png)
 
 #### 4.1 {{ 表达式 }} 可以放什么？
 
@@ -435,9 +435,9 @@ vue 中定义好的一些以"v-"开头+具体的名称的 属性，这些属性�
 
   指令分：自定义指令和内置指令（Vue 自带）
 
-内置指令：Vue 自带 的，能直接使用的 指令
+ 内置指令：Vue 自带 的，能直接使用的 指令
 
-自定义指令：就是用户自己定义的。扩展功能
+ 自定义指令：就是用户自己定义的。扩展功能
 
 下述列举 常用的 内置指令：
 
@@ -563,11 +563,11 @@ cloak ：[kləuk] 笼罩，覆盖；隐藏，掩饰的意思
 > <script src="../packages/vue.js"></script>
 > <script>
 > const vm = new Vue({
->   el: "#app", // 将 vue 的代码 生效的「挂载点」
->   data: {
->     link: "http://www.baidu.com",
->     title: "百度一下",
->   },
+>     el: "#app", // 将 vue 的代码 生效的「挂载点」
+>     data: {
+>       link: "http://www.baidu.com",
+>       title: "百度一下",
+>     },
 > });
 > </script>
 > ```
@@ -705,19 +705,25 @@ const vm = new Vue({
   > </script>
   > ```
 
+
+
 <hr />
 
 ### 预讲：事件简介
 
 ```vue
-<button @事件类型="赋值语句;"></button>
+<button @事件类型="赋值语句"></button>
 ```
+
+
 
 <hr />
 
+
+
 ### 5.3 条件渲染
 
-原生 js : 条件分支 if 判断
+原生 js : 条件分支  if 判断
 
 ```js
 if(true){
@@ -792,10 +798,10 @@ if(true){
 
 **v-if 与 v-show 比较**
 
-- 渲染模式：v-if 控制 DOM 元素的 销毁与创建； v-show 是控制 css 的 display。
+- 渲染模式：v-if 控制DOM元素的 销毁与创建； v-show 是控制 css 的 display。
 - 开销/性能：v-if 因为需要 销毁和创建，而 v-show 只是控制 display 的 css，所以 v-show 对性能开销更低。
 - 如何选择：
-  - 若是要控制大量元素的显示与隐藏，v-if 开销更大，不建议使用。
+  - 若是要控制大量元素的显示与隐藏，v-if开销更大，不建议使用。
   - 但 若要有 条件分支的逻辑：if - else / if - else ... if，只能用 v-if；因为 v-show 没有其他的 v-else 的逻辑。
 
 #### 总结：
@@ -803,12 +809,12 @@ if(true){
 1. 语法：
 
    ```vue
-   <div v-if="条件1">条件1成立</div>
-   <div v-else-if="条件2">条件2成立</div>
+   <div v-if='条件1'>条件1成立</div>
+   <div v-else-if='条件2'>条件2成立</div>
    <div v-else>条件1，2都不成立</div>
    ```
 
-2. v-if 功能：添加、删除元素；切换频率不高，用 v-if
+2. v-if 功能：添加、删除元素；切换频率不高，用v-if
 
 ![v-if](/Users/mark/Downloads/day18_课件/images/v-if.png)
 
@@ -817,87 +823,108 @@ if(true){
 4. v-show 语法:
 
    ```vue
-   <div v-show="条件">显示</div>
+   <div v-show='条件'>显示</div>
    ```
 
-5. 特点：控制元素的 display 属性是否 none；切换比较频繁，建议使用 v-show
+5. 特点：控制元素的display属性是否none；切换比较频繁，建议使用v-show
 
    应用场景：切换开销比较高就用 v-show
 
+
+
 ### 5.4 列表渲染
 
-原生 JS 遍历数组 for
+原生JS  遍历数组  for 
+
+
 
 我们可以用 `v-for` 指令基于一个数组来渲染一个列表。`v-for` 指令需要使用 `item in items` 形式的特殊语法，其中 `items` 是源数据数组，而 `item` 则是被迭代的数组元素的**别名**。
 
 ```html
 <ul id="app">
-  <li v-for="item in items" :key="item.name">{{ item.name }}</li>
+  <li v-for="item in items" :key="item.name">
+    {{ item.name }}
+  </li>
 </ul>
+
 ```
 
 ```js
 var example1 = new Vue({
-  el: "#app",
+  el: '#app',
   data: {
-    items: [{ name: "千千" }, { name: "小峰" }],
-  },
-});
+    items: [
+      { name: '千千' },
+      { name: '小峰' }
+    ]
+  }
+})
 ```
 
-> 嵌套渲染
+
+
+>嵌套渲染
 >
-> ```vue
-> <!DOCTYPE html>
-> <html lang="en">
->   <head>
->     <meta charset="UTF-8" />
->     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
->     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
->     <title>Document</title>
->   </head>
->   <body>
->     <ul id="app">
->       <li v-for="item in items">
->         {{ item.name }}
->         <ol>
->           <li v-for="child in item.children">{{ child.name }}</li>
->         </ol>
->       </li>
->     </ul>
->   </body>
-> </html>
-> <script src="../packages/vue.js"></script>
-> <script>
-> const vm = new Vue({
->   el: "#app",
->   data: {
->     items: [
->       {
->         name: "aa",
->         children: [
->           { name: "aa - 1" },
->           { name: "aa - 2" },
->           { name: "aa - 3" },
->         ],
->       },
->       {
->         name: "bb",
->         children: [
->           { name: "bb - 1" },
->           { name: "bb - 2" },
->           { name: "bb - 3" },
->         ],
->       },
->     ],
->   },
-> });
-> </script>
-> ```
+>```vue
+><!DOCTYPE html>
+><html lang="en">
+>  <head>
+>    <meta charset="UTF-8" />
+>    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>    <title>Document</title>
+>  </head>
+>  <body>
+>    <ul id="app">
+>      <li v-for="item in items">
+>        {{item.name}}
+>        <ol>
+>          <li v-for="child in item.children">{{child.name}}</li>
+>        </ol>
+>      </li>
+>    </ul>
+>  </body>
+></html>
+><script src="../packages/vue.js"></script>
+><script>
+>  const vm = new Vue({
+>    el: "#app",
+>    data: {
+>      items: [
+>        {
+>          name: "aa",
+>          children: [
+>            { name: "aa - 1" },
+>            { name: "aa - 2" },
+>            { name: "aa - 3" },
+>          ],
+>        },
+>        {
+>          name: "bb",
+>          children: [
+>            { name: "bb - 1" },
+>            { name: "bb - 2" },
+>            { name: "bb - 3" },
+>          ],
+>        },
+>      ],
+>    },
+>  });
+></script>
+>
+>```
+>
+>
+
+
 
 ##### 作业：嵌套列表渲染
 
 <img src="/Users/mark/Downloads/day18_课件/images/作业：嵌套列表渲染.jpg" alt="img" style="zoom:67%;" />
+
+
+
+
 
 ## 6、事件处理
 
@@ -905,9 +932,11 @@ var example1 = new Vue({
 
 1. Vue2 典型的面向对象写法
 
-2. Vue 的 函数 - methods
+2. Vue的 函数 - methods
 
    注：因为 vue 是「面向对象」写法，所以 函数中，可以使用 `this`。
+
+
 
 ### 6.1 监听事件 - 基础写法：
 
@@ -925,48 +954,55 @@ var example1 = new Vue({
 ```
 
 ```js
-var example1 = new Vue({
-  el: "#example-1",
-  data: {
-    counter: 0,
-  },
-});
+var example1 = new Vue({ 
+    el: '#example-1',
+    data: {  
+        counter: 0 
+    } 
+})
 ```
 
-​ ![logo](/Users/mark/Downloads/day18_课件/images/7.png)
+​	![logo](/Users/mark/Downloads/day18_课件/images/7.png)
+
+
 
 - 事件绑定的简写：
 
 `v-on:click = "JS语句"` 的简写方式： `@click = "JS语句"`
 
+
+
 ### 6.2 事件 触发 回调函数
 
 ```html
-<div id="example-2">
-  <!-- `greet` 是在下面定义的方法名 -->
-  <button v-on:click="greet">Greet</button>
+<div id="example-2">  
+    <!-- `greet` 是在下面定义的方法名 -->  
+    <button v-on:click="greet">Greet</button>
 </div>
 ```
 
 ```js
 var example2 = new Vue({
-  el: "#example-2",
+  el: '#example-2',
   data: {
-    name: "Vue.js",
+    name: 'Vue.js'
   },
   // 在 `methods` 对象中定义方法
   methods: {
     greet: function (event) {
       // `this` 在方法里指向当前 Vue 实例
-      alert("Hello " + this.name + "!");
+      alert('Hello ' + this.name + '!')
       // `event` 是原生 DOM 事件
       if (event) {
-        alert(event.target.tagName);
+        alert(event.target.tagName)
       }
-    },
-  },
-});
+    }
+  }
+})
+
 ```
+
+
 
 ### 6.3 事件传递参数
 
@@ -979,28 +1015,34 @@ var example2 = new Vue({
 
 ```js
 new Vue({
-  el: "#example-3",
+  el: '#example-3',
   methods: {
     say: function (message) {
-      alert(message);
-    },
-  },
-});
+      alert(message)
+    }
+  }
+})
 ```
+
+
 
 ##### 小结：
 
-事件相关：1、this 指向 2、传参 3、事件对象
+事件相关：1、this 指向   2、传参  3、事件对象
 
-1. this 指向： 指向当前 vm 实例对象
 
-2. 传参： ` v-on:click="say('Hi')"`
+
+1. this 指向： 指向当前 vm实例对象
+
+2. 传参：  ` v-on:click="say('Hi')"`
 
 3. 事件对象：
 
-   不带参数:接受到的第一个参数就是事件对象
+   不带参数:接受到的第一个参数就是事件对象 
 
    带参数：又要用事件对象时，必须写成$event！！！！！
+
+
 
 ### 6.4 事件修饰符（本质 就是 一些 “快捷键”）
 
@@ -1011,7 +1053,7 @@ new Vue({
 #### 6.4.1 事件修饰符
 
 - `.stop` 阻止事件事件冒泡
-- `.prevent` 阻止浏览器的默认行为
+- `.prevent`  阻止浏览器的默认行为
 - `.capture` 开启 捕获模式
 - `.self`
 - `.once`
@@ -1039,7 +1081,9 @@ new Vue({
 <div v-on:click.self="doThat">...</div>
 ```
 
-####
+#### 
+
+
 
 ```vue
 <!-- 案例： 阻止冒泡  和  阻止浏览器的默认行为 -->
@@ -1099,7 +1143,7 @@ new Vue({
 .right
 
 ```html
-<input v-on:keyup.enter="submit" />
+<input v-on:keyup.enter="submit">
 ```
 
 #### 6.4.3 系统修饰键
@@ -1109,15 +1153,19 @@ new Vue({
 - `.ctrl`
 - `.alt`
 - `.shift`
-- `.meta` windows 下，指的是 windows 键；macos 下，指的是 command 键；
+- `.meta`  windows 下，指的是 windows键；macos下，指的是 command 键；
 
 ```html
 <!-- Alt + C -->
-<input v-on:keyup.alt.67="clear" />
+<input v-on:keyup.alt.67="clear">
 
 <!-- Ctrl + Click -->
 <div v-on:click.ctrl="doSomething">Do something</div>
 ```
+
+
+
+
 
 ### 6.5 案例：点击高亮
 
@@ -1128,16 +1176,24 @@ new Vue({
 
 ![image-点击高亮](/Users/mark/Desktop/扣丁课堂23期/coding-23/DAY2/课件/images/点击高亮案例.png)
 
+
+
 ### 6.6 案例：点击删除按钮，删除对应行
 
 1. 动态渲染列表
-2. 点击删除按钮，删除对应的 li 标签
+2. 点击删除按钮，删除对应的li标签
 
 ![删除案例](images/删除案例.png)
 
-### 6.6 v-for 一定要绑定 key 属性
 
-#### v-for 为什么一定要绑定 key?
+
+
+
+
+
+### 6.6 v-for一定要绑定key属性
+
+#### v-for 为什么一定要绑定key?
 
 > 有相同父元素的子元素必须有**独特的 key**。重复的 key 会造成渲染错误。
 
@@ -1145,30 +1201,32 @@ https://v2.cn.vuejs.org/v2/api/#key
 
 ##### 结论：
 
-设置 key 的目的，就是为了让列表中当前节点得到复用。像 vue、react、还有小程序当中，只要用了遍历，生成同样结构的数据，必须要给每个结构加一个唯一性的标识。
+设置key的目的，就是为了让列表中当前节点得到复用。像vue、react、还有小程序当中，只要用了遍历，生成同样结构的数据，必须要给每个结构加一个唯一性的标识。
 
-#### 为什么需要「虚拟 DOM」？
 
-数据渲染到界面要经历创建虚拟 DOM 的过程，才能真正上 DOM 树。
 
-1. 真实 DOM 太重，属性太多。虚拟 DOM 轻。
-2. 新旧虚拟 DOM 之间的对比，效率更高。
+#### 为什么需要「虚拟DOM」？
+
+数据渲染到界面要经历创建虚拟DOM的过程，才能真正上DOM树。
+
+1. 真实DOM太重，属性太多。虚拟DOM轻。
+2. 新旧虚拟DOM之间的对比，效率更高。
 
 ![虚拟DOM](/Users/mark/Downloads/day18_课件/images/虚拟DOM.png)
 
-**虚拟 Dom**：是真实 Dom 的映射，即用 JS 对象来描述真实 DOM 节点，本质上就是在 JS 和 DOM 之间做了一个缓存。
+**虚拟Dom**：是真实Dom的映射，即用 JS 对象来描述真实DOM节点，本质上就是在 JS 和 DOM 之间做了一个缓存。
 
-真实 DOM：
+真实DOM：
 
 ```vue
-<ul id="list">
+<ul id='list'>
     <li class='item'>aa</li>
     <li class='item'>bb</li>
     <li class='item'>cc</li>
 </ul>
 ```
 
-虚拟 DOM：
+虚拟DOM：
 
 ```js
 {
@@ -1186,29 +1244,39 @@ https://v2.cn.vuejs.org/v2/api/#key
 
 别名：vdom、vnode、virtual dom、virtual node
 
+
+
 **diff 算法**：比较两棵虚拟 DOM 树的差异，最小量变化
 
 **patch**：将两个虚拟 DOM 对象的差异应用到真正的 DOM 树。
 
-#### 为什么 key 属性最好不要用下标
+
+
+#### 为什么key属性最好不要用下标
 
 - 若使用了 下标，其 效果 `:key` 作为 唯一标识的效果，就丧失了。
 
-#### 总结：
 
-1. 列表渲染一定要绑定 key！！！！
-2. 设置 key 的目的，就是为了让列表中当前节点得到复用（提高性能）
+
+
+
+#### 总结：          
+
+1. 列表渲染一定要绑定key！！！！
+2. 设置key的目的，就是为了让列表中当前节点得到复用（提高性能）
 3. 原则：尽量不要用下标，用后台提供的唯一标识！
+
+
 
 ## 7、表单输入绑定
 
-回顾：前面我们讲过从 data 数据到页面的单向绑定，用到 v-bind，如果要实现双向绑定，就用到了接下来要讲的 v-model。
+回顾：前面我们讲过从data数据到页面的单向绑定，用到v-bind，如果要实现双向绑定，就用到了接下来要讲的 v-model。
 
 ### 7.1 v-model
 
-`v-model` ：可以实现表单元素和 Model 层中的数据的双向绑定，特点注意：==只能应用在表单类元素单中！==
+`v-model`  ：可以实现表单元素和Model层中的数据的双向绑定，特点注意：==只能应用在表单类元素单中！==
 
-​ 你可以用 `v-model` 指令在表单元素创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但 v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。
+​		你可以用 `v-model` 指令在表单元素创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但 v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。
 
 `v-model` 在内部为不同的输入元素使用不同的 property 并抛出不同的事件：
 
@@ -1218,9 +1286,11 @@ https://v2.cn.vuejs.org/v2/api/#key
 
 你可以用 v-model 指令在表单控件元素上创建双向数据绑定
 
-​ ![logo](/Users/mark/Downloads/day18_课件/images/MVVM-5129503.png)
+​	![logo](/Users/mark/Downloads/day18_课件/images/MVVM-5129503.png)
 
 ==v-model 默认收集的是表单元素中 value 的值==
+
+
 
 #### 案例：==自动==收集表单数据
 
@@ -1230,134 +1300,148 @@ https://v2.cn.vuejs.org/v2/api/#key
 
 ```
 
+
+
 ### 7.2 ref 来获取表单中的数据
 
 - 说明
 
-  给 DOM 元素或组件起名字，相当于 id 标记，通过：this.$refs.名字 获取给 Dom 元素
+  给DOM元素或组件起名字，相当于 id 标记，通过：this.$refs.名字 获取给Dom元素
 
 - 语法
 
   ```html
-  <input type="text" ref="userInfo" />
-  <!--相当于给input框取个名字，相当于id-->
-
-  // JS 代码，在函数中 ，获取到 对应的 DOM 元素 // 再次强调：Vue
-  中，切记，不要直接操作DOM元素；则 不要 document.querySelector()... // 因为
-  vue/react 的思想，都是
-  「数据驱动视图」，即考虑如何操作数据，而不是操作DOM元素。 this.$refs.userInfo
+  <input type='text' ref='userInfo' />  <!--相当于给input框取个名字，相当于id-->
+  
+  // JS 代码，在函数中 ，获取到 对应的 DOM 元素
+  // 再次强调：Vue 中，切记，不要直接操作DOM元素；则 不要 document.querySelector()...
+  // 因为 vue/react 的思想，都是 「数据驱动视图」，即考虑如何操作数据，而不是操作DOM元素。
+  
+  this.$refs.userInfo 
   ```
 
 - 应用
 
-  获取 Dom 节点;
+  获取Dom节点;
 
-  修改 DOM 节点相关属性
+  修改DOM节点相关属性
+  
+  - 注：不建议直接操作DOM元素
 
-  - 注：不建议直接操作 DOM 元素
+
 
 ### 7.3 修饰符
 
 .**lazy**
 
-在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了[上述](https://cn.vuejs.org/v2/guide/forms.html#vmodel-ime-tip)输入法组合文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件*之后*进行同步：
+在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了[上述](https://cn.vuejs.org/v2/guide/forms.html#vmodel-ime-tip)输入法组合文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件_之后_进行同步：
 
 ```html
 <!-- 
 	在“change”时而非“input”时更新 
 		即，光标丢失 且value内容发生了改变，才会触发 change 事件
 -->
-<input v-model.lazy="msg" />
+<input v-model.lazy="msg">
 ```
+
+
 
 .**number**
 
 如果想自动将用户的输入值转为数值类型，可以给 `v-model` 添加 `number` 修饰符：
 
 ```html
-<input v-model.number="age" type="number" />
+<input v-model.number="age" type="number">
 ```
 
 这通常很有用，因为即使在 `type="number"` 时，HTML 输入元素的值也总会返回字符串。如果这个值无法被 `parseFloat()` 解析，则会返回原始的值。
+
+
 
 .**trim**
 
 如果要自动过滤用户输入的首尾空白字符，可以给 `v-model` 添加 `trim` 修饰符：
 
 ```html
-<input v-model.trim="msg" />
+<input v-model.trim="msg">
 ```
 
-### 7.4 v-model 实现的原理
 
-v-model 只不过是一个语法糖而已,真正的实现靠的还是
 
-原理：
+### 7.4 v-model实现的原理
 
-1、通过 v-bind，动态绑定 value 属性
+v-model只不过是一个语法糖而已,真正的实现靠的还是
 
-2、监听 input 事件，把变化后的值赋值给变量
+原理：      
+
+1、通过v-bind，动态绑定value属性      
+
+2、监听input事件，把变化后的值赋值给变量
 
 v-model 是什么。语法糖 :value + @input。还要分为两种情况
 
 ![v-model实现的原理](/Users/mark/Downloads/day18_课件/images/v-model实现的原理.png)
 
-#####
+##### 
 
 ## 8、数据劫持与代理
 
 ### Object.defineProperty()
 
-Vue2 中很多地方都用到了它，比如说 Vue 中的 数据劫持、数据代理、计算属性 等都用到了这个方法。
+Vue2 中很多地方都用到了它，比如说Vue中的 数据劫持、数据代理、计算属性 等都用到了这个方法。
 
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
-作用：为 对象 添加 或者 修改属性，使之变为==响应式的==。 数据劫持，拦截了做点儿啥事儿。
+作用：为 对象 添加 或者 修改属性，使之变为==响应式的==。  数据劫持，拦截了做点儿啥事儿。
 
 #### Object.defineProperty - 基本用法
 
 ```js
-const data = {
-  content: "你好",
-};
+  const data = {
+    content: "你好",
+  };
 
-Object.defineProperty(data, "key1", {
-  value: "即表示给 key1 的value 值", // 作用：给 key1 增加 属性值
-  enumerable: true, // enumerable - 即是否可被 for...in 循环遍历（默认值是 false）
-  writable: true, // writable - 即 该key 的value值能否被修改（默认值是 false）
-  configurable: true, // configurable - 即 该key 能否被 `delete` 将该 key 删除（默认值是 false）
-});
+  Object.defineProperty(data, "key1", {
+    value: "即表示给 key1 的value 值", // 作用：给 key1 增加 属性值
+    enumerable: true, // enumerable - 即是否可被 for...in 循环遍历（默认值是 false）
+    writable: true, // writable - 即 该key 的value值能否被修改（默认值是 false）
+    configurable: true, // configurable - 即 该key 能否被 `delete` 将该 key 删除（默认值是 false）
+  });
 ```
 
 ```js
-// 声明的 对象 - Model（数据）
-const data = {
-  content: "你好",
-  age: 333,
-};
+  // 声明的 对象 - Model（数据）
+  const data = {
+    content: "你好",
+    age: 333,
+  };
 
-const vm = {}; // 表示 vm 的实例对象
 
-Object.defineProperty(vm, "age", {
-  // 注：defineProperty 的对象，还有 两项 配置项：get函数 和 set函数
-  get() {
-    // get 函数 ，又被称为 `getter`，get 不能与 `value` 共用
-    // 注：该函数的作用： 只要执行 `vm.age` 表示 查询该key的 value
-    // 则 `vm.age` 的返回值是 本 get 函数的`返回值`
-    console.log("vm - age 的 get 函数执行 了...");
-    return data.age;
-  },
-  set(val) {
-    // set 函数，又被称为 `setter`，set 不能与 `writable` 共用
-    // 只要执行了 `vm.age = 新的value值`，即表示 data 的数据要被更新
-    // 注：该函数的作用： 只要执行 `vm.age = 新的value值`，即赋值
-    // 则会执行 set 函数，val 代表的是 `新的value值`
+  const vm = {}; // 表示 vm 的实例对象
 
-    console.log("vm - age 的 set 函数执行了 ...", val);
-    data.age = val; // 数据被更新
-  },
-});
+  Object.defineProperty(vm, "age", {
+    // 注：defineProperty 的对象，还有 两项 配置项：get函数 和 set函数
+    get() {
+      // get 函数 ，又被称为 `getter`，get 不能与 `value` 共用
+      // 注：该函数的作用： 只要执行 `vm.age` 表示 查询该key的 value
+      // 则 `vm.age` 的返回值是 本 get 函数的`返回值`
+      console.log("vm - age 的 get 函数执行 了...");
+      return data.age;
+    },
+    set(val) {
+      // set 函数，又被称为 `setter`，set 不能与 `writable` 共用
+      // 只要执行了 `vm.age = 新的value值`，即表示 data 的数据要被更新
+      // 注：该函数的作用： 只要执行 `vm.age = 新的value值`，即赋值
+      // 则会执行 set 函数，val 代表的是 `新的value值`
+
+      console.log("vm - age 的 set 函数执行了 ...", val);
+      data.age = val; // 数据被更新
+    },
+  });
+
 ```
+
+
 
 ### 案例：使属性变成响应式
 
@@ -1377,43 +1461,48 @@ Object.defineProperty(vm, "age", {
 </html>
 <script src="../packages/vue.js"></script>
 <script>
-function render() {
-  document.querySelector("#app").innerHTML = `
+  function render() {
+    document.querySelector("#app").innerHTML = `
       <h1>${vm.msg}</h1>
       <h1>${vm.content}</h1>
     `;
-}
-
-const data = {
-  msg: "你好",
-  content: "千锋",
-};
-
-function createVm(data) {
-  const vm = {};
-
-  for (const key in data) {
-    Object.defineProperty(vm, key, {
-      get() {
-        return data[key];
-      },
-      set(val) {
-        data[key] = val;
-        render();
-      },
-    });
   }
 
-  return vm;
-}
+  const data = {
+    msg: "你好",
+    content: "千锋",
+  };
 
-const vm = new createVm(data);
+  function createVm(data) {
+    const vm = {};
 
-render();
+    for (const key in data) {
+      Object.defineProperty(vm, key, {
+        get() {
+          return data[key];
+        },
+        set(val) {
+          data[key] = val;
+          render();
+        },
+      });
+    }
+
+    return vm;
+  }
+
+  const vm = new createVm(data);
+
+  render();
 </script>
+
 ```
 
-提示：Vue2 使用 Object.defineProperty() 无法给 对象中新增的 key 实现数据的响应性
+
+
+提示：Vue2使用Object.defineProperty() 无法给 对象中新增的key 实现数据的响应性
+
+
 
 ## 9、计算属性
 
@@ -1443,34 +1532,38 @@ render();
 
 ```js
 var vm = new Vue({
-  el: "#example",
+  el: '#example',
   data: {
-    message: "Hello",
+    message: 'Hello'
   },
   computed: {
     // 计算属性的 的简写getter
     reversedMessage() {
       // `this` 指向 vm 实例
-      return this.message.split("").reverse().join("");
-    },
-  },
-});
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
 ```
+
+
 
 ### 计算属性总结
 
-- 作用：由计算得来的属性。当你需要一个属性，不需要在 data 中提前声明，而是由其他现有属性计算得到（对**data 中的属性进行再处理**）。
+- 作用：由计算得来的属性。当你需要一个属性，不需要在data中提前声明，而是由其他现有属性计算得到（对**data中的属性进行再处理**）。
 
 - 特点：是基于它的依赖而进行缓存。依赖变了，计算属性就重新计算;依赖不变，计算属性就不变。
 
 - 应用场景：
-  - 只要是需对 data 中的数据进行“二次加工”即可选择计算属性
+  - 只要是需对data 中的数据进行“二次加工”即可选择计算属性
+
+
 
 ### 计算属性 VS 方法
 
 - 方法不存在缓存。调用几次方法，就执行几次方法，每次调用都执行
 
-###
+### 
 
 ### 案例：
 
@@ -1494,52 +1587,55 @@ var vm = new Vue({
 >         type="text"
 >         v-model="lastName"
 >       />
->
+> 
 >       <!-- 第一种方式 1、字符串拼接 【不用】 -->
->       <p>1.字符串拼接： {{ firstName }}-{{ lastName }}</p>
->
+>       <p>1.字符串拼接： {{firstName}}-{{lastName}}</p>
+> 
 >       <!-- 第二种方式 2、方法 【不用】 -->
->       <p>2.函数： {{ fGetFullName() }}</p>
->
->       <p>3.计算属性：{{ fullName2 }}</p>
+>       <p>2.函数： {{fGetFullName()}}</p>
+> 
+>       <p>3.计算属性：{{fullName2}}</p>
 >     </div>
 >   </body>
 > </html>
 > <script src="../packages/vue.js"></script>
 > <script>
-> const vm = new Vue({
->   el: "#app",
->   data: {
->     firstName: "姓",
->     lastName: "名",
->   },
->   methods: {
->     fGetFullName() {
->       return this.firstName + `-` + this.lastName;
+>   const vm = new Vue({
+>     el: "#app",
+>     data: {
+>       firstName: "姓",
+>       lastName: "名",
 >     },
->   },
->
->   // 计算属性，是基于它的依赖而变化的。
->   computed: {
->     // 完整写法：
->     fullName: {
->       get() {
->         console.log("执行了 getter 函数");
+>     methods: {
+>       fGetFullName() {
 >         return this.firstName + `-` + this.lastName;
 >       },
->       set(val) {
->         [this.firstName, this.lastName] = val.split("-");
+>     },
+> 
+>     // 计算属性，是基于它的依赖而变化的。
+>     computed: {
+>       // 完整写法：
+>       fullName: {
+>         get() {
+>           console.log("执行了 getter 函数");
+>           return this.firstName + `-` + this.lastName;
+>         },
+>         set(val) {
+>           [this.firstName, this.lastName] = val.split("-");
+>         },
+>       },
+> 
+>       // 如果计算属性中只有getter方法，可以简写
+>       fullName2() {
+>         return this.firstName + `-` + this.lastName;
 >       },
 >     },
->
->     // 如果计算属性中只有getter方法，可以简写
->     fullName2() {
->       return this.firstName + `-` + this.lastName;
->     },
->   },
-> });
+>   });
 > </script>
+> 
 > ```
+
+
 
 ### 案例：todolist+模糊搜索
 
@@ -1567,7 +1663,7 @@ var vm = new Vue({
       />
       <ul>
         <li v-for="(item, index) in showList" :key="item.name">
-          {{ item.name }}
+          {{item.name}}
           <button @click="handleDelete(index)">删除</button>
         </li>
       </ul>
@@ -1576,44 +1672,45 @@ var vm = new Vue({
 </html>
 <script src="../packages/vue.js"></script>
 <script>
-// 给 todoList 增加搜索项
-const vm = new Vue({
-  el: "#app",
-  data: {
-    todolist: [{ name: "吃饭" }, { name: "睡觉" }], // 注：只要的 待做项，统统放入该数组中
-    search: "", // search 中的内容是对 todolist 进行 筛选/模糊搜索
-  },
-  methods: {
-    // 方法 - function
-    handleDelete(index) {
-      this.todolist.splice(index, 1); // 删除 对应的 数据
+  // 给 todoList 增加搜索项
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      todolist: [{ name: "吃饭" }, { name: "睡觉" }], // 注：只要的 待做项，统统放入该数组中
+      search: "", // search 中的内容是对 todolist 进行 筛选/模糊搜索
+    },
+    methods: {
+      // 方法 - function
+      handleDelete(index) {
+        this.todolist.splice(index, 1); // 删除 对应的 数据
+      },
+
+      handleKeydownEnter(event) {
+        this.todolist.push({
+          name: event.target.value,
+        });
+
+        event.target.value = ""; // 将 input 中输入的内容，清空
+      },
     },
 
-    handleKeydownEnter(event) {
-      this.todolist.push({
-        name: event.target.value,
-      });
-
-      event.target.value = ""; // 将 input 中输入的内容，清空
+    computed: {
+      // 本计算属性的作用：用于 li 的显示
+      // 基于 search 搜索的内容，多 todolist 进行 过滤
+      showList() {
+        return this.todolist.filter((d) => {
+          return d.name.includes(this.search); // '吃饭' 包含 '吃'
+        }); // 对 todolist 进行过滤
+      },
     },
-  },
-
-  computed: {
-    // 本计算属性的作用：用于 li 的显示
-    // 基于 search 搜索的内容，多 todolist 进行 过滤
-    showList() {
-      return this.todolist.filter((d) => {
-        return d.name.includes(this.search); // '吃饭' 包含 '吃'
-      }); // 对 todolist 进行过滤
-    },
-  },
-});
+  });
 </script>
+
 ```
 
 ### 案例：验证用户名是否可用
 
-用户名是 admin，不可以注册；只要不是 admin，就可以注册
+用户名是admin，不可以注册；只要不是 admin，就可以注册
 
 ```vue
 <!DOCTYPE html>
@@ -1637,35 +1734,38 @@ const vm = new Vue({
 </html>
 <script src="../packages/vue.js"></script>
 <script>
-const vm = new Vue({
-  el: "#app",
-  data: {
-    username: "",
-    registeredList: ["admin", "abc", "aaa", "bbb", "ccc"],
-  },
-  computed: {
-    /* 
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      username: "",
+      registeredList: ["admin", "abc", "aaa", "bbb", "ccc"],
+    },
+    computed: {
+      /* 
         'a' 显示： `请输入要注册的用户名`
         'b' 显示： `该用户名已被注册，请输入其他用户名`
         'c' 显示： `该用户名可以使用`
       */
-    status: {
-      get() {
-        const isRegistered = this.registeredList.includes(this.username);
+      status: {
+        get() {
+          const isRegistered = this.registeredList.includes(this.username);
 
-        if (this.username === "") {
-          return "a";
-        } else if (isRegistered) {
-          return "b";
-        } else {
-          return "c";
-        }
+          if (this.username === "") {
+            return "a";
+          } else if (isRegistered) {
+            return "b";
+          } else {
+            return "c";
+          }
+        },
       },
     },
-  },
-});
+  });
 </script>
+
 ```
+
+
 
 ## 10、侦听器
 
@@ -1677,7 +1777,9 @@ const vm = new Vue({
 
   作用：监听**单个数据的变化**，一旦数据有变化执行相应的方法。
 
-- 用法 1：监视基本的数据类型： 属性(新值,旧值)
+  
+
+- 用法1：监视基本的数据类型： 属性(新值,旧值)
 
 ```js
 watch: {
@@ -1688,7 +1790,7 @@ watch: {
 }
 ```
 
-- 用法 2：handler （可配置：immediate 、deep）
+- 用法2：handler （可配置：immediate 、deep）
 
 ```js
 watch: {
@@ -1704,7 +1806,7 @@ watch: {
 }
 ```
 
-- 用法 3：深入监听具体 key 的变化：
+- 用法3：深入监听具体key的变化：
 
 ```js
 watch: {
@@ -1716,13 +1818,15 @@ watch: {
 }
 ```
 
+
+
 ### computed VS watch
 
 什么时候用计算属性：需要对 data 的数据 进行 `再加工` 的时候，用计算属性。
 
 什么时候用 watch：需要监听 data 的数据发生了改变，则用 watch。
 
-**相同**：computed 和 watch 都会因为 data 中的数据变化而执行响应的函数。
+**相同**：computed 和 watch 都会因为data中的数据变化而执行响应的函数。
 
 **不同**：
 
@@ -1734,77 +1838,88 @@ watch: {
 **watch**：没有缓存性，更多的是==观察==的作用，类似于某些数据的监听回调，每当监听的数据变化时都会执行回调进行后续操作；
 
 1. 不支持缓存，数据变，直接会触发相应的操作；
-2. watch 支持异步
+2. watch支持异步
 3. 监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值
+
+
 
 ## 11、重要的实例 API
 
 ### 11.1 对象更新检测
 
-说明：Vue 会监视 data 中所有层级的数据。对象修改后 视图同步更新的特点。
+说明：Vue会监视data中所有层级的数据。对象修改后 视图同步更新的特点。
 
-Vue 对对象数据的检测：
+Vue对对象数据的检测：
 
 1. 修改已经存在的属性，界面跟着变。是响应式
 2. 新添加的属性,界面不跟着变。 不是响应式
+
+
 
 #### 实现对象视图同步更新
 
 1. Vue.set( target, propertyName/index, value )
    参数：
-   {Object | Array} target
-   {string | number} propertyName/index
-   {any} value
-   返回值：设置的值。
+       {Object | Array} target
+       {string | number} propertyName/index
+       {any} value
+       返回值：设置的值。
 
    作用：
 
-   ​ 若 某个 key 在初始的时候，并未在 data 中声明，要为后续添加的 key，使其具有数据响应性；则可使用该方法。
+   ​	若 某个 key 在初始的时候，并未在 data 中声明，要为后续添加的key，使其具有数据响应性；则可使用该方法。
 
    用法：
-   向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
+       向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。
+
+   
 
    组件内部：
 
    ```js
    // 写法1：Vue 静态方法：
-   Vue.set(vm.ming, "height", "1999cm");
-
+   Vue.set(vm.ming, 'height', '1999cm')
+   
    // 写法2：this 等同于 vm
-   vm.$set(vm.ming, "height", "2000cm");
-   this.$set(this.obj, "age", 18); // 函数中 this 等同于 vm
+   vm.$set(vm.ming, 'height', '2000cm')
+   this.$set(this.obj,'age',18) // 函数中 this 等同于 vm
+   
    ```
 
 2. Vue.delete(target, propertyName/index);
 
    出现的原因：delete vm.key ，其方法 不具有数据响应性。
 
-   作用：使得 删除 key，也具有数据的响应性。
+   作用：使得 删除key，也具有数据的响应性。
 
    组件内部：
 
    ```js
    // 写法1：
-   this.$delete(this.obj, "name");
-   vm.$delete(vm.ming, "name");
-
+   this.$delete(this.obj, 'name');
+   vm.$delete(vm.ming, 'name');
+   
    // 写法2：
-   Vue.delete(vm.ming, "name");
+   Vue.delete(vm.ming, 'name')
    ```
+
+   
 
 #### 总结：
 
-Vue 对对象数据的检测：
+Vue对对象数据的检测：
 
 1. 可以修改已经存在的属性；
 
 2. 但是，对于新添加的属性不是响应式的，要想实现响应式需要：
 
-   Vue.set(this.obj，'age',19) this.$set(this.obj，'age',19)
+   Vue.set(this.obj，'age',19)     this.$set(this.obj，'age',19)
 
 3. 对于删除已经存在的响应式数据，界面不会更新
 
-   Vue.delete(this.obj,'age') this.$delete(this.obj，'age')
+    Vue.delete(this.obj,'age')     this.$delete(this.obj，'age')
+
+
 
 ### 11.2 数组更新检测
 
@@ -1816,14 +1931,14 @@ Vue 对对象数据的检测：
 >
 > 那么，在 vue 中调用该实例方法，操作数组，都会具有 响应性。
 
-| `push()`    | 往数组最后面添加一个元素，成功返回当前数组的长度                                                                      |
-| ----------- | --------------------------------------------------------------------------------------------------------------------- |
-| `pop()`     | 删除数组的最后一个元素，成功返回删除元素的值                                                                          |
-| `shift()`   | 删除数组的第一个元素，成功返回删除元素的值                                                                            |
-| `unshift()` | 往数组最前面添加一个元素，成功返回当前数组的长度                                                                      |
+| `push()`    | 往数组最后面添加一个元素，成功返回当前数组的长度             |
+| ----------- | ------------------------------------------------------------ |
+| `pop()`     | 删除数组的最后一个元素，成功返回删除元素的值                 |
+| `shift()`   | 删除数组的第一个元素，成功返回删除元素的值                   |
+| `unshift()` | 往数组最前面添加一个元素，成功返回当前数组的长度             |
 | `splice()`  | 有三个参数，第一个是想要删除的元素的下标（必选），第二个是想要删除的个数（必选），第三个是删除 后想要在原位置替换的值 |
-| `sort()`    | sort() 使数组按照字符编码默认从小到大排序,成功返回排序后的数组                                                        |
-| `reverse()` | reverse() 将数组倒序，成功返回倒序后的数组                                                                            |
+| `sort()`    | sort()  使数组按照字符编码默认从小到大排序,成功返回排序后的数组 |
+| `reverse()` | reverse()  将数组倒序，成功返回倒序后的数组                  |
 
 Vue 重写了以上几种方法，让数组变化后，通知页面更新的。对于下面的方法并没有重写（注：不会改变数组本身的方法，均没有被 vue 重写）。
 
@@ -1834,13 +1949,13 @@ Vue 重写了以上几种方法，让数组变化后，通知页面更新的。�
 #### 举例：变更方法
 
 ```html
-<input type="text" v-model="fname" />
-<button @click="add">添加</button>
-<button @click="del">删除</button>
-<button @click="change">替换</button>
+<input type="text" v-model='fname'>
+<button @click='add'>添加</button>
+<button @click='del'>删除</button>
+<button @click='change'>替换</button>
 
 <ul>
-  <li :key="index" v-for="(item,index) in list">{{item}}</li>
+    <li :key='index' v-for='(item,index) in list'>{{item}}</li>
 </ul>
 ```
 
@@ -1859,7 +1974,7 @@ data: {
                 this.list.pop();
             },
             change: function(){
-          // 截取数组
+          // 截取数组  
           // 如果只是截取数组：this.list.slice(0,2);并不会影响原始数组
           // 必须得把截取后的数组重新赋值给原始数组
           this.list = this.list.slice(0,2);
@@ -1867,23 +1982,27 @@ data: {
     }
 ```
 
+
+
 #### 3、数组响应式处理
 
-对数组的修改，除了用上面提供的 API 之后，还可以通过索引直接操作数组。但是==通过索引操作并不是响应式的==。
+对数组的修改，除了用上面提供的API之后，还可以通过索引直接操作数组。但是==通过索引操作并不是响应式的==。
 
 ```js
-this.arr[2] = "新值"; // 这种写法不具有数据响应性！！！
+this.arr[2]='新值' // 这种写法不具有数据响应性！！！
 ```
 
-但是 Vue 也提供了以下两种方法：
 
-一、通过 Vue 对象调用 ：
+
+但是Vue 也提供了以下两种方法：
+
+一、通过Vue对象调用 ：
 
 ```js
-Vue.set(vm.items, indexOfItem, newValue);
+Vue.set(vm.items,indexOfItem,newValue) 
 ```
 
-二、通过 vue 示例调用
+二、通过vue示例调用
 
 ```j
 vm.$set(vm.items,indexOfItem,newValue)
@@ -1895,104 +2014,116 @@ vm.$set(vm.items,indexOfItem,newValue)
 
 ```html
 <ul>
-  <li v-for="item in list">{{item}}</li>
+    <li v-for='item in list'>{{item}}</li>
 </ul>
 <div>
-  <div>{{info.name}}</div>
-  <div>{{info.age}}</div>
-  <div>{{info.gender}}</div>
+    <div>{{info.name}}</div>
+    <div>{{info.age}}</div>
+    <div>{{info.gender}}</div>
 </div>
 ```
+
+
+
+
 
 ```js
 /*
       动态处理响应式数据      
     */
 var vm = new Vue({
-  el: "#app",
-  data: {
-    list: ["apple", "orange", "banana"],
-    info: {
-      name: "lisi",
-      age: 12,
+    el: '#app',
+    data: {
+        list: ['apple', 'orange', 'banana'],
+        info: {
+            name: 'lisi',
+            age: 12
+        }
     },
-  },
 });
 // 用索引方式修改数据并不是响应式的
 // vm.list[1] = 'lemon';
 // 通过对象方式调用，可以修改数组里的值
 // Vue.set(vm.list, 2, 'lemon');
 // 通过实例方式
-vm.$set(vm.list, 1, "lemon");
+vm.$set(vm.list, 1, 'lemon');
+
 ```
+
+
+
+
 
 > ##### 31.数组更新检测.html
 >
 > ```html
 > <!DOCTYPE html>
 > <html lang="en">
->   <head>
->     <meta charset="UTF-8" />
->     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
->     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
->     <title>Document</title>
->   </head>
->
->   <body>
->     <!-- 2、在body中创建一个挂载点 -->
->     <div id="app">
->       <h2>数组更新检测</h2>
->       <p>{{ arr }}</p>
->       <button @click="addArr">添加一个</button>
->       <p>
->         <button @click="cut">截取</button>
->       </p>
->       <p>
->         <button @click="update">修改数组元素</button>
->       </p>
->     </div>
->
->     <script src="vue.js"></script>
->     <script>
->       Vue.config.productionTip = false; //阻止 vue在启动时生成生产提示
->       // 3、new  Vue实例，并挂载到挂载点上 MV VM(Vue在此充当vm的角色 )
->       const vm = new Vue({
->         //vue实例
->         // el:'#app', //挂载点
->         data: {
+> 
+> <head>
+> <meta charset="UTF-8">
+> <meta http-equiv="X-UA-Compatible" content="IE=edge">
+> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> <title>Document</title>
+> </head>
+> 
+> <body>
+> <!-- 2、在body中创建一个挂载点 -->
+> <div id="app">
+>   <h2>数组更新检测</h2>
+>   <p>{{ arr }}</p>
+>   <button @click="addArr">添加一个</button>
+>   <p>
+>       <button @click="cut">截取</button>
+>   </p>
+>   <p>
+>       <button @click="update">修改数组元素</button>
+>   </p>
+> </div>
+> 
+> <script src="vue.js"></script>
+> <script>
+>   Vue.config.productionTip = false //阻止 vue在启动时生成生产提示
+>   // 3、new  Vue实例，并挂载到挂载点上 MV VM(Vue在此充当vm的角色 )
+>   const vm = new Vue({ //vue实例
+>       // el:'#app', //挂载点
+>       data: {
 >           arr: ["grape", "mongo", "peach"],
->         },
->         methods: {
+>       },
+>       methods: {
 >           addArr() {
->             // 修改了原数组，界面变
->             // this.arr.push('lemon');
->             this.arr.reverse();
+>               // 修改了原数组，界面变
+>               // this.arr.push('lemon');
+>               this.arr.reverse();
 >           },
 >           cut() {
->             // let newArr= this.arr.slice(1)
->             // console.log(newArr);
->             // // 需要替换
->             // this.arr=newArr;
->             // 替换简写
->             this.arr = this.arr.slice(1);
+>               // let newArr= this.arr.slice(1)
+>               // console.log(newArr);
+>               // // 需要替换
+>               // this.arr=newArr;
+>               // 替换简写
+>               this.arr = this.arr.slice(1);
 >           },
 >           update() {
->             // 通过数组下标更改数组元素，改不掉
->             // this.arr[2]='banana';
->             //   需要使用Vue2提供的this.$set()修改
->             // this.$set(this.arr,2,'banana')
->             this.$delete(this.arr, 2);
+>               // 通过数组下标更改数组元素，改不掉
+>               // this.arr[2]='banana';
+>               //   需要使用Vue2提供的this.$set()修改
+>               // this.$set(this.arr,2,'banana')
+>               this.$delete(this.arr, 2);
 >           },
->         },
->       }).$mount("#app");
->     </script>
->   </body>
+>       },
+>   }).$mount('#app')
+> </script>
+> </body>
+> 
 > </html>
 > ```
 
+
+
 ### 11.3 界面强制更新
 
-$forceUpdate() 强制该组件重新渲染。
+$forceUpdate()  强制该组件重新渲染。
 
 鉴于 Vue 的全自动响应性系统，这个功能应该很少会被用到。
 
@@ -2000,13 +2131,15 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 
 注：若 工作中，用到了 `$forceUpdate()` 绝大概率是我们 某些地方写错了。
 
+
+
 ### 11.4 总结
 
-1. Vue2 对待对象的响应式和数组的响应式处理方式是不一样的：
+1. Vue2对待对象的响应式和数组的响应式处理方式是不一样的：
 
-   对于对象，使用的是 Object.defineProperty()。
+   对于对象，使用的是Object.defineProperty()。
 
-   对于数组，重写数组中会改变数组本身的 7 种实例方法（pop/push/shift/unshift/splice/reverse/sort）。
+   对于数组，重写数组中会改变数组本身的7种实例方法（pop/push/shift/unshift/splice/reverse/sort）。
 
 2. 对象的更新检测
 
@@ -2015,10 +2148,10 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
    删除对象上的数据，不是响应式的，需要特殊处理
 
    ```js
-   Vue.set(this.obj，'age',19)
+   Vue.set(this.obj，'age',19)     
    this.$set(this.obj，'age',19)
-
-   Vue.delete(this.obj,'age')
+   
+   Vue.delete(this.obj,'age')     
    this.$delete(this.obj，'age')
    ```
 
@@ -2029,13 +2162,15 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
    通过下标来修改数组元素的值，不是响应式的，需要特殊处理
 
    ```js
-   Vue.set(vm.items, indexOfItem, newValue);
-   vm.$set(vm.items, indexOfItem, newValue);
-
+   Vue.set(vm.items,indexOfItem,newValue) 
+   vm.$set(vm.items,indexOfItem,newValue)
+   
    //删除数组里的某一项
    Vue.$delete(this.arr, 2);
    this.$delete(this.arr, 2);
    ```
+
+   
 
 # 二、组件相关
 
@@ -2044,18 +2179,24 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 ### 思考：编写代码的技术进阶（中级/高级程序员），最需要考虑的几点：
 
 ```vue
-1. 代码的可读性 （注：代码是给人读的） 2. 代码的可复用性（千万不要不断地
-粘贴复制代码）
+1. 代码的可读性 （注：代码是给人读的）
+2. 代码的可复用性（千万不要不断地 粘贴复制代码）
 ```
+
+
 
 ### 在框架之前，组织代码的最小单元：
 
 ```vue
-什么是 代码的最小单元： 思考：前端中 任何一个小功能，必须有 html + css + js
-三种代码才能组成。
+什么是 代码的最小单元：
+  思考：前端中 任何一个小功能，必须有 html + css + js 三种代码才能组成。
 ```
 
+
+
 ![image-20230506225643485](/Users/mark/Library/Application Support/typora-user-images/image-20230506225643485.png)
+
+
 
 ### 组件的作用：
 
@@ -2065,11 +2206,13 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 
 组件的好处：在一个页面中，可以实现 `html+css+js` 三者组成的代码的 复用。
 
+
+
 #### 组件化的思想
 
 通常在框架中，我们将一个完整的页面分成很多个组件。每个组件都用于实现页面的一个具体功能块。而每一个组件又可以进行细分。
 
-组件是一个单独功能模块的封装：这个模块有属于自己的 HTML 模板，也有属于自己的数据 data。使用时，把组件当作是一个标签。其实组件就是制作自定义的标签，这些标签在 HTML 中是没有的。
+组件是一个单独功能模块的封装：这个模块有属于自己的HTML模板，也有属于自己的数据data。使用时，把组件当作是一个标签。其实组件就是制作自定义的标签，这些标签在HTML中是没有的。
 
 ![](/Users/mark/Downloads/day18_课件/images/components_0.png)
 
@@ -2085,13 +2228,17 @@ https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#%E5%BC%BA%E5%88%B6%E
 
 使用步骤：
 
-- 定义组件
-- 注册组件
-- 使用组件
+* 定义组件
+* 注册组件
+* 使用组件
 
 组件注册有两种方式：全局注册和局部注册。
 
 为了能在模板中使用，这些组件必须先注册以便 Vue 能够识别。这里有两种组件的注册类型：**全局注册**和**局部注册**.
+
+
+
+
 
 ### 12.2 全局组件
 
@@ -2116,9 +2263,7 @@ Vue.component('my-component-name', { /* ... */ })
 **使用 kebab-case**
 
 ```js
-Vue.component("my-component-name", {
-  /* 内容配置 */
-});
+Vue.component('my-component-name', { /* 内容配置 */ })
 ```
 
 当使用 kebab-case (短横线分隔命名) 定义一个组件时，你也必须在引用这个自定义元素时使用 kebab-case，例如 `<my-component-name />`。
@@ -2126,28 +2271,29 @@ Vue.component("my-component-name", {
 **使用 PascalCase**
 
 ```js
-Vue.component("MyComponentName", {
-  /* 内容配置 */
-});
+Vue.component('MyComponentName', { /* 内容配置 */ })
 ```
 
 当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时==两种命名法都可以使用==。也就是说 `<my-component-name>` 和 `<MyComponentName/>` 都是可接受的。注意，
 
-尽管如此，**直接在 DOM (即非字符串的模板，即 html 文件中) 中使用时只有 kebab-case 是有效的**。
+尽管如此，**直接在 DOM (即非字符串的模板，即 html文件中) 中使用时只有 kebab-case 是有效的**。
 
 到目前为止，我们只用过 `Vue.component` 来创建组件：
 
 ```js
-Vue.component("my-component-name", {
+Vue.component('my-component-name', {
   // ... 选项 ...
-});
+})
 ```
 
 这些组件是**全局注册的**。也就是说它们在注册之后可以用在任何新创建的 Vue 根实例 (`new Vue`) 的模板中。比如：
 
 ```html
-Vue.component('component-a', { /* ... */ }) Vue.component('component-b', { /*
-... */ }) Vue.component('component-c', { /* ... */ }) new Vue({ el: '#app' })
+Vue.component('component-a', { /* ... */ })
+Vue.component('component-b', { /* ... */ })
+Vue.component('component-c', { /* ... */ })
+
+new Vue({ el: '#app' })
 <div id="app">
   <!-- 注：html 中，只能写 烤串式 -->
   <component-a></component-a>
@@ -2158,18 +2304,22 @@ Vue.component('component-a', { /* ... */ }) Vue.component('component-b', { /*
 
 在所有子组件中也是如此，也就是说这三个组件*在各自内部*也都可以相互使用
 
+
+
 #### 总结：
 
-1. 名字规范：不能是 HTML 标签名
-2. template 内部必须包含一个根节点
-3. 组件内部的 data，必须写成一个函数。
+1. 名字规范：不能是 HTML标签名
+2. template内部必须包含一个根节点
+3. 组件内部的data，必须写成一个函数。
 4. html 文件中的写法有所局限：如 组件的使用，只能写 烤串式标签命名
+
+
 
 ### 12.3 局部组件（重点）
 
 四部曲：定义、引入、注册、使用
 
-##### 1、定义 局部组件 CompA.js:
+#####  1、定义 局部组件 CompA.js:
 
 ```js
 // 将 对象以 默认的形式导出
@@ -2199,9 +2349,9 @@ export default {
   computed: {
     doubleCount() {
       return this.count * 2;
-    },
-  },
-};
+    }
+  }
+}
 ```
 
 ##### 2、哪里需要哪里引入：
@@ -2231,9 +2381,13 @@ components: {
 <comp-a></comp-a>
 ```
 
-## 13、脚手架 创建 vue 项目
+
+
+## 13、脚手架 创建vue项目
 
 <img src="images/脚手架.png" alt="img" style="zoom:50%;" />
+
+
 
 ### 13.1 创建项目
 
@@ -2246,7 +2400,7 @@ npm install -g @vue/cli
 # OR  npm i yarn -g
 yarn global add @vue/cli
 
-# 设置淘宝镜像
+# 设置淘宝镜像 
 # npm config set registry http://registry.npm.taobao.org/
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install -g @vue/cli
@@ -2258,49 +2412,56 @@ cnpm install -g @vue/cli
 vue --version
 ```
 
+
+
 #### 创建项目
 
 vue create my-project（自定义项目名）
 
 项目名称最好是英文，不能包含驼峰命名法
 
-​ -> 选择 `Manually select features`
+​		-> 选择 `Manually select features`
 
-​ -> Babel：转码，把 ES6=>ES5
+​			-> Babel：转码，把ES6=>ES5
 
-​ -> Linter / Formatter
+​			-> Linter / Formatter
 
-​ -> Vue 2.0
+​				-> Vue 2.0
 
-​ -> ESLint + Prettier
+​				-> ESLint + Prettier
 
-​ -> Lint on save
+​					-> Lint on save
 
-​ Eslint：语法校验
+​					Eslint：语法校验
 
-​ Prettier：Ctrl + S 时，自动格式化代码格式
+​					Prettier：Ctrl + S 时，自动格式化代码格式
 
-​ -> In package.json
+​			-> In package.json
 
 ![Vue-cli](images/Vue-cli.png)
 
 #### 启动项目（开发环境）：
 
-​ 1）cd 至 项目文件夹
+​	1）cd 至 项目文件夹
 
-​ 2）npm run serve：本地启动项目
+​	2）npm run serve：本地启动项目
+
+
 
 ####项目目录介绍
 
 ```vue
-
 ```
+
+
 
 ####打包项目（生产环境）
 
-​ 1）cd 至 项目文件夹
+​	1）cd 至 项目文件夹
 
-​ 2）npm run build ：上线
+​	2）npm run build ：上线
+
+
 
 ####插件安装
 
@@ -2308,21 +2469,35 @@ vue create my-project（自定义项目名）
 
 ![eslint](/Users/mark/Desktop/扣丁课堂23期/coding-23/DAY6/课件/images/elint.png)
 
+
+
 ####VSCode 配置：
 
 `设置`中搜 `save`
 
 ![image-20230209212703435](/Users/mark/Downloads/day18_课件/images/image-20230209212703435.png)
 
+
+
+### 知识点补充：
+
+- 组件的本质是对象
+- 组件的嵌套 本质是 对象的嵌套（组件树 ->  对象的树形数据结构）
+- this/组件 中的 `公有属性/方法` 、 `私有属性/方法`
+
+
+
 ## 14、组件传值
 
-### 14.1 prop 传值
+### 14.1 prop传值
 
 最基本、最简单的组件通信方式。
 
 适用场合：适用于父子之间
 
 父可以给子传递==非函数数据==和==函数数据==
+
+
 
 #### 14.1.1 传递普通数据（非函数数据）
 
@@ -2332,49 +2507,60 @@ vue create my-project（自定义项目名）
 
 ` <Son title='标题' />`
 
-在子级组件中,通过 props 属性接收,不写接收是接收不到的
+在子级组件中,通过props属性接收,不写接收是接收不到的
 
 ```js
-export default {
-  props: ["title"],
-};
+export default{
+	props:['title']
+ }
 ```
 
-​ 在子级组件中使用 props 数据：直接当变量使用 title
+​    在子级组件中使用props数据：直接当变量使用 title
 
-**1.** **静态 props，动态的 props**
+**1.** **静态props，动态的props**
 
-​ 静态 props `<Son title='标签'>`
+​    静态props  `<Son title='标签'>`
 
-​ 动态的 props ` <Son :title='mytitle'/>`
+​    动态的props ` <Son :title='mytitle'/>`
 
-**2.** **props 类型**
+**2.** **props类型**
 
-​ props:{ title:String }
+​    props:{ title:String }
+
+
 
 #### 14.1.2 父向子传递函数数据
 
-父可以给子传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲
+父可以给子传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲	
 
-```vue
 
-```
 
 #### 总结：
 
 1. Props 最基础的通信，用的也是比较多的，所以必须搞定
-2. 父可以给子传递==函数数据==和==非函数数据==
+2. 父可以给子传递
    (1) 传递非函数数据，本质就是父亲给儿子传数据
-   (2) 传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲
+   (2) 传递函数数据，本质是父亲想要儿子的数据，通过函数调用传参的方式把数据传递给父亲	
 
-3. 不足（不是父子就很麻烦） 兄弟关系，就必须先把一个数据给了父亲，然后通过父亲再给另一个
+3. 不足：必须是父子关系才能传递数据（且只能 父传子），其他组件关系关系数据则相对麻烦。
+
+
+
+#### 强调：vue的单向数据流的重要性！
+
+```vue
+```
+
+
+
+
 
 ### 14.2 props 校验
 
 我们可以为组件的 prop 指定验证要求，例如你知道的这些类型。如果有一个需求没有被满足，则 Vue 会在浏览器控制台中警告你。这在开发一个会被别人用到的组件时尤其有帮助
 
 ```js
-Vue.component("my-component", {
+Vue.component('my-component', {
   props: {
     // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
     propA: Number,
@@ -2383,30 +2569,30 @@ Vue.component("my-component", {
     // 必填的字符串
     propC: {
       type: String,
-      required: true,
+      required: true
     },
     // 带有默认值的数字
     propD: {
       type: Number,
-      default: 100,
+      default: 100
     },
-    // 带有默认值的对象
+    // 强调！！带有默认值的对象
     propE: {
       type: Object,
       // 对象或数组默认值必须从一个工厂函数获取
       default: function () {
-        return { message: "hello" };
-      },
+        return { message: 'hello' }
+      }
     },
     // 自定义验证函数
     propF: {
       validator: function (value) {
         // 这个值必须匹配下列字符串中的一个
-        return ["success", "warning", "danger"].indexOf(value) !== -1;
-      },
-    },
-  },
-});
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    }
+  }
+})
 ```
 
 **类型校验**
@@ -2426,38 +2612,48 @@ Vue.component("my-component", {
 
 额外的，`type` 还可以是一个自定义的构造函数，并且通过 `instanceof` 来进行检查确认。
 
+
+
 ### 14.3 自定义事件
 
-**由来：**父组件通过 props 传递给子组件的数据，子组件不能修改。但是可以通过自定义事件，由子组件通知父组件，让父组件自行修改。
+**由来：**父组件通过props传递给子组件的数据，子组件不能修改。但是可以通过自定义事件，由子组件通知父组件，让父组件自行修改。
 
 #### 步骤：
 
-1. 子组件中，通过 this.$emit('自定义事件名'，'传参数') 触发
+1. 子组件中，通过this.$emit('自定义事件名'，'传参数') 触发
 
-2. 父组件中，通过 v-on 来监听子组件事件
+2. 父组件中，通过v-on 来监听子组件事件
 
    语法 ：
 
-3. 子组件定义事件
+3. 子组件定义事件 
 
    ```js
-   this.$emit("自定义事件名", this.msg);
+   this.$emit('自定义事件名',this.msg)
    ```
 
-4. 父组件-调用子组件上面接受自定义事件
+ 4. 父组件-调用子组件上面接受自定义事件
 
-   ```html
-   <子组件 @自定义事件名='函数名'/> methods:{ 函数名(val){ this.xx = val; } }
-   ```
+    ```html
+    <子组件 @自定义事件名='函数名'/>
+    
+    methods:{
+        函数名(val){
+            this.xx = val;
+        }
+    }
+    ```
 
 ==不足之处：只能应用在父子之间==
+
+
 
 #### 自定义事件命名规范
 
 不同于组件和 prop，事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。举个例子，如果触发一个 camelCase 名字的事件：
 
 ```js
-this.$emit("myEvent");
+this.$emit('myEvent')
 ```
 
 则监听这个名字的 kebab-case 版本是不会有任何效果的：
@@ -2467,4 +2663,308 @@ this.$emit("myEvent");
 <my-component v-on:my-event="doSomething"></my-component>
 ```
 
+
+
 不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 `v-on` 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 `v-on:myEvent` 将会变成 `v-on:myevent`——导致 `myEvent` 不可能被监听到。
+
+
+
+
+
+
+
+## 15、处理边界
+
+https://v2.cn.vuejs.org/v2/guide/components-edge-cases.html#ad
+
+> 这里记录的都是和处理边界情况有关的功能，即一些需要对 Vue 的规则做一些小调整的特殊情况。不过注意这些功能都是有劣势或危险的场景的。我们会在每个案例中注明，所以当你使用每个功能的时候请稍加留意。
+
+### 15.1 访问 本组件 根节点
+
+$el
+
+
+
+### 15.2  访问根实例
+
+放在根实例上的数据，能实现组件共享，全局的，因为所有的组件实例都可以访问这个实例
+
+访问根实例 $root 
+
+
+
+### 15.3 访问父组件实例 $parent 
+
+打印this 先看自身：$vnode虚拟dom指向的是 第三层
+
+#### 访问：
+
+1. this.$parent.xxx  
+2. {{ $parent.xx  }}
+
+- 注意：尽管在Vue中，允许通过 `$parent`访问父组件，但在真实开发中尽量不要这样做（单向数据流）
+
+
+
+###  15.4 获取子组件实例
+
+- this.$children是一个数组类型，它包含所有子组件对象。
+
+
+
+### 15.5 $ref访问子组件实例（使用相对较多）
+
+前面讲双向数据绑定时，讲过用 "ref 来获取表单中数据"，ref 获取的其实就是Dom元素，而组件其实也就是自定义标签元素，同样可以用 ref 获取。
+
+1. 获取DOM元素：
+
+   ```vue
+   <div ref='xx'></div>
+   ```
+
+   this.$refs.xx 获取div-dom元素
+
+2. 获取子组件实例
+
+   ```vue
+   <Son ref='xx'/>
+   ```
+
+   获取子组件的属性：
+
+   ```vue
+   
+   ```
+
+   执行子组件的方法：
+
+   ```js
+   
+   ```
+
+   
+
+### 15.6 组件实例和Vue实例关系
+
+#### （1）组件实例和Vue实例
+
+每个组件都是一个VueComponent构造函数，而在组件内部打印出来的this，都是当前组件的实例。
+
+new VueComponent({options})
+
+##### 对比： 
+
+在组件选项中打印this，指的是VueComponent实例；即组件内的data函数，methods中的函数，watch中的函数，computed中的函数 都指的是 ==VueComponent实例对象==  `vc`
+
+在new Vue选项中打印this，指的是Vue实例；即data函数，methods中的函数，watch中的函数，computed中的函数 都指的是 ==Vue实例对象==  `vm`
+
+底层在创建的时候，很多代码都是复用的。
+
+##### 所以：
+
+> 组件实例有的功能，vm都有。但是vm有的，组件实例并不全都有。如el属性，只有根节点才能挂载。
+
+https://v2.cn.vuejs.org/v2/guide/components.html
+
+
+
+#### （2）重新指向（原型链关系）
+
+结论：Vue强制让VueComponent的原型对象的隐式原型属性指向了Vue的原型对象
+
+`VueComponent.prototype.__proto__===Vue.prototype`
+
+即，可认为 `VueComponent` 的父类是 `Vue`；
+
+所以，Vue原型对象上的属性和方法，会被 VueComponent （实例组件）所`继承` 。
+
+
+
+### 15.7 原型链传递（继承）
+
+#### 实用场景：
+
+Vue.prototype.$user='admin'
+
+```js
+//挂载一个数据--挂载到原型链上
+Vue.prototype.$user='admin'
+```
+
+访问任何组件树中的 子组件，均可 继承 ：
+
+```js
+
+```
+
+
+
+
+
+
+
+## 16、全局事件总线
+
+#### 回顾：vue自定义事件
+
+由来：父组件通过props传递给子组件的数据，子组件不能直接修改。想要修改？
+
+可以通过自定义事件，==通知==父组件去修改。
+
+步骤：
+
+1. 在子组件中，通过 this.$emit(‘自定义事件名’,参数) 来触发事件
+2. 父组件中，通过 v-on 来监听子组件的事件   v-on:自定义事件名="回调函数"
+
+弊端：必须是父子组件中，子组件给父组件传递数据。
+
+如果不是父子，是兄弟或者是其他隔着层级比较多的话，就不适合
+
+
+
+#### 全局事件总线  ->  `eventBus`
+
+作用：任何关系的组件间，均可传递数据。
+
+基于vue自定义事件。  `$emit`  , `$on  `   
+
+使用条件：
+
+1，所有的组件对象都能找到它   ->    Vue.prototype.xxx
+
+2，在它身上可以使用`$emit` 和 `$on `  
+
+```js
+
+```
+
+
+
+适用场景：任何场景
+
+缺点：管理不集中
+
+
+
+补充：全局事件总线本质是应用了设计模式-「观察者模式」。
+
+>「观察者模式」学习资料
+>
+>链接: https://pan.baidu.com/s/1ssHpcESnpsYTtmHVJmSbsw?pwd=n4cr 提取码: n4cr 
+
+
+
+
+
+## 17、生命周期
+
+什么是生命周期？
+
+组件的生命周期：Vue 组件从创建到销毁的过程。
+
+案例：v-if  从显示 到 销毁 -> 一个组件的“一生”。
+
+```vue
+```
+
+
+
+生命周期钩子（生命周期函数）：在特点时间点上触发的函数，不需要你手动调用，当组件加载到一定的阶段，会自动触发。
+
+
+
+### 17.1 生命周期图
+
+https://v2.cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA
+
+
+
+### 17.2 五个大阶段
+
+初始化阶段、模板编译阶段、挂载阶段、更新阶段、销毁阶段
+
+![lifecycle](/Users/mark/Downloads/day18_课件/images/lifecycle.png)
+
+
+
+1. 初始化阶段：beforeCreate（初始化之前）、created（初始化之后）
+
+   在beforeCreate 和created之间 -> 给data里的所有属性添加getter和setter方法。  
+
+   beforeCreate：打印data里的数据，打印不到；vm已经创建，只是数据还没代理。
+
+   created：初始化完成。可以访问数据。
+
+   ```js
+   
+   ```
+
+   
+
+2. 挂载阶段：beforeMount和mounted 把虚拟Dom变成真实Dom
+
+   beforeMount：即将把虚拟Dom变成真实Dom
+
+   mounted：真实DOM在页面中渲染完毕
+
+   ```js
+   
+   ```
+
+   
+
+3. 更新阶段：beforeUpdate和updated 
+
+   beforeUpdate：vm上的数据已经更改，而页面的数据更新之前。
+
+   updated：页面的数据更新之后，
+
+   ```html
+   
+   ```
+
+   
+
+4. 销毁阶段
+
+   ​    beforeDestroy：收尾阶段，解绑事件，清除定时器
+
+   ​	destroyed：组件销毁完毕
+
+```js
+
+```
+
+
+
+
+
+### 17.3 总结-钩子函数：
+
+beforeCreate：实例化之前，数据和方法还没有代理，vm，
+
+​				特点：访问不到数据和方法；可以访问this 
+
+created: 实例化之后。已经代理完成
+
+​			特点：可以访问数据和方法；**可以在本钩子函数中发送 ajax 请求**
+
+beforeMount：挂载之前   将模板挂载到虚拟DOM时     注意：页面中是没数据   this.$el 还没有
+
+mounted：挂载完成   可以操作DOM，this.$el 也有了    开定时器、绑定事件
+
+beforeUpdate: 数据更新之后，界面更新之前
+
+updated： 数据更新之后，界面也更新之后
+
+beforeDestroy ：销毁之前，收尾工作 
+
+destroyed：销毁之后
+
+强调：`destroye` 钩子函数的作用：
+
+```vue
+```
+
+
+
