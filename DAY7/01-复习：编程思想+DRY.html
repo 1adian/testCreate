@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script src="../packages/vue.js"></script>
+<script>
+  /* 
+  程序员 开发需要思考的方向（开发原则/编写代码的原则）：
+    - 代码的 可读性
+    - 代码的 可复用性
+
+
+    如何 实现代码的「可复用性」？
+      编写代码的原则 -> 「DRY原则」 
+        -> Don't Repect Yourself。
+          -> 即写代码的时候，但凡有代码 重复了 两次以上，
+              即要考虑将代码「封装」，以实现代码的「可复用性」。
+
+
+    重复的代码怎么「封装」？？
+      -> 封装原则，将`不变的代码`写死，将`变化的代码`提成`参数`，以实现代码的可复用性。
+
+
+    二阶段，可进行「封装」主要是 封装「函数」。
+      -> 函数，只是封装了 `JS` 代码，以实现 JS 代码的可复用性。
+
+    三阶段，可进行「封装」 还可以封装「组件」。
+      -> 组件，封装了 `html` + `css` + `js` 三类代码，被封装到组件中，
+        以实现三类代码最最小单元代码块的复用。
+*/
+
+  const vm = new Vue({
+    el: "#app",
+    data: {},
+    computed: {},
+    methods: {},
+    watch: {},
+  });
+</script>
