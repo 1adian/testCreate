@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  /* 设计模式 简介：
+  设计模式 是什么？
+    -> 设计模式是 开发当中，解决特定问题的特定方案。
+
+  作用：解决特定问题。
+
+  说明：设计模式，有很多种；
+    每种设计模式，就是为了 解决一个特定问题。
+
+  常见的设计模式：
+    `ESM` - `ES6 - Module`，其作用：方便 代码的导入、导出。
+      即 `模块化`。
+    即 模块化，就是一种设计模式，其解决了 JS 代码/数据 见 导入/导入的 特定问题的特定解决方案。
+*/
+
+  /* 工厂函数简介：
+  工厂模式/工厂函数，也是 一种设计模式。
+     作用：为了 方便地 创造对象。
+
+*/
+
+  // 案例：写一个 工厂函数，能方便地 作家这一类对象创造对象。
+  /* 
+  约定：作家对象，必须是 
+  {
+    name: '鲁迅',
+    book: '朝花夕拾'
+  }
+
+*/
+
+  // createAuthor - 本工厂函数的作用：专门用于 创建 作家对象
+  function createAuthor(name = "佚名", book = "作品未知") {
+    return {
+      name,
+      book,
+    };
+  }
+
+  const luXun = createAuthor("鲁迅", "呐喊");
+
+  const noBody = createAuthor();
+
+  /* 设计模式 自学途径：
+  《JavaScript设计模式与开发实践》
+    https://book.douban.com/subject/26382780/
+
+
+    建议一定要学的一个设计模式：观察者模式/发布订阅模式
+  */
+</script>
