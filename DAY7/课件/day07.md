@@ -2511,7 +2511,7 @@ vue create my-project（自定义项目名）
 
 ```js
 export default{
-	props:['title']
+	props:['title', 'xxx', 'yyy', ...]
  }
 ```
 
@@ -2519,9 +2519,9 @@ export default{
 
 **1.** **静态props，动态的props**
 
-​    静态props  `<Son title='标签'>`
+​    静态props  `<Son title='标签'>`，标签即为 字符串。
 
-​    动态的props ` <Son :title='mytitle'/>`
+​    动态的props ` <Son :title='mytitle'/>`，mytitle 即为 JS 表达式。
 
 **2.** **props类型**
 
