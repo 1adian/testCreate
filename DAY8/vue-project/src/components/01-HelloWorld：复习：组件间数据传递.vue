@@ -1,18 +1,12 @@
 <template>
-  <div class="hello" style="border: 1px solid red">
-    <p>模拟 爸爸</p>
-    <button @click="handleClick">点击爸爸</button>
-    <GrandSon />
+  <div class="hello" @click="handleClick">
+    <h1>子组件：{{ msg }}</h1>
   </div>
 </template>
 
 <script>
-import GrandSon from "./GrandSon.vue";
 export default {
   name: "HelloWorld",
-  components: {
-    GrandSon,
-  },
   props: {
     msg: String,
   },
@@ -23,7 +17,13 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log("点击爸爸");
+      console.log("我在 HelloWorld 组件中，点击的 根节点的标签");
+
+      // 自定义事件：
+      // 在子组件中，`触发` 父组件 绑定的 自定义事件 -
+      // 'xxx' - 即 自定义的事件类型
+      // this.message - 即 触发该自定义事件的回调函数，所获取的数据
+      this.$emit("xxx", this.message);
     },
   },
 };

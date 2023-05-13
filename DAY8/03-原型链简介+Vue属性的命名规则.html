@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  /* 
+  原型对象简介：
+
+    // 概念1： 构造函数 （又叫 `类`）
+    // ->  构造函数的作用：`new 构造函数()` 可以生成 `实例对象`
+    
+    // 概念2：实例对象
+    
+    // 概念3：原型对象
+    // 如何 获取原型对象：
+      // 方法1：`构造函数.prototype` 可以得到 原型对象
+      // 方法2：`实例对象.__proto___` 也可以得到 原型对象
+    // 若 实例对象A 是被 构造函数A 构造出来的，
+    // 则 构造函数A.prototype === 实例对象A.__proto__ ，其返回值是 true
+
+*/
+
+  /* vue 中，对象属性的 命名规则（约定）：
+  注：约定，不是强制性的。 即鼓励/要求大家这样做，但不这样做，也不报错。
+
+
+  vue 对象属性，命名规则有两类：
+    第一类： `$xx`
+      即，vue的作者，提供给 vue的使用者 所使用的 方法和属性。
+
+
+    
+    第二类： `_xx`
+      即，_xx 的属性和方法，是给 vue的作者 自己使用的，
+        而 vue的使用者 千万不要 篡改 _xx 的属性和方法。
+          只要 篡改了，则 vue 会发生故障，甚至可能 vue 失效。
+
+
+  所以，在实际的开发中，若在 Vue.prototype 上，新增属性或方法；
+    建议，使用 `$xx` 开头，但 不使用 `$` 开头，代码依然正常工作。
+*/
+</script>

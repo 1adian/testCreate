@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  /* 全局事件总线：
+
+  回顾：vue自定义事件 作用：
+    子组件给 父组件 传递数据。
+
+    缺陷：若 孙子组件，给 爷爷组件传递数据，则 非常麻烦。
+    本质原因：Vue自定义事件，一定要 组件间 有关系，才能发生 事件触发。
+
+  
+
+  需求：
+    若 非关系型组件之前传递数据，比如 兄弟、爷孙、甚至更复杂关系的组件间传递数据：
+      的解决方案：`全局事件总线`
+*/
+
+  /* 
+  全局事件总线的作用：
+    解决 非关系型组件 间 传递数据不便的情况：
+    
+
+  本质：还是「观察者模式」，即与 子传父的 自定义事件类似。
+
+*/
+</script>

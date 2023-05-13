@@ -2763,11 +2763,19 @@ $el
 
 ### 15.6 组件实例和Vue实例关系
 
-#### （1）组件实例和Vue实例
+#### （1）组件实例 和 Vue实例
 
-每个组件都是一个VueComponent构造函数，而在组件内部打印出来的this，都是当前组件的实例。
+   组件实例  ->  即每个组件的实例对象，比如说 `this.$refs.hello`
 
-new VueComponent({options})
+   Vue实例   ->  new Vue() 返回的实例对象，之前一直说的 `vm`
+
+每个组件都是一个 VueComponent 构造函数，而在组件内部打印出来的this，都是当前组件的实例。
+
+new VueComponent({options}) // 返回值是 组件的实例对象
+
+new Vue({})  // 返回值是 Vue实例，即 vm
+
+
 
 ##### 对比： 
 
@@ -2787,13 +2795,15 @@ https://v2.cn.vuejs.org/v2/guide/components.html
 
 #### （2）重新指向（原型链关系）
 
-结论：Vue强制让VueComponent的原型对象的隐式原型属性指向了Vue的原型对象
+结论：Vue 强制让 VueComponen t的 原型对象 的隐式原型属性 指向了 Vue 的 原型对象
 
 `VueComponent.prototype.__proto__===Vue.prototype`
 
 即，可认为 `VueComponent` 的父类是 `Vue`；
 
-所以，Vue原型对象上的属性和方法，会被 VueComponent （实例组件）所`继承` 。
+注：VueComponent 是子类， Vue 是父类：从「继承」来说，子类的实例对象能获取(继承)到 父类的属性和方法。
+
+所以，Vue原型对象 上的 属性 和 方法，会被 VueComponent （实例组件）所`继承` 。
 
 
 
@@ -2811,7 +2821,7 @@ Vue.prototype.$user='admin'
 访问任何组件树中的 子组件，均可 继承 ：
 
 ```js
-
+`this.$user` 获取到 Vue原型对上上的 'admin'
 ```
 
 

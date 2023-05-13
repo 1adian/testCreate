@@ -1,18 +1,13 @@
 <template>
-  <div class="hello" style="border: 1px solid red">
-    <p>模拟 爸爸</p>
-    <button @click="handleClick">点击爸爸</button>
-    <GrandSon />
+  <div class="hello">
+    <button @click="getProp">HelloWorld中获取Vue原型对象上的属性</button>
+    <h1>子组件：{{ msg }}</h1>
   </div>
 </template>
 
 <script>
-import GrandSon from "./GrandSon.vue";
 export default {
   name: "HelloWorld",
-  components: {
-    GrandSon,
-  },
   props: {
     msg: String,
   },
@@ -22,8 +17,8 @@ export default {
     };
   },
   methods: {
-    handleClick() {
-      console.log("点击爸爸");
+    getProp() {
+      console.log("我是Hello组件，我要获取 Vue.prototype.yyy 的数据", this.yyy);
     },
   },
 };
