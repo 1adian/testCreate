@@ -1,18 +1,11 @@
 <template>
-  <div class="hello" style="border: 1px solid red">
-    <p>模拟 爸爸</p>
-    <button @click="handleClick">点击爸爸</button>
-    <GrandSon />
-  </div>
+  <div class="hello">hello</div>
 </template>
 
 <script>
-import GrandSon from "./GrandSon.vue";
 export default {
   name: "HelloWorld",
-  components: {
-    GrandSon,
-  },
+  components: {},
   props: {
     msg: String,
   },
@@ -21,11 +14,7 @@ export default {
       message: "我是子组件 - helloWorld 的数据",
     };
   },
-  methods: {
-    handleClick() {
-      console.log("点击爸爸");
-    },
-  },
+  methods: {},
 };
 </script>
 
