@@ -34,4 +34,4 @@ new Vue({
 // .$mount("#app");
 
 // vm 的构造函数是 `Vue`
-console.log("Vue.prototype", Vue.prototype);
+// console.log("Vue.prototype", Vue.prototype);

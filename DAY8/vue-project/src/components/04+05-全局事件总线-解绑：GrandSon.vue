@@ -20,6 +20,7 @@ export default {
         "点击孙子，则执行 this.$eventBus.$emit('onlyId') 则触发 对应的回调函数"
       );
 
+      // 全局事件总线
       this.$eventBus.$emit("onlyId", "孙子传递给爷爷的数据...");
     },
   },

@@ -2869,7 +2869,7 @@ Vue.prototype.$user='admin'
 
 适用场景：任何场景
 
-缺点：管理不集中
+缺点：管理不集中（即哪些 组件 使用了 事件总线，很难 立马得知；还有一共有哪些事件总线，也很难得知）
 
 
 
@@ -2886,6 +2886,17 @@ Vue.prototype.$user='admin'
 ### webpack 简介：
 
 ```vue
+1. 打包：将比如 `.vue` / `.scss` 等 浏览器默认不认识的文件，
+打包/解析成 浏览器认识的文件。
+
+文件的查看位置：
+浏览器/源代码 
+-> `app.js` || `chunk-vendors.js`
+
+
+webpack 自学资料：
+https://www.bilibili.com/video/BV1YU4y1g745/?spm_id_from=333.337.search-card.all.click
+
 ```
 
 
@@ -2893,6 +2904,12 @@ Vue.prototype.$user='admin'
 ### <style scoped> 作用：
 
 ```vue
+Add "scoped" attribute to limit CSS to this component only
+增加 "scoped" 属性 则 限制 css 只在 本组件内生效。
+
+
+原因：css 属性，默认 全局生效。
+在 组件的 <style scoped> 增加 scoped 属性，则确保 css 只作用于 本组件内部。
 ```
 
 
@@ -2900,6 +2917,7 @@ Vue.prototype.$user='admin'
 ### 图片显示：
 
 ```vue
+具体见 代码
 ```
 
 
@@ -2908,9 +2926,9 @@ Vue.prototype.$user='admin'
 
 什么是生命周期？
 
-组件的生命周期：Vue 组件从创建到销毁的过程。
+组件的 生命 周期：Vue 组件从创建到销毁的过程。
 
-案例：v-if  从显示 到 销毁 -> 一个组件的“一生”。
+案例：v-if  从 显示 到 销毁 -> 一个组件的“一生”。
 
 ```vue
 ```
@@ -2918,6 +2936,10 @@ Vue.prototype.$user='admin'
 
 
 生命周期钩子（生命周期函数）：在特点时间点上触发的函数，不需要你手动调用，当组件加载到一定的阶段，会自动触发。
+
+什么是 生命周期的钩子函数：
+
+即 在组件特定的 “生命时间点” 会被执行的函数，则被称为 「生命周期的钩子函数」
 
 
 

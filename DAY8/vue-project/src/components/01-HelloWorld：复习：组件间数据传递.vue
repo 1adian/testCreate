@@ -23,6 +23,15 @@ export default {
       // 在子组件中，`触发` 父组件 绑定的 自定义事件 -
       // 'xxx' - 即 自定义的事件类型
       // this.message - 即 触发该自定义事件的回调函数，所获取的数据
+
+      // 全局事件总线
+      // this.$eventBus.$emit("onlyId", "孙子传递给爷爷的数据...");
+
+      // 子传父：和 全局事件总线 的 $emit 用法一致
+      // （全局事件总线 的本质和 子传父 的本质，是一回事儿）
+      // --->  观察者模式
+
+      // $on('click', handleClick)  - 等价于 -  <组件 @click="handleClick" />
       this.$emit("xxx", this.message);
     },
   },

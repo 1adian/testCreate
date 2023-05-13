@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <HelloWorld />
+    <button @click="flag = !flag">点我 toggle - HelloWorld</button>
+
+    <img width="50" :src="kPhomeImgUrl" alt="" />
+
+    <!-- flag 为 true 则显示 组件，为 false 则销毁 组件 -->
+    <input type="text" v-model="message" />
+    <HelloWorld :val="message" v-if="flag" />
   </div>
 </template>
 
@@ -13,7 +19,11 @@ export default {
     HelloWorld,
   },
   data() {
-    return {};
+    return {
+      message: "父组件传递给子组件的数据...",
+      flag: false,
+      kPhomeImgUrl: require("@/assets/c.jpg"),
+    };
   },
   methods: {},
 };
