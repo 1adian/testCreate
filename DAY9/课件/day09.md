@@ -3070,33 +3070,37 @@ destroyed：销毁之后
 
    ```vue
    <template>
-     <div class="hello">
-       <!-- 改变子组件的数据 -->
-       <input type="text" v-model="msg" />
+     <div>
+       <input type="text" v-model="val" />
      </div>
    </template>
    
    <script>
    export default {
+     name: "SonComp",
      props: {
-       // 父组件传递来的数据
        data: {
          type: String,
        },
      },
      data() {
        return {
-         msg: "xxx", // 子组件的数据
+         val: "",
        };
      },
+     created() {
+       this.val = this.data;
+     },
      watch: {
-       msg() {
-         // 将 子组件的 this.msg 数据 emit 出去
-         this.$emit("update:val", this.msg);
+       val() {
+         this.$emit("update:data", this.val);
        },
      },
    };
    </script>
+   
+   <style scoped lang="scss"></style>
+   
    ```
 
 2. 父组件
@@ -3104,26 +3108,26 @@ destroyed：销毁之后
    ```vue
    <template>
      <div id="app">
-       <h1>父组件的数据：{{ val }}</h1>
-       <Son :val="val" @update:val="updateVal" />
+       <Son :data="msg" @update:data="handleUpdateData" />
      </div>
    </template>
    
    <script>
-   import HelloWorld from "./components/HelloWorld.vue";
+   import Son from "./components/Son.vue";
    export default {
+     name: "App",
      components: {
-       Son: HelloWorld,
+       Son,
      },
      data() {
        return {
-         val: "父组件的val",
+         msg: "xxx",
        };
      },
+   
      methods: {
-       // 子组件 emit 的 data，以 更新 父组件的 val 数据
-       updateVal(data) {
-         this.val = data;
+       handleUpdateData(data) {
+         this.msg = data;
        },
      },
    };
@@ -3146,9 +3150,9 @@ sync修饰符是一个语法糖，它主要是解决了父子组件的双向绑�
 父组件给子组件属性传递数据后面添加.sync 例如: 
 
 ```html
-<Son :val.sync="val" />
+<Son :data.sync="msg" />
 
-<!-- 注：其是 <Son :val="val" @update:val="updateVal" />  的语法糖！ -->
+<!-- 注：其是  <Son :data="msg" @update:data="handleUpdateData" />  的语法糖！ -->
 ```
 
 
@@ -3482,10 +3486,6 @@ Vue.js 允许你自定义过滤器，可被用于一些常见的文本格式化�
 
 过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符号指示：
 
-￥20    ￥30
-
-sdSTFFOfsfsf
-
 ```html
 <!-- 在双花括号中 -->
 {{ message | capitalize }}
@@ -3530,49 +3530,6 @@ new Vue({
 
 过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数。在上述例子中，`capitalize` 过滤器函数将会收到 `message` 的值作为第一个参数。
 
-过滤器可以串联：
-
-```html
-{{ message | filterA | filterB }}
-```
-
-在这个例子中，`filterA` 被定义为接收单个参数的过滤器函数，表达式 `message` 的值将作为参数传入到函数中。然后继续调用同样被定义为接收单个参数的过滤器函数 `filterB`，将 `filterA` 的结果传递到 `filterB` 中。
-
-过滤器是 JavaScript 函数，因此可以接收参数：
-
-```html
-{{ message | filterA('arg1', arg2) }}
-```
-
-这里，`filterA` 被定义为接收三个参数的过滤器函数。其中 `message` 的值作为第一个参数，普通字符串 `'arg1'` 作为第二个参数，表达式 `arg2` 的值作为第三个参数。
-
-
-
-
-
-
-
-### 20.3 定义本地的过滤器：
-
-```js
-// 全局过滤器
-Vue.filter('upper', function (val) {
-  if (!val) return '';
-  // return val.toString().toUpperCase(); //全大写
-  return val.toString().charAt(0).toUpperCase() + val.slice(1).toLowerCase(); //首字母大写
-})
-
-
-
-filters: {
-  capitalize: function (value) {
-    if (!value) return ''
-    value = value.toString()
-    return value.charAt(0).toUpperCase() + value.slice(1)
-  }
-}
-```
-
 
 
 
@@ -3583,61 +3540,23 @@ filters: {
 
 #### [异步更新队列](https://v2.cn.vuejs.org/v2/guide/reactivity.html#异步更新队列)
 
-Vue 在更新 DOM 时是**异步**执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。Vue 在内部对异步队列尝试使用原生的 `Promise.then`  、`MutationObserver` 和 `setImmediate`，如果执行环境不支持，则会采用 `setTimeout(fn, 0)` 代替。
+Vue 在更新 DOM 时是**异步**执行的。
 
-例如，当你设置 `vm.someData = 'new value'`，该组件不会立即重新渲染。当刷新队列时，组件会在下一个事件循环“tick”中更新。多数情况我们不需要关心这个过程，但是如果你想基于更新后的 DOM 状态来做点什么，这就可能会有些棘手。虽然 Vue.js 通常鼓励开发人员使用“数据驱动”的方式思考，避免直接接触 DOM，但是有时我们必须要这么做。为了在数据变化之后等待 Vue 完成更新 DOM，可以在数据变化之后立即使用 `Vue.nextTick(callback)`。这样回调函数将在 DOM 更新完成后被调用。例如：
+只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。
 
-```vue
-<div id="example">{{message}}</div>
-```
+这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。
+
+例如，当你设置 `vm.someData = 'new value'`，该组件不会立即重新渲染。而是将多次数据更新放到一个队列中，做完diff算法等计算后，一并更新。
+
+而 `Vue.nextTick(callback)` 或 `vm.$nextTick(callback)` 的回调函数，则会在 DOM更新后，执行。
 
 
-
-```js
-var vm = new Vue({
-  el: '#example',
-  data: {
-    message: '123'
-  }
-})
-vm.message = 'new message' // 更改数据
-vm.$el.textContent === 'new message' // false
-Vue.nextTick(function () {
-  vm.$el.textContent === 'new message' // true
-})
-```
-
-在组件内使用 `vm.$nextTick()` 实例方法特别方便，因为它不需要全局 `Vue`，并且回调函数中的 `this` 将自动绑定到当前的 Vue 实例上：
-
-```js
-Vue.component('example', {
-  template: '<span>{{ message }}</span>',
-  data: function () {
-    return {
-      message: '未更新'
-    }
-  },
-  methods: {
-    updateMessage: function () {
-      this.message = '已更新'
-      console.log(this.$el.textContent) // => '未更新'
-      this.$nextTick(function () {
-        console.log(this.$el.textContent) // => '已更新'
-      })
-    }
-  }
-})
-```
 
 ### 使用场景
 
-1. 如果想要在修改数据后立刻得到更新后的DOM结构，可以使用Vue.nextTick()
+在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中。
 
-2. 在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中。
-
-   在 Vue生命周期函数中 created钩子函数中： DOM 并没有进行任何渲染， 而此时进行DOM 操作无异于是徒劳的， 所以此处一定将DOM 操作的js 代码放进Vue.nextTick 回调函数中， 
-
-3. 在watch 侦听到数据变化后要执行某个回调函数，而这个操作需要使用随数据改变而改变的DOM结构的时候， 这个操作都应该放进Vue.nextTick () 回调函数中。
+在 Vue生命周期函数中 created钩子函数中： DOM 并没有进行任何渲染， 而此时进行DOM 操作无异于是徒劳的， 所以此处一定将DOM 操作的js 代码放进Vue.nextTick 回调函数中， 
 
 
 
