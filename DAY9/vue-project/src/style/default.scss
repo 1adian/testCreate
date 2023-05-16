@@ -1,0 +1,11 @@
+// 去掉默认样式
+// scss 的注释形式，与 JS 非常像
+// 所以也从侧面说明了， scss 有 很多与 JS 类似的 功能
+* {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /* vue-cli / 脚手架
+    Babel - 将高版本JS ，通过 babel 解析成 低版本的 JS代码。
+  
+    Linter / Formatter 
+      - 1）规定 JS/html/css 写法的规范（ESLint）
+      - 2) Formatter 在 ctrl+s 保存时，自动 格式化代码。
+    
+  
+    CSS Pre-processors：CSS预处理器
+      -> Sass/SCSS (with dart-sass)
+      作用：
+  */
+
+
+  /* Sass VS Less
+    介绍：Sass 和 Less 功能类似； 都是 对 css 的功能的进一步增强。
+      即 在 css 的基础上，增加了 很多 类似JS 的功能。
+  */
+
+  /* Sass 在 vue 中的用法：
+    第一步：脚手架中，必须安装了 SASS
+    第二步：在 .vue 文件中，直接在 标签上 <style scoped lang="scss"> 只要有 ` lang="scss"`
+       即标注， css 语法，可以使用 sass的语法。
+  
+  */
+
+  /* Sass 的好处：
+     1. sass/less 都是 css 的 `超集`：
+     2. sass 对 css 的增强：
+        // 作用1：`@import 'path'` 引入scss的单文件模块
+      //  ->  `/style` 文件夹， 在 main.js 中引入 index.scss 统一管理
+        //  -> import "@/style/index.scss";
+      // 注： scss 具有模块化的功能，所以关于 样式/scss，可以更方便地统一进行代码管理
+
+
+
+      // 作用2：颜色变量
+      // 使用 -> @import "@/style/variable.scss";
+      // 具体见 `代码`
+      // 颜色变量的作用：1）颜色变量的 可复用性；  2）方便 页面主题 的切换。
+
+
+
+      // 作用3：代码的嵌套
+        // 具体见： `代码`
+
+      // 作用4：`&` 符号
+        // 具体见： `代码`
+
+
+      // sass 官网：https://www.sass.hk/docs/
+  */
+</script>

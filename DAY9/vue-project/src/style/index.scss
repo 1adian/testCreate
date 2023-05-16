@@ -1,0 +1,5 @@
+// index.scss 文件的作用：统一 导入 多个 scss 文件
+// 以便 导入的 scss 文件能全局生效
+@import './a.scss';
+@import './b.scss';
+@import './default.scss';

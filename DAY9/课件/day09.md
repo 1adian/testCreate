@@ -3034,6 +3034,7 @@ destroyed：销毁之后
 强调：`destroy` 钩子函数的作用：
 
 ```vue
+destroy 声明周期的作用：组件被销毁时，清除定时器 或 其他容易引起内存泄漏相关的代码
 ```
 
 
@@ -3043,19 +3044,28 @@ destroyed：销毁之后
 ## 脚手架解锁新技能：scss
 
 ```js
-// 作用1：@import 'path' 引入
-//  ->  /style 文件夹， 在 main.js 中引入 index.scss 统一管理
+// 作用1：`@import 'path'` 引入scss的单文件模块
+//  ->  `/style` 文件夹， 在 main.js 中引入 index.scss 统一管理
 	//  -> import "@/style/index.scss";
+// 注： scss 具有模块化的功能，所以关于 样式/scss，可以更方便地统一进行代码管理
+
 
 
 // 作用2：颜色变量
 // 使用 -> @import "@/style/variable.scss";
+// 具体见 `代码`
+// 颜色变量的作用：1）颜色变量的 可复用性；  2）方便 页面主题 的切换。
+
 
 
 // 作用3：代码的嵌套
-
+	// 具体见： `代码`
 
 // 作用4：`&` 符号
+	// 具体见： `代码`
+
+
+// sass 官网：https://www.sass.hk/docs/
 ```
 
 
@@ -3155,7 +3165,7 @@ sync修饰符是一个语法糖，它主要是解决了父子组件的双向绑�
 <!-- 注：其是  <Son :data="msg" @update:data="handleUpdateData" />  的语法糖！ -->
 ```
 
-
+强调： `sync` 语法糖，在 vue3 中，被废弃了。
 
 
 
@@ -3163,12 +3173,15 @@ sync修饰符是一个语法糖，它主要是解决了父子组件的双向绑�
 
 ### 18.1 插槽介绍
 
-插槽的作用：
+插槽的作用：有了插槽，可以将组件的参数，不仅限于 JS的数据，还可以是 `标签`，甚至是 `组件`。
 
 ```js
-props 传参的局限性：
+props 传参的局限性：只能传递 JS的数据。
+// 为什么 “只能传递 JS的数据” 就叫局限性？
+// -> 因为 组件是对 `JS+html+css` 三者的封装，所以 参数，很多情况下，也会是 `JS+html+css` 的组合。
 
 插槽解决的问题：
+即通过 插槽，可以传递 html+css+js 的代码（主要是 html）
 ```
 
 > Vue 实现了一套内容分发的 API，将 `<slot>` 元素作为承载分发内容的出口。
@@ -3190,7 +3203,9 @@ props 传参的局限性：
 （1）子组件定义时，预留好插槽：
 
 ```html
-<!--预留好插槽-->
+<!--预留好插槽
+	即 默认参数
+-->
 <slot>默认内容，不传结构时，默认展示</slot>
 ```
 
@@ -3205,6 +3220,8 @@ props 传参的局限性：
 
 
 #### 18.2.2 具名插槽
+
+作用：即 可以传递 多个参数
 
 有时我们需要多个插槽。例如对于一个带有如下模板的 `<header>` 组件：
 
@@ -3234,7 +3251,6 @@ props 传参的局限性：
   
   <!--右侧侧内容插槽 -->
   <slot name="right"></slot>
-
 </div>
 ```
 
@@ -3275,13 +3291,13 @@ props 传参的局限性：
     
     <span v-slot:default>列表标题</span>
     
-    <template v-slot:right="obj">
+    <template v-slot:right>
         <span>列表右侧</span>
     </template>
 </Header>
 ```
 
-**Vue2.6 版本之前**
+**Vue2.6 版本之前（被废弃）**
 
 老版本属性写法；新版本用v-slot指令的写法，v-slot只能用在template中 
 
@@ -3308,6 +3324,8 @@ props 传参的局限性：
 
 作用: 让插槽内容能够访问子组件中才有的数据 (插槽提供数据，让别人使用)  
 
+​	即，子组件 能给 父组件 传递数据...
+
 实现：子组件向父组件传值方式
 
 2. 语法：子组件
@@ -3321,7 +3339,7 @@ props 传参的局限性：
  3. 父组件 使用插槽：
 
     ```html
-    <template v-slot:footer='data'>
+    <template v-slot:footer='obj'>
        底部区域
         <p>使用slot数据:{{ obj }}</p>
         <p>{{ obj.msg }}</p>
@@ -3330,7 +3348,7 @@ props 传参的局限性：
 
     
 
-    注意：==data一个对象 data={ msg:'',num:'',...}==
+    注意：==obj一个对象 obj={ msg:'',num:'',...}==
 
 #### 总结：
 
@@ -3367,7 +3385,54 @@ props 传参的局限性：
 
 案例：选项卡
 
-```
+```vue
+<template>
+  <div id="app">
+    <button @click="handleClick('Son1')">显示1</button>
+    <button @click="handleClick('Son2')">显示2</button>
+    <button @click="handleClick('Son3')">显示3</button>
+
+    <component :is="showComp" />
+    <!-- <Son1 />
+    <Son2 />
+    <Son3 /> -->
+  </div>
+</template>
+
+<script>
+import Son1 from "./components/Son1.vue";
+import Son2 from "./components/Son2.vue";
+import Son3 from "./components/Son3.vue";
+
+/* 
+  // 需求：点击 button，分别显示 对应的 组件 - Son1 / 2 / 3
+  // 即： 选项卡案例
+  正常思路：需要 if - else if ... 的条件分支：
+*/
+export default {
+  name: "App",
+  components: {
+    Son1,
+    Son2,
+    Son3,
+  },
+  data() {
+    return {
+      showComp: "Son1",
+    };
+  },
+  methods: {
+    handleClick(str) {
+      this.showComp = str;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "./style/variable.scss"; // 引入/导入 颜色变量
+</style>
+
 ```
 
 
@@ -3380,7 +3445,7 @@ props 传参的局限性：
 
 ```html
 <!-- 动态组件 -->
-<!-- :exclude 为 排除 为某个组件 “保活” -->
+<!-- :exclude 为 排除 为某个组件 “保活”   `TODO` -->
 <keep-alive :exclude='["Personal"]'>
     <component :is='comName'></component>
 </keep-alive>
