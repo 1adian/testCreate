@@ -3537,12 +3537,20 @@ https://github.com/animate-css/animate.css
    （3）使用
 
    ```html
-   <!--使用 - 4.X版本-->
+   <!-- 
+   	使用 - 4.X版本（最新版本）
+   
+   	而 vue官网介绍的 3.X 的 animate.css 版本，
+   	
+   	建议 同学直接使用 4.X（即直接参照本教程使用即可）
+   -->
    <Transition
       name="custom-classes"
       enter-active-class="animate__animated animate__fadeInDown"
       leave-active-class="animate__animated animate__bounceOut"
    >
+     <会被施加 进场 和 离场效果的 组件或标签 />
+   </Transition>
    
      注：只更改 `animate__animated` 后面的 class
      具体的 class 直接在 `https://animate.style/` 复制即可
