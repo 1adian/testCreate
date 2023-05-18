@@ -1,37 +1,63 @@
 <template>
   <div id="app">
-    <h1 ref="header">App</h1>
+    <button @click="handleGet1">请求 1 接口</button>
+    <button @click="handleGet2">请求 2 接口</button>
+    <button @click="handleGet3">请求 3 接口</button>
+    <button @click="handleGet4">请求 4 接口</button>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "App",
   components: {},
   data() {
-    return {
-      show: true,
-      msg: "Hello Filter",
-    };
-  },
-  // 思考：在 钩子函数中 获取 DOM元素：
-  created() {
-    // 强调：created钩子函数，无法获取DOM元素
-    // created 钩子函数执行的时候，是 vm 实例创建完毕，但 页面并未进行渲染
-    // 即 虚拟DOM，并未 渲染成真实的 DOM
-    console.log("created", this.$refs.header); // 可以获取到 DOM 元素
-
-    // 面试问题：如何在 created钩子函数中 获取到 DOM元素？
-    this.$nextTick(() => {
-      // 本回调函数，会在 页面更新(即DOM元素挂载)完毕，执行本钩子函数
-      console.log("created - nextTick", this.$refs.header);
-    });
+    return {};
   },
 
-  mounted() {
-    // mounted钩子函数中，可以获取DOM元素
-    // mounted执行的时机：页面的DOM元素渲染完毕
-    console.log("mounted", this.$refs.header); // 可以获取到 DOM 元素
+  methods: {
+    handleGet1() {
+      axios.get("http://localhost:8888/test/first").then((res) => {
+        console.log("111", res);
+      });
+    },
+    handleGet2() {
+      axios.get("http://localhost:8888/test/second").then((res) => {
+        console.log("222", res);
+      });
+    },
+    handleGet3() {
+      axios
+        .get("http://localhost:8888/test/third", {
+          params: {
+            name: "张三",
+            age: 33,
+          },
+        })
+        .then((res) => {
+          console.log("333", res);
+        });
+    },
+    handleGet4() {
+      axios
+        .post(
+          "http://localhost:8888/test/fourth",
+          {
+            name: "李四",
+            age: 44,
+          },
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((res) => {
+          console.log("444", res);
+        });
+    },
   },
 };
 </script>

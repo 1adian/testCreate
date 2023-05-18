@@ -3665,6 +3665,9 @@ https://www.kancloud.cn/yunye/axios/234845
 
    ```js
    npm install axios -S
+   
+   // 简写：
+   npm i axios
    ```
 
 2. 常见请求方式
