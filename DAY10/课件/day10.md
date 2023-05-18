@@ -3768,6 +3768,8 @@ https://www.kancloud.cn/yunye/axios/234845
 >
 > ```js
 > // /api/http.js
+> 
+> // 生成 axios实例，其 作用域 axios 几乎一致，但其可以封装一些基础“参数”
 > const http = axios.create({
 >   baseURL: '', // 
 >   // baseURL: process.env.VUE_APP_URL,
