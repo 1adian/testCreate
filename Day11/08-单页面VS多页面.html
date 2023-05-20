@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    面试问题：什么是 单页面应用（SPA）
+      - Single Page Application
+
+    多页面应用（MPA）
+      - Mutiply Page Application
+
+
+    多页面应用：以前的开发形式（jQuery为主），一个 `.html` 文件，对应 一个路由（path）。
+      用户点击，切换 path，即重新向服务器请求 新的 .html 文件，然后浏览器 重新渲染页面。
+
+      好处：
+        - 能被 SEO（即 搜索引擎 给查询的到）
+        - 首屏加载速度快（首屏也是 一个 html 文件）
+
+      坏处：
+        若网络较差，点击切换新的页面，速度非常慢。
+          因为 新的页面，需要重新通过网络下载。
+
+
+
+
+  
+    单页面应用：现代框架的开发形式（vue/react）：
+      即 整个网站，只有 一个 .html 文件，
+        用户点击，切换 path，本质是 JS渲染新的组件（DOM元素），
+          不需要网络请求。
+
+
+      好处：
+        路由改变（切换页面）不需要通过网络，则切换页面速度快。
+
+
+      坏处：
+        - 无法被SEO（搜索引擎搜索到的原因是 搜索引擎本质所搜的是 html 中的标签）。
+        - 首屏加载速度慢（首屏需要加载 “所有” 的JS，以便 后续切换页面，能直接渲染）。
+    
+  */
+</script>
