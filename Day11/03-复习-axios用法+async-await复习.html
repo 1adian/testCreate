@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    面试问题： Vue3 为什么要 废弃 过滤器 ( filter )？
+      -> 因为 filter 实现的功能，与 计算属性 一致。
+          都是 对 数据 进行 “再加工”。
+
+      -> filter 与 计算属性相比，其写法，增加 前端开发者的 学习负担。
+
+
+    面试问题：
+      1）created 钩子函数中，能获取到 DOM 元素吗？
+        -> 不能。
+
+      2）那么，就想在 created 中获取到 DOM 元素，有什么办法吗？
+        -> this.$nextTick(() => {
+          在回调函数中 获取DOM元素
+        });
+
+      3）为什么 就能在 $nextTick 的回调函数中 获取到 DOM元素。
+        -> 因为 Vue的渲染机制，不是 数据更新了，就立刻渲染DOM元素，
+          而是 多次数据更新，会在 下一次 绘制 (帧)的时候，统一进行 DOM渲染。
+            DOM渲染完毕后，会执行 this.$nextTick 的回调函数。
+
+  */
+</script>
