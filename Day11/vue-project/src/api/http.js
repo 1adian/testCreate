@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // http 的变量，相当于 axios 的功能；
-// 只是 
-  // 1） 绑定了 基本url - 'http://localhost:8888'  (即后续 使用 http 变量发出的 ajax 请求，统统发送到了 8888 的服务器上)
-  // 2）只要是 http 发出的 ajax 请求，默认都携带 请求头： "Content-type": "application/json"
+// 只是
+// 1） 绑定了 基本url - 'http://localhost:8888'  (即后续 使用 http 变量发出的 ajax 请求，统统发送到了 8888 的服务器上)
+// 2）只要是 http 发出的 ajax 请求，默认都携带 请求头： "Content-type": "application/json"
 export const http = axios.create({
   baseURL: "http://localhost:8888", // 即对 基础的 url 进行封装，后续 使用 http 替代 axios
   // 那么 http对象，默认携带了 "http://localhost:8888" 的基础地址
@@ -14,9 +14,6 @@ export const http = axios.create({
   headers: { "Content-type": "application/json" },
 });
 
-
-
-// /api/http.js
 // 添加请求拦截器
 // req拦截器主要的用处，实现 token 身份验证
 http.interceptors.request.use(
