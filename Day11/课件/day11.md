@@ -3913,11 +3913,13 @@ module.exports = {
 
 # 三、路由系统
 
-## 1、什么是路由？
+路由官网：https://v3.router.vuejs.org/zh/
 
-### 1.1 生活中的路由
+## 1、什么是 路由？
 
-生活中的路由和路由器，是为了上网。
+### 1.1 生活中的 路由
+
+生活中的 路由 和 路由器，是为了上网。
 
 ![img](/Users/mark/Downloads/day18_课件/images/路由器.jpg)
 
@@ -3931,17 +3933,29 @@ module.exports = {
 
 ### 1.2 编程中的路由
 
-根据不同的url，响应不同的数据或页面，这就是路由。key和value的一一对应关系。
+根据不同的 url，响应不同的数据或页面，这就是路由。key和value的一一对应关系。
 
 ##### 后端路由 vs 前端路由：
 
-- 后端路由：根据不同的URL(path)请求，返回不同的数据。
+- 后端路由：根据不同的URL( path )请求，返回不同的数据。
+
+- 举例：
+
+  - http://localhost:8888/test/first  ->  路由 - path（/test/first）,请求 一种数据
+
+  - http://localhost:8888/test/second  ->  路由 - path（/test/second）,请求 另一种数据
+
 
   
 
   
 
 - 前端路由：为了实现页面跳转（页面内容的切换）。
+
+  - 举例：不同的 path ，显示不同的页面
+    - https://v3.router.vuejs.org/ja/  ->  path (/ja)，显示 一种页面
+    - https://v3.router.vuejs.org/zh/  ->  path (/zh)，显示 另一种页面
+
 
   
 
@@ -4003,6 +4017,7 @@ module.exports = {
       .....
   ]
   ```
+
 
 
 
