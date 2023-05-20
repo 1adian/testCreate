@@ -5,10 +5,12 @@ import axios from "axios";
 // 1） 绑定了 基本url - 'http://localhost:8888'  (即后续 使用 http 变量发出的 ajax 请求，统统发送到了 8888 的服务器上)
 // 2）只要是 http 发出的 ajax 请求，默认都携带 请求头： "Content-type": "application/json"
 export const http = axios.create({
-  baseURL: "http://localhost:8888", // 即对 基础的 url 进行封装，后续 使用 http 替代 axios
-  // 那么 http对象，默认携带了 "http://localhost:8888" 的基础地址
+  // baseURL: "http://127.0.0.1:5555", // 即对 基础的 url 进行封装，后续 使用 http 替代 axios
 
-  // baseURL: process.env.VUE_APP_URL,
+  // 借用了 node 的写法（因为 vue脚手架，集成了 webpack）
+  // process.env.VUE_APP_URL 该变量，即可以根据前端代码的不同环境（dev / prod）
+  // 来确定 其值是什么
+  baseURL: process.env.VUE_APP_URL,
 
   // 默认，前后端交互 都是 json ，所以将 "Content-type": "application/json" 进行封装
   headers: { "Content-type": "application/json" },

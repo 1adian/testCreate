@@ -3795,8 +3795,8 @@ https://cli.vuejs.org/zh/guide/mode-and-env.html
 >
 > ```js
 > "scripts": {
->   "serve": "vue-cli-service serve --mode dev",
->   "build": "vue-cli-service build --mode prod",
+>   	"serve": "vue-cli-service serve --mode dev", // npm run serve 执行本行代码
+>   	"build": "vue-cli-service build --mode prod",
 > },
 > ```
 >

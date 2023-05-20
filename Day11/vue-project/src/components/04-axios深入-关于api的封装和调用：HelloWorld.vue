@@ -16,8 +16,6 @@ export default {
   },
   methods: {
     getFirstApi() {
-      //
-      console.log("process.env.VUE_APP_URL", process.env.VUE_APP_URL);
       console.log("this.$api", this.$api);
       this.$api.test.getTestSecond().then((res) => {
         console.log("getTestSecond", res);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    axios 封装：`baseURL: process.env.VUE_APP_URL,` 的作用：
+
+
+      背景描述：ajax数据请求，通常分 
+        - 开发时候的接口联调：即前端在开发，后端也在开发，前端通常 会连接 测试环境的服务器。
+          「环境」：即开发时候的 “环境”，被称为 「开发环境 - `dev env`」 - develop
+          即开发的时候， `baseURL` 为 测试环境的服务器。
+
+            - 使用开发环境， `npm run serve`
+
+            开发环境中，前后端 接口联调完毕，确保没有 bug，才能将 前/后端 的代码，
+              发送/部署 至生产环境（即正式上线）。
+
+
+        - 上线部署，前端直接接入 正式的服务器数据：
+          即「生产环境」，即前端代码开发完毕，后端代码开发完毕，且都调试完毕。
+            将代码，部署到 正式的环境（生产环境）。
+            即正式环境，`baseURL` 为 正式环境/生产环境 的服务器。
+              「生产环境 - `prod env`」 - production
+
+              - 产生 生产环境的代码：`npm run build`
+
+
+
+
+    ---------- vue 中具体操作：
+      1. 在 根目录下，创建 `.env.dev` / `.env.prod` 两个文件
+      2. package.json 进行更改：
+        "scripts": {
+          "serve": "vue-cli-service serve --mode dev",
+          "build": "vue-cli-service build --mode prod",
+          "lint": "vue-cli-service lint"
+        },
+
+      3. npm run serve：
+        则 process.env.VUE_APP_URL 的值，即为 `.env.dev` 中声明的值。
+
+  */
+</script>
