@@ -7,7 +7,7 @@ import axios from "axios";
 export const http = axios.create({
   // baseURL: "http://127.0.0.1:5555", // 即对 基础的 url 进行封装，后续 使用 http 替代 axios
 
-  // 借用了 node 的写法（因为 vue脚手架，集成了 webpack）
+  // 借用了 node 的写法（因为 vue脚手架，集成了 webpack，所以 能直接使用 process）
   // process.env.VUE_APP_URL 该变量，即可以根据前端代码的不同环境（dev / prod）
   // 来确定 其值是什么
   baseURL: process.env.VUE_APP_URL,
