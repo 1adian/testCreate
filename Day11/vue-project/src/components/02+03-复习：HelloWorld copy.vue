@@ -38,6 +38,31 @@ export default {
       console.log("await - res", res);
     },
   },
+  //
+
+  // 组件实例创建，而 DOM元素未被渲染
+  beforeCreate() {},
+  created() {
+    this.$nextTick(() => {
+      console.log(this.$refs.h1);
+    });
+  },
+
+  // 组件被渲染（DOM元素被渲染）
+  beforeMount() {},
+  mounted() {},
+
+  // 数据更新，页面变化
+  beforeUpdate() {},
+  updated() {},
+
+  // 组件被销毁（v-if）
+  beforeDestroy() {},
+  destroyed() {},
+
+  // 在 若组件使用了 <keep-alive> “保活”，那么 组件 显示/隐藏 会触发的钩子函数
+  activated() {},
+  deactivated() {},
 };
 </script>
 
