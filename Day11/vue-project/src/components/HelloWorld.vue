@@ -8,6 +8,7 @@
 
 <script>
 // vue 中  导入的 js 文件，可以省略 后缀 `.js`
+import axios from "axios";
 
 export default {
   name: "HelloWorld",
@@ -17,11 +18,15 @@ export default {
   methods: {
     getFirstApi() {
       //
-      console.log("process.env.VUE_APP_URL", process.env.VUE_APP_URL);
-      console.log("this.$api", this.$api);
-      this.$api.test.getTestSecond().then((res) => {
-        console.log("getTestSecond", res);
-      });
+      axios
+        // 向  代理服务器发起请求（代理服务器 与 前端服务器，同源，所以不会跨域）
+        .get("http://localhost:8080/api")
+        .then((res) => {
+          console.log("res", res);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     },
   },
 };

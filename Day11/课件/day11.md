@@ -3871,7 +3871,7 @@ https://cli.vuejs.org/zh/guide/mode-and-env.html
 
 
 
-#### （3）代理服务器
+#### （3）代理服务器 - proxy
 
 代理服务器所处的端口号跟前端一样。
 
@@ -3887,7 +3887,7 @@ https://cli.vuejs.org/zh/guide/mode-and-env.html
 
 （1）nginx 反向代理服务器  （学习成本高，需要了解后端技术）
 
-（2）借助vue-cli
+（2）借助 vue-cli （脚手架 还是 借助了 webpack 的功能）
 
 
 
