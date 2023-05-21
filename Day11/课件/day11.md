@@ -3844,7 +3844,7 @@ https://cli.vuejs.org/zh/guide/mode-and-env.html
 
 规定了三者必须一致：协议名、主机名、端口号
 
-<img src="/Users/mark/Downloads/day18_课件/images/跨域.png" alt="跨域"  />
+<img src="./images/跨域.png" alt="跨域"  />
 
 
 
