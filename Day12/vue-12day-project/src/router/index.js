@@ -56,6 +56,18 @@ const routes = [
     path: "/news",
     component: () => import("../views/NewsView.vue"),
   },
+
+  // 登录页面
+  {
+    path: "/login",
+    component: () => import("../views/LoginView.vue"),
+  },
+
+  {
+    // 用户详情页面：UserDetailsView
+    path: "/user-details",
+    component: () => import("../views/UserDetailsView.vue"),
+  },
 ];
 
 const router = new VueRouter({

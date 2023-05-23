@@ -4208,6 +4208,41 @@ export default {
 #### App.vue:
 
 ```vue
+<template>
+  <div id="app">
+    <div>
+      <button @click="handleToPath('/')">toHome</button>
+      <button @click="handleToPath('/about')">toAbout</button>
+      <button @click="handleToPath('/news')">toNews</button>
+    </div>
+    <nav>
+      <!-- 
+        <router-link> 本质是 <a> 点击其标签，进行 url 的 path 更改 
+        -->
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/news">News</router-link> |
+    </nav>
+
+    <!-- 
+      <router-view /> 作用：
+        路由组件，渲染在 <router-view /> 其中。
+      
+     -->
+    <router-view />
+  </div>
+</template>
+<script>
+export default {
+  name: "App",
+  methods: {
+    handleToPath(path) {
+      // 是 路由跳转的 最常用 写法！
+      this.$router.push(path);
+    },
+  },
+};
+</script>
 
 ```
 
@@ -4240,6 +4275,11 @@ this.$router.push(path)
 ## 3、案例：登录成功，跳转至用户详情页
 
 ```
+// 案例描述： 
+// 1）在 `/login` 页面 进行 「用户名」和「密码」的输入， 点击提交，验证通过，则跳转至 `/user-details` 用户详情页面
+// 2）若 用户已经登录（token），则 用户详情 根据接口，显示用户详情的数据
+// 3）若 用户并未登录，则 alert 告知用户未登录，并跳回 登录页面，引导用户登录
+
 ```
 
 

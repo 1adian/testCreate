@@ -2,7 +2,10 @@
 import * as test from "./modules/test";
 // 案例： test.getTestFirst 即获取了 test.js 中的 getTestFirst函数
 
+import * as user from "./modules/user";
+
 // 将 test 模块，以 默认的形式导出
 export default {
   test,
+  user,
 };
