@@ -1,12 +1,38 @@
 <template>
   <div id="app">
+    <div>
+      <button @click="handleToPath('/')">toHome</button>
+      <button @click="handleToPath('/about')">toAbout</button>
+      <button @click="handleToPath('/news')">toNews</button>
+    </div>
     <nav>
+      <!-- 
+        <router-link> 本质是 <a> 点击其标签，进行 url 的 path 更改 
+        -->
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/news">News</router-link> |
     </nav>
+
+    <!-- 
+      <router-view /> 作用：
+        路由组件，渲染在 <router-view /> 其中。
+      
+     -->
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  name: "App",
+  methods: {
+    handleToPath(path) {
+      // 是 路由跳转的 最常用 写法！
+      this.$router.push(path);
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
