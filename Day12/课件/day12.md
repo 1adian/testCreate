@@ -4043,6 +4043,8 @@ Vue Router 是 [Vue.js (opens new window)](http://cn.vuejs.org/)官方的路由�
 
 #### 非路由组件 和 路由组件
 
+
+
 ##### 非路由组件 - `/components`
 
 作用：
