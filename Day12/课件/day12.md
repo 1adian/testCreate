@@ -3907,7 +3907,7 @@ module.exports = {
 
 
 
-# 三、路由系统
+# 四、路由系统
 
 路由官网：https://v3.router.vuejs.org/zh/
 
@@ -4844,6 +4844,485 @@ router.beforeEach((to,from,next)=>{
       next();
     }
 })
+```
+
+
+
+
+
+
+
+# 五、状态管理
+
+## 回顾：组件通信方式：
+
+1. 父传子：props
+
+2. 子传父：自定义事件： this.$emit   v-on
+
+3. 兄弟：  父组件做中转  子 -> 父 -> 子
+
+4. $refs.xx，父可以获取 子组件的 data 和 method
+
+5. 事件总线机制  
+
+   -> 痛点：管理不集中
+
+6. Vuex  ->  任意组件
+
+
+
+## 1、Vuex介绍
+
+### 1.1 简介
+
+ Vuex 是一个专为 Vue.js 应用程序开发的**状态管理模式**。它采用==集中式存储==管理应用的所有组件的状态，并以相应的规则保证状态以一种==可预测==的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 [devtools extension (opens new window)](https://github.com/vuejs/vue-devtools)，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。
+
+​	https://v3.vuex.vuejs.org/zh/
+
+![](/Users/mark/Downloads/day18_课件/images/vuex.png)
+
+
+
+### 1.2 vuex原理图
+
+​	![logo](/Users/mark/Downloads/day18_课件/images/vuex2.png)
+
+
+
+## 2、什么情况下应该使用 Vuex？
+
+Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。
+
+​	如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择.
+
+
+
+## 3、store
+
+### 3.1 介绍
+
+​	每一个 Vuex 应用的核心就是 store（仓库）。“store”基本上就是一个容器，它包含着你的应用中大部分的**状态 (state)**。Vuex 和单纯的全局对象有以下两点不同：
+
+1. Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。
+2. 你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地**提交 (commit) mutation**。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用
+
+
+
+### 3.2 vuex的作用/优势：
+
+1. 状态(state) 的集中管理
+2. 状态 具有响应性
+
+
+
+### 3.3 核心概念：
+
+#### 3.3.1 state
+
+提供唯一的公共数据源，需要共享的数据都放到store的state中
+
+##### 定义 state
+
+```js
+
+const store = new Vuex.Store({
+  state:{
+    count:0
+  }
+})
+```
+
+##### 访问数据第一种方式：$store.state.名称
+
+JS中：
+
+```js
+this.$store.state.count
+```
+
+HTML模板当中：
+
+```vue
+ <p>访问state中数据的第一种方式: 
+     {{$store.state.count}}---{{this.$store.state.count}}</p>
+```
+
+
+
+##### 访问数据第二种方式：辅助函数
+
+```js
+// 1、按需引入辅助函数
+import { mapState } from "vuex";
+ computed: {
+    // 写法1：映射成当前组件需要的计算属性 【常用】   ...mapState(['','',''])
+    ...mapState(["count"]),
+
+    // 写法2：mapState 对象写法（作用：对 state 的数据 进行 “重命名”）
+    ...mapState({
+      num: 'count'
+    }),
+
+    // 写法3：
+    ...mapState({
+      // mapState 函数写法:可以访问data数据
+      // 注：也可对 state 的数据 进行 “再加工”
+      count22: state => state.count,
+    }),
+  },
+  mounted() {
+    console.log(this.count);
+  }
+```
+
+
+
+#### 3.3.2 Mutation 
+
+更改 Vuex 的 store 中的状态的==唯一方法==是提交 mutation （变异）
+
+##### 定义 mutation
+
+```js
+ mutations: {
+    // mutation是一个方法，在此可以定义多个mutation 
+    // 1、定义  mutation   作用：修改state里的数据
+    updateCount(state, value) {
+        console.log('updateCount mutation 被调用了')
+        state.count += value
+    }
+  }
+```
+
+##### 第一种触发mutation的方法：$store.commit
+
+```js
+methods: {
+    add() {
+      // 触发mutation的第一种方式 this.$store.commit('mutation名字')
+      this.$store.commit("updateCount", 3);
+    }
+  }
+```
+
+
+
+##### 第二种触发mutation的方法：辅助函数
+
+映射为当前组件所需要的methods方法：	
+
+```js
+// 1. 从 vuex 中按需导入 mapMutations 函数
+import { mapMutations } from 'vuex'
+```
+
+
+
+```js
+// 2. 将指定的 mutations 函数，映射为当前组件的 methods 函数
+methods: {
+ ...mapMutations(['updateCount'])
+}
+```
+
+
+
+#### 3.3.3 Action 
+
+- 说明
+
+  Action 用于处理异步任务。如果通过异步操作变更数据，必须通过 Action，而不能使用 Mutation，但是在 Action 中还是要通过触发Mutation 的方式间接变更数据。
+
+- 注意
+
+  在 actions 中，不能直接修改 state 中的数据；
+
+  必须通过 context.commit() 触发某个 mutation 才行
+
+  
+
+##### 定义 action
+
+```js
+ const store = new Vuex.Store({
+     // ...省略其他代码
+     mutations: {
+         ADD(state, value) {
+            console.log('ADD mutation 被调用了')
+            state.count += value
+          }
+     },
+
+     // 放多个action,每个action都是响应组件中用户动作的方法
+    actions: {
+      // 延迟加
+      delayAdd(context, value) {
+        console.log('delayAdd action 被调用了--延迟加')
+        setTimeout(() => {
+          context.commit('ADD', value)
+        }, 2000)
+      }
+    }
+ })
+ 
+```
+
+
+
+##### 触发 actions 的第一种方式：$store.dispatch
+
+```js
+// 组件中：触发 Action
+methods: {
+  handle() {
+    // 触发 actions 的第一种方式
+    this.$store.dispatch('delayAdd', /*本实参值被赋值给 value*/)
+  }
+}
+```
+
+
+
+##### 触发 actions 的第二种方式：辅助函数
+
+- 实现
+
+  ```js
+  // 1. 从 vuex 中按需导入 mapActions 函数
+  import { mapActions } from 'vuex'
+  ```
+
+  通过刚才导入的 mapActions 函数，将需要的 actions 函数，映射为当前组件的 methods 方法：
+
+  ```js
+  // 2. 将指定的 actions 函数，映射为当前组件的 methods 函数
+  methods: {
+   	...mapActions(['delayAdd', '其他action...'])
+  }
+  ```
+
+  3、直接调用
+
+  ```html
+  <button @click="delayAdd(3)">延迟2S执行</button>
+  ```
+
+  
+
+#### 3.3.4 Getter
+
+- 说明：
+
+  Getter 用于对 state 中的数据进行“再加工”（其作用 等同于 计算属性）。
+
+##### 定义 getter
+
+```js
+// 定义 Getter
+ const store = new Vuex.Store({
+     state: {
+    	 count: 2
+     },
+     getters: {
+         doubleCount: state => {
+             return state.count * 2
+         }
+     }
+ })
+```
+
+#####使用 getters 的第一种方式：$store.getters.名称
+
+```js
+// JS函数中
+this.$store.getters.名称
+```
+
+```html
+<!-- template中 用法 -->
+ <h3>{{$store.getters.doubleCount}}</h3>
+```
+
+
+
+##### 使用 getters 的第二种方式：辅助函数
+
+```js
+import { mapGetters } from 'vuex'
+computed: {
+ ...mapGetters(['doubleCount'])
+}
+```
+
+```html
+<!-- template中 用法 -->
+<h3>{{doubleCount}}</h3>
+```
+
+
+
+注：getter与计算属性一样，其返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+
+
+
+
+
+
+
+### 3.5 Modules
+
+#### （1）介绍
+
+​    由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。
+
+​    为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块。
+
+所谓的模块管理，就是把状态拆分成一个个的模块进行管理。
+
+```js
+const moduleA = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
+
+const moduleB = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... }
+}
+
+const store = new Vuex.Store({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+
+store.state.a // -> moduleA 的状态
+store.state.b // -> moduleB 的状态
+```
+
+https://v3.vuex.vuejs.org/zh/guide/modules.html#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%B1%80%E9%83%A8%E7%8A%B6%E6%80%81
+
+
+
+#### （2）模板代码 （/store/modules/example.js）
+
+```js
+// *** 在组件中 的用法 *** eg:
+
+// import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+// computed: {
+//   ...mapState("example", ["count"]),
+//   ...mapGetters("example", ["squareCount"])
+// }
+// methods: {
+//   ...mapActions("example", ["delayIncrement"]),
+//   ...mapMutations("example", ["increment"]),
+// }
+
+// *** 在组件中 的用法 *** eg:
+
+export default {
+  namespaced: true, // 强调：必须 设该 属性为 true
+  state: {
+    count: 11,
+  },
+  getters: {
+    squareCount: (state) => state.count ** 2,
+  },
+  mutations: {
+    increment(state, value) {
+      state.count = value;
+    },
+  },
+  actions: {
+    // 异步操作
+    delayIncrement({ commit }, value) {
+      setTimeout(() => {
+        // 异步时间到了，触发 对应 的 mutation 方法
+        commit("increment", value);
+      }, 1000);
+    },
+  },
+};
+
+```
+
+
+
+
+
+## 4、目录结构
+
+Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则：
+
+1. 应用层级的状态应该集中到单个 store 对象中。
+2. 提交 **mutation** 是更改状态的唯一方法，并且这个过程是同步的。
+3. 异步逻辑都应该封装到 **action** 里面。
+
+只要你遵守以上规则，如何组织代码随你便。如果你的 store 文件太大，只需将 action、mutation 和 getter 分割到单独的文件。
+
+对于大型应用，我们会希望把 Vuex 相关代码分割到模块中。下面是项目结构示例：
+
+```bash
+├── index.html
+├── main.js
+├── api
+    └── modules
+        ├── cart.js       # 购物车模块
+        └── user.js       # 用户相关模块
+├── components
+│   ├── App.vue
+│   └── ...
+└── store
+    ├── index.js          # 我们组装模块并导出 store 的地方
+    ├── actions.js        # 根级别的 action
+    ├── mutations.js      # 根级别的 mutation
+    └── modules
+        ├── cart.js       # 购物车模块
+        └── products.js   # 产品模块
+```
+
+
+
+```js
+import Vue from 'vue'
+// 2、导入Vuex，并且安装到项目中
+import Vuex from 'vuex'
+// 安装 
+Vue.use(Vuex)
+
+import state from './state'
+import mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
+import cityModule from './module/cityModule'
+import userModule from './module/userModule'
+import example from './module/example'
+
+
+// 3、创建Store实例
+const store = new Vuex.Store({
+    // 开启严格模式
+    strict:true,
+    // 共享数据
+    state,
+    mutations,
+    actions,
+    getters,
+    modules: {
+      	example,
+        cityModule,
+        userModule
+    }
+})
+
+// 导出实例
+export default store;
 ```
 
 
