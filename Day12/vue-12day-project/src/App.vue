@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <div>
+      <button @click="back">后退1步</button>
       <button @click="handleToPath('/')">toHome</button>
       <button @click="handleToPath('/about')">toAbout</button>
       <button @click="handleToPath('/news')">toNews</button>
+      <button @click="forward">前进1步</button>
     </div>
     <nav>
       <!-- 
@@ -44,6 +46,14 @@ export default {
     handleToPath(path) {
       // 是 路由跳转的 最常用 写法！
       this.$router.push(path);
+    },
+
+    back() {
+      // 历史记录：后退异步
+      this.$router.back();
+    },
+    forward() {
+      this.$router.forward();
     },
   },
 };

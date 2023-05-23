@@ -4516,7 +4516,7 @@ router.push(location, onComplete?, onAbort?)
 该方法的参数可以是一个字符串路径，或者一个描述地址的对象。例如：
 
 ```js
-// 字符串
+// 字符串（这种写法 最常用）
 router.push('home')
 
 // 对象
