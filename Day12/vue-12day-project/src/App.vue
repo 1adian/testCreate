@@ -12,6 +12,21 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/news">News</router-link> |
+      <!-- params to属性字符串写法  
+            path: "/user/:name/:id",
+      -->
+      <router-link to="/user/zhangsan/001">User 1</router-link> |
+      <router-link to="/user/lisi/002">User 2</router-link> |
+      <router-link to="/detail?id=001&title=hello"
+        >query传参-商品详情-1</router-link
+      >
+      |
+      <router-link to="/detail?id=002&title=hi"
+        >query传参-商品详情-2</router-link
+      >
+      |
+      <router-link to="/nest">嵌套路由</router-link>
+      |
     </nav>
 
     <!-- 

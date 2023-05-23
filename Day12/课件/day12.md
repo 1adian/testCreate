@@ -4288,7 +4288,7 @@ this.$router.push(path)
 
 作用：路由跳转时，进行 传参
 
-应用场景：不同“入口” 进入同一路由组件，有不同的显示。
+应用场景：不同“入口” 进入 同一路由组件，有不同的显示。
 
 ![image-动态路由](/Users/mark/Downloads/day18_课件/images/动态路由-1.png)
 
@@ -4302,9 +4302,9 @@ this.$router.push(path)
 
 分为两种情况：params传参  和  query传参 
 
-ajax里的params参数：localhost:3000/zhangsan/001
+ajax里的 params 参数：localhost:3000/zhangsan/001
 
-ajax里的query参数：localhost:3000?name=zhangsan&id=001 
+ajax里的 query 参数：localhost:3000?name=zhangsan&id=001 
 
 
 
@@ -4424,7 +4424,7 @@ const routes = [
 
 4. 对比query传参：
 
-   params参数：属于路径当中的一部分，需在在路由中进行配置
+   parms参数：属于路径当中的一部分，需在在路由中进行配置
 
    query参数：不属于路径当中的一部分，不需在在路由中进行配置
 

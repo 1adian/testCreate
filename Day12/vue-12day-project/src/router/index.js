@@ -68,6 +68,35 @@ const routes = [
     path: "/user-details",
     component: () => import("../views/UserDetailsView.vue"),
   },
+  {
+    // params 动态路由  以冒号开头  /路径/:参数/:参数
+    path: "/user/:name/:id",
+    name: "user",
+    component: () => import("../views/User.vue"),
+  },
+
+  {
+    // query 传参
+    // 动态路由  以
+    path: "/detail", //地址
+    name: "detail",
+    component: () => import("../views/Detail.vue"),
+  },
+  {
+    path: "/nest", // 第一级 路由
+    component: () => import("../views/Nest/index.vue"),
+    children: [
+      {
+        // 第二级 路由
+        path: "nest1", //访问  /nest/nest1
+        component: () => import("../views/Nest/Nest1.vue"),
+      },
+      {
+        path: "nest2", //访问  /nest/nest2
+        component: () => import("../views/Nest/Nest2.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
