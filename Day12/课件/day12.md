@@ -4683,13 +4683,27 @@ props值为对象，对象中所有的key-value组合都会通过props传给组�
 props值为函数，返回的对象通过props传递给组件，灵活，推荐使用
 
 ```js
-// 第三种写法：props值为函数，返回的对象通过props传递给组件，灵活，推荐使用
-props(route) {
-    return {
-        id: route.params.id,
-        title: route.params.title
-    }
-}
+// 第三种写法：props值为函数，返回的对象// router/index.js  
+{
+    path: "/user",
+    component: () => import("@/views/User.vue"),
+    props(route) {
+      return {
+        id: route.query.id,
+        name: route.query.name,
+      };
+    },
+  },
+ 
+
+ // 路由跳转
+    this.$router.push({
+      path: "/user",
+      query: {
+        id: "idxxx",
+        name: "nameyyy",
+      },
+    });
 ```
 
 

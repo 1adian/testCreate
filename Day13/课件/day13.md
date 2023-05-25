@@ -4678,18 +4678,32 @@ props值为对象，对象中所有的key-value组合都会通过props传给组�
 
 传递的是死数据，无法传递动态参数，所以很少使用。
 
-#### 第三种：函数写法
+#### 第三种：函数写法（推荐使用）
 
 props值为函数，返回的对象通过props传递给组件，灵活，推荐使用
 
 ```js
-// 第三种写法：props值为函数，返回的对象通过props传递给组件，灵活，推荐使用
-props(route) {
-    return {
-        id: route.params.id,
-        title: route.params.title
-    }
-}
+// router/index.js  
+{
+    path: "/user",
+    component: () => import("@/views/User.vue"),
+    props(route) {
+      return {
+        id: route.query.id,
+        name: route.query.name,
+      };
+    },
+  },
+ 
+
+ // 路由跳转
+    this.$router.push({
+      path: "/user",
+      query: {
+        id: "idxxx",
+        name: "nameyyy",
+      },
+    });
 ```
 
 
@@ -5419,5 +5433,4 @@ const store = new Vuex.Store({
 // 导出实例
 export default store;
 ```
-
 
