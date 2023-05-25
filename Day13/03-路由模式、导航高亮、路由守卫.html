@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+  /*
+    路由的两种模式：
+      - hash （哈希路由）：
+        好处：生产环境，不需要 后端进行配置。
+        坏处：path 中有 `#`
+
+      - history
+        好处： path 没有 `#`
+        坏处：生产环境，需要 后端进行配置。
+
+    案例： router/index.js 中：
+      const router = new VueRouter({
+        mode: "history", // "hash" || "history"
+        base: process.env.BASE_URL,
+        routes,
+      });
+  */
+
+
+  /*
+   路由的 导航守卫：
+  
+ 
+     背景描述：
+       假设 url 中输入 `xxx/path`，要进入 对应的 `路由组件`。
+     -> 导航守卫，可以在 进入前(渲染) 组件执行，执行一个函数（拦截器），
+       也可以再 组件渲染完毕(进入后) ，执行一个函数（拦截器）。
+
+      可以在拦截器中，在比如进入前，确定是否真正进入该路由/渲染该组件。
+  */
+
+  /* 案例：验证是否登录：
+ 
+    router.beforeEach((to, from, next) => {
+    // 如果是 去往 登录页直接 “放行”
+    if (to.path === "/login") {
+      next();
+      return;
+    }
+    
+    // 模拟 未登录
+    const isLogin = false;
+    
+    // 若未登录，去往其他页面，则会被 重定向至 登录页面
+    if (!isLogin) {
+      alert("你未登录，请登录");
+      next("/login");
+    } else {
+      next();
+    }
+    });
+  
+  
+  */
+
+  /* 路由总结： 重要知识点：
+     1. 四、 2+3 两小节
+     2. 嵌套路由
+     3. 重定向的概念
+     4. 全局前置守卫 - `router.beforeEach`
+  
+  */
+</script>

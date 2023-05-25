@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+  /*
+    解锁新功能： vuex
+    脚手架中，选择 - `Vuex`
+    */
+
+  /* 同步导入组件   和   异步导入组件
+
+  同步导入组件：如下 import 关键字导入组件，会在 刷新页面时，同步优先 导入组件：
+   import HomeView from "../views/HomeView.vue";
+     好处：必选先将 组件导入完成，才会执行后续的代码。（代码执行的 优先级最高）
+     坏处：若同步导入的组件太多，会造成 页面的 “白屏现象”。
+
+   异步导入组件：import函数，导入组件
+     component: () => import( "../views/AboutView.vue"), 
+       好处：渲染对应的 路由，才会 导入对应的组件。
+       坏处：点击的时候才会 导入，偶尔会造成（点击时）页面的卡顿（相对而言）。
+
+   同步导入组件   和   异步导入组件 如何选择？？
+     -> 建议 首页使用同步，剩下其他页面都使用 异步。
+  
+  */
+</script>

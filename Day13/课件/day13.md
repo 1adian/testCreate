@@ -4132,7 +4132,7 @@ Vue Router 是 [Vue.js (opens new window)](http://cn.vuejs.org/)官方的路由�
 
 
 
-### 2.3 同步导入组件 VS  异步导入组件
+### 2.3 同步导入 组件  VS  异步导入组件
 
 ```js
 // 同步导入：
@@ -4290,9 +4290,9 @@ this.$router.push(path)
 
 应用场景：不同“入口” 进入 同一路由组件，有不同的显示。
 
-![image-动态路由](/Users/mark/Downloads/day18_课件/images/动态路由-1.png)
+![image-动态路由](./images/动态路由-1.png)
 
-![img](/Users/mark/Downloads/day18_课件/images/动态路由-2.png)
+![img](./images/动态路由-2.png)
 
 
 
@@ -4434,7 +4434,7 @@ const routes = [
 
 以element官网举例：https://element.eleme.cn/#/zh-CN
 
-![嵌套路由2](/Users/mark/Downloads/day18_课件/images/嵌套路由2.png)
+![嵌套路由2](./images/嵌套路由2.png)
 
 #### 路由配置 router/index.js
 
@@ -4547,7 +4547,7 @@ go：这个方法的参数是一个整数，意思是在 history 记录中向前
 
 例子
 
-​	![logo](/Users/mark/Downloads/day18_课件/images/go.png)
+​	![logo](./images/go.png)
 
 
 
@@ -4562,7 +4562,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/user/:userId',
-+     name: 'user',
++     name: 'user', // name 也可以进行路由跳转
       component: User
     }
   ]
@@ -4570,10 +4570,8 @@ const router = new VueRouter({
 ```
 
 ```js
-this.$route.push({ name: 'user', params: { userId: 123 } })
+this.$router.push({ name: 'user' })
 ```
-
-这种方式也会把路由导航到 `/user/123` 路径。
 
 
 
@@ -4586,6 +4584,7 @@ this.$route.push({ name: 'user', params: { userId: 123 } })
 ```js
 const router = new VueRouter({
   routes: [
+    // 只要 用户访问了 /a 的 path，会被自动重定向到 '/b'
     { path: '/a', redirect: '/b' }
   ]
 })
@@ -4596,6 +4595,7 @@ const router = new VueRouter({
 #### 重定向的常用场景：- `/404`
 
 ```js
+
 const router = new VueRouter({
   routes: [
     {},
@@ -4604,6 +4604,7 @@ const router = new VueRouter({
     { path: '/404', component: () => import("../views/404.vue")},
 
     // '*' 表示 通配符 所有
+    // 将所有的 无效路由，重定向到 `/404` 对应的 组件
     { path: '*', redirect: '/404' } // 注：一定要放在数组的 最后
   ]
 })
@@ -4619,9 +4620,9 @@ const router = new VueRouter({
 
 ==耦合度越低越好==
 
-在组件中使用 `$route` 会使之与其对应路由形成高度耦合，从而使组件只能在某些特定的 URL 上使用，限制了其灵活性。
+在组件中使用 `$route` 会使之与其对应路由形成高度 `耦合`，从而使组件只能在某些特定的 URL 上使用，限制了其灵活性。
 
-使用 `props` 将组件和路由解耦：
+使用 `props` 将 组件 和路由解耦：
 
 ##### router/index.js
 
@@ -4670,7 +4671,7 @@ props值为对象，对象中所有的key-value组合都会通过props传给组�
     name: 'yonghu',
     component: () => import('@/views/User.vue'),
     // 第二种写法：props值为对象，对象中所有的key-value组合都会通过props传给组件
-    props: { a: '1',b:'2' }
+    props: { a: '1',b:'2' } // 则 a / b 的数据，可以传递给组件
   }
 ```
 
@@ -4712,7 +4713,7 @@ props值为函数，返回的对象通过props传递给组件，灵活，推荐�
 
 #### 2种 路由模式
 
-1. 默认 hash 模式   http://yoursite.com/#/user/id 有#
+1. 默认 hash（哈希） 模式   http://yoursite.com/#/user/id 有#
 
    `#` 及其后面的内容就是hash值
 
@@ -4779,6 +4780,7 @@ Router-link默认携带class：router-link-active和router-link-exact-active
 const router = new VueRouter({ ... })
                               
 //注册一个全局前置守卫 
+// 本守卫的作用： 在进入 路由之前，先执行 beforeEach 的回调函数
 router.beforeEach((to, from, next) => {
   // ...
 })
@@ -4802,24 +4804,26 @@ router.beforeEach((to, from, next) => {
 
 > 案例：登录验证
 >
+> 举例：若用户 没有登录，还要访问 某些页面(路由跳转至某些页面)，可以直接在 拦截器中，将用户的访问，直接重定向到 登录页面
+>
 > ```js
 > router.beforeEach((to, from, next) => {
->   // 如果是 去往 登录页直接 “放行”
->   if (to.path === "/login") {
->     next();
->     return;
->   }
+> // 如果是 去往 登录页直接 “放行”
+> if (to.path === "/login") {
+>  next();
+>  return;
+> }
 > 
->   // 模拟 未登录
->   const isLogin = false;
+> // 模拟 未登录
+> const isLogin = false;
 > 
->   // 若未登录，去往其他页面，则会被 重定向至 登录页面
->   if (!isLogin) {
->     alert("你未登录，请登录");
->     next("/login");
->   } else {
->     next();
->   }
+> // 若未登录，去往其他页面，则会被 重定向至 登录页面
+> if (!isLogin) {
+>  alert("你未登录，请登录");
+>  next("/login");
+> } else {
+>  next();
+> }
 > });
 > ```
 >
@@ -4919,7 +4923,7 @@ const Foo = {
 
 
 
-### 11.8 路由元信息
+### 11.8 路由 元 信息
 
 #### 介绍
 
@@ -4927,7 +4931,7 @@ const Foo = {
 
 作用：可以给每个路由（route）配置单独的 信息/标记。
 
-​	标记![logo](/Users/mark/Downloads/day18_课件/images/meta.png)
+​	标记![logo](./images/meta.png)
 
 
 
@@ -4989,13 +4993,13 @@ router.beforeEach((to,from,next)=>{
 
 ​	https://v3.vuex.vuejs.org/zh/
 
-![](/Users/mark/Downloads/day18_课件/images/vuex.png)
+![](./images/vuex.png)
 
 
 
 ### 1.2 vuex原理图
 
-​	![logo](/Users/mark/Downloads/day18_课件/images/vuex2.png)
+​	![logo](./images/vuex2.png)
 
 
 
