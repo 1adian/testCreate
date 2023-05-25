@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <button @click="handleToUser">toUser</button>
+    <h1>app组件 - {{ $store.state.count }}</h1>
+    <button @click="add3Count">add3Count</button>
+    <button @click="add10Count">add10Count</button>
+    <button @click="delayAdd20">delayAdd20</button>
+    <button @click="delayAdd100">delayAdd100</button>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -9,26 +13,38 @@
   </div>
 </template>
 <script>
+import { mapMutations, mapActions } from "vuex";
 export default {
   name: "App",
   methods: {
-    handleToUser() {
-      // 使用的 name 进行路由跳转
-      // this.$router.push({ name: "user" });
+    // action - 辅助函数写法
+    // 即表示 本组件中，多了一个 this.delayAdd 的方法
+    ...mapActions(["delayAdd"]),
 
-      // 使用 path 进行路由跳转
-      // `/namexxx/idyy` 会以参数的形式，传递至 User.vue 中
-      // this.$router.push("/user/namexxx/idyyy"); // params 传参
-
-      // 路由跳转 - query 传参
-      this.$router.push({
-        path: "/user",
-        query: {
-          id: "query-idxxx",
-          name: "query-nameyyy",
-        },
-      });
+    delayAdd100() {
+      this.delayAdd(100);
     },
+
+    // mutation - 辅助函数写法
+    // 即表示 本组件中，多了一个 this.updateCount 的方法
+    ...mapMutations(["updateCount"]),
+    add3Count() {
+      // 触发mutation的第一种方式 this.$store.commit('mutation名字')
+      // 触发 mutation - updateCount 方法
+      this.$store.commit("updateCount", 3);
+    },
+    add10Count() {
+      // 本质是执行了 this.$store.commit("updateCount", 10);
+      this.updateCount(10);
+    },
+
+    delayAdd20() {
+      // 只要执行本函数，则会触发 action -> delayAdd
+      this.$store.dispatch("delayAdd", 20);
+    },
+  },
+  mounted() {
+    console.log(this.$store, this.$store.state.count);
   },
 };
 </script>

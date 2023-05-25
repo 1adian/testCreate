@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    状态管理：
+      状态 - 即 data / Model。
+
+    组件通信方式：
+      即 组件之间 传值（传递数据）。
+
+    面试问题： 组件之间的通讯方式 都有哪些？
+      - 父传子：props
+      - 子传父：自定义事件（this.$emit  /  this.$on - v-on:type="回调函数"  ）
+      - 非关系型组件：`EventBus / 全局事件总线`
+        缺点：全局的代码管理，相对混乱（因为要在 每个组件内部 $bus.$emit / $bus.$on）
+
+      - localStorage / sessionStorage 
+      - 父组件获取子组件的数据：  this.$refs.自定义子组件名，从而获取到 子组件的 data 和 method
+      - 兄弟组件：通过 父组件传递数据
+
+
+      - vuex
+  */
+
+
+  /*  Vuex 中的概念：
+    - store：即 vuex 的数据仓库， 该仓库中 统一管理数据；
+      各个组件，均能获取到 store 中的数据（状态）
+
+    - state：即 数据； 即多有的 需要放到 仓库(store) 中的数据，均被放在了 state 概念中。
+  
+    - mutation：同步更改 state 的数据
+
+    - action： 异步 触发 mutation
+
+    - getter：即 state 的计算属性
+  */
+</script>

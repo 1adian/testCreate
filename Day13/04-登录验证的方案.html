@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    验证用户是否登录的方案：
+  
+    1. axios 拦截器中 进行 用户是否登录 的验证：
+        需要前后端约定：若访问任何接口，都需要登录，若用户未登录，且访问该接口，
+          而后端 response.code 值为 401，则前端得知 用户未登录。
+  
+        // 任何 ajax 请求，都会走拦截器
+        http.interceptors.response.use(
+          function (response) {
+            // 对响应数据做点什么
+  
+            // 即表示 用户未登录
+            if (response.data.code === 401) {
+              则 进行路由跳转
+              router.push('/login')
+              // 即若用户未登录，则 在 axios 拦截器中重定向至 '/login' 页面
+            }
+  
+            // 即可以认为是 对 每个实际的接口，进行 DRY
+            return response.data; // 直接获得 data 数据
+          },
+          function (error) {
+            // 对响应错误做点什么
+            return Promise.reject(error);
+          }
+        );
+  
+  
+    2. 在 路由守卫 - beforeEach 中，进行未登录的 拦截
+          （今天的知识)
+  */
+</script>
