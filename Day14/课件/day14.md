@@ -5317,13 +5317,17 @@ export default {
 
 ref：定义一个数据的响应式，number,string,boolean 得到的是：RefImpl 的实例，==引用对象== .value
 
-reactive：定义复杂类型数据响应式，Object，Array 得到的是：Proxy 的实例，==代理对象==
+reactive：定义 复杂类型数 据响应式，Object，Array 得到的是：Proxy 的实例，==代理对象==
 
 ##### 原理区别：
 
 ref 处理基本数据类型，用的是 Object.defineProperty()，走的是 getter,setter，数据劫持
 
 reactive 处理对象，数组类型，底层用的是 ES6 里的 Proxy，通过代理对象对源对象进行加工操作
+
+
+
+
 
 ### 2.2.3 Vue2 响应式原理
 
