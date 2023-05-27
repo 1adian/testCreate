@@ -5445,3 +5445,88 @@ const store = new Vuex.Store({
 export default store;
 ```
 
+
+
+
+
+
+
+
+
+
+
+# 六、Vue3
+
+## 1、Vue3 快速上手
+
+## 1.1 Vue3介绍
+
+### Vue3现状
+
+- 2020年09月18日，发布vue3.0版本。代号：One Piece（海贼王 ）
+- 现在主流组件库都已经发布了支持vue3.0的版本，其他生态也已经非常成熟
+
+### Vue3优势
+
+- 性能提升（体积更小，速度更快）
+
+  打包体积减少41%
+
+  内存减少54%
+
+  初次渲染快55%，更新渲染快133%
+
+  https://github.com/vuejs/core/releases/tag/v3.0.0
+
+  ....
+
+- 源码升级
+
+  使用 Proxy 代替 defineProperty 实现响应式
+
+  重写 虚拟DOM，虚拟DOM 的对比更快了，实现 Tree-Shaking
+
+  ....
+
+- 更好的支持Typescript
+
+  最大的亮点。对类型进行更加严格的校验。以后肯定是拥抱TS的前端时代。
+
+- 新特性【重点关注 】
+
+  - 组合API（Composition API） 能够更好的组织逻辑，封装逻辑，复用逻辑
+
+    setup配置
+
+    ref 和 reactive
+
+    watch 和 watchEffect
+
+    Provide 和 inject
+
+    ....
+
+  - 新的内置组件
+
+    Fragment: Vue 3 组件不再要求有一个唯一的根节点，清除了很多无用的占位 div。
+
+    Teleport: 允许组件渲染在别的元素内，主要开发弹窗组件的时候特别有用。
+
+    Suspense: 异步组件，更方便开发有异步请求的组件。
+
+  - 其他改变
+
+    新生命周期钩子
+
+    .....
+
+  
+
+### Vue3展望：
+
+- 这是趋势，越来越多的企业将来肯定会升级到Vue3.0
+- ==大型项目==，由于对Ts的友好越来越多大型项目可以用Vue3.0
+- 最火框架，它是国内最火的前端框架之一
+- 英文网站：https://v3.vuejs.org/
+- 中文：https://cn.vuejs.org/
+
