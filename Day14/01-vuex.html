@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  const store = {
+    state: {
+      num: 12, // 根节点
+      example: {
+        num: 12 // 子模块
+      }
+
+      // 有一个小问题：若将 根节点的 num 和  example 模块的 num 在同一组件中引入
+      // 会发生 命名冲突
+    }
+  }
+  /*
+  ## 组件通信方式：
+    *1. 父传子：props
+    *2. 子传父：自定义事件： this.$emit v-on
+      自定义事件，本质也是『观察者模式』
+  
+    3. 兄弟： 父组件做中转 子1 -> 父 -> 子2
+    4. $refs.xx，父可以获取 子组件的 data 和 method
+  
+    *5. 事件总线 机制（相对常用：EventBus - 观察者模式）
+      -> 痛点：管理不集中
+  
+    ** 6. Vuex -> 任意组件
+      注：vuex 非常容易在 面试的时候被问题到。
+  
+      Vuex 中的概念：
+        store - 数据仓库
+  
+        state - 数据
+        mutate - 改变数据（注：vuex 中，只能通过 mutate 改变 state 中的数据）
+        getter - 即vuex中的 `计算属性`; 即对数据（state）的“再加工”
+        action - 若要进行`异步`的数据操作，其代码要在 action 中声明。
+  
+        dispatch  ->  通过 dispatch 可以 执行 `action` 中声明的函数。
+        commit    ->  通过 commit 可以 执行 `mutation` 中声明的函数。
+  */
+</script>
