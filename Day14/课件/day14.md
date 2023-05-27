@@ -5087,15 +5087,17 @@ Vue3 支持两种代码风格，选项式 API 和组合式 API，当然两种代
 
 通过组合式 API，我们可以使用导入的 API 函数来描述组件逻辑。
 
-![选项API和组合API2](/Users/mark/Downloads/day22课件/images/选项API和组合API2.png)
+假设，一个组件中，代码非常多（即组件的功能很复杂）：
+
+![选项API和组合API2](images/选项API和组合API2.png)
 
 每一个功能模块的代码颜色一样，左边是 Options API，一个功能的代码零散的分布在 data，methods 等配置内，维护起来很麻烦，而右边的 Compositon API 就不一样了，每个功能模块都在一起维护。
 
 其实还可以更进一步，如果每个颜色块代码，我们都拆分出去一个函数，我们就会写出类似上面右侧风格的代码，每个数据来源都清晰可见，而且每个功能函数都可以在各个地方复用。
 
-![选项API和组合API](/Users/mark/Downloads/day22课件/images/选项API和组合API.png)
+![选项API和组合API](images/选项API和组合API.png)
 
-![基于函数组合的API](/Users/mark/Downloads/day22课件/images/基于函数组合的API.png)
+![基于函数组合的API](images/基于函数组合的API.png)
 
 **选项式** **API (Options API)**
 
@@ -5180,7 +5182,7 @@ export default {
 
 1. Vue3 中一个新的配置项，值为一个函数。`setup` 是一个专门用于组合式 API 的特殊钩子函数
 
-2. 所有的组合 API 函数都在此使用, 只在初始化时执行一次
+2. 所有的组合 API 函数都在此使用, 只在初始化时执行一次（setup执行时机，早于 beforeCreate ）
 
 3. 注意：
 
@@ -5190,7 +5192,7 @@ export default {
 
 #### ref
 
-- 作用: 定义一个数据的响应式
+- 作用:  定义一个 数据的响应式
 
 - 语法
 
@@ -5202,27 +5204,29 @@ export default {
 
   - 创建一个包含响应式数据的==引用(reference)对象（或者说 ref 对象）==
   - js 中操作数据: ` xxx.value`
-  - 模板中操作数据: 不需要.value
+  - 模板 中操作数据: 不需要.value，直接 `xxx` 使用即可（相当于 省略了 `.value`）
 
 - 实例对象 解释
 
   其构造函数是：`RefImpl`
 
-  RefImpl：reference(引用) implement(实现) "**引用的实现**"
+  RefImpl：reference(引用)   implement(实现) "**引用的实现**"
 
   构造函数 `RefImpl` 生成的对象，简称「引用对象」。
 
 - `.value` 解释
 
-  Vue 中 `Proxy` 或 ` Object.defineProperty` 的数据响应，本质都是 给对象的 key 绑定 setter 钩子函数，所以需要 `.value` 属性，才能实现数据的响应性。
+  Vue 中 `Proxy` 或 ` Object.defineProperty` 的数据响应，本质都是 给 对象的 key 绑定 setter 钩子函数，所以需要 `.value` 属性，才能实现数据的响应性。
 
 - 注意：
 
-  一般用来定义一个基本类型的响应式数据，也可以是对象类型
+  一般用来定义一个 基础数据类型 的响应式数据，也可以是 对象类型
 
   基本类型数据：响应式仍然是 通过 `Object.defineProperty()` 的 getter 和 setter 实现
 
-- 模板解析：
+  而对象，使用的是 Proxy 实现的 数据响应性。
+
+- 模板 解析：
 
   模板在解析的时候，会判断是不是 ref 形式创建的数据，直接取出 value。所以在模板中使用的时候，省略 .value
 
@@ -5234,7 +5238,7 @@ export default {
 
 - Vue3 里 ref 对基本类型数据实现响应式的原理，是通过 Object.defineProperty()，getter 和 setter 拦截来实现 .value
 
-- ref 定义对象类型数据，底层原理是利用了 ES6 的的 Proxy 实现的响应式，而在 Vue3 中，对 Proxy 的操作封装在了一个叫做 reactive 的新函数中。
+- ref 定义 对象类型 数据，底层原理是利用了 ES6 的的 Proxy 实现的响应式，而在 Vue3 中，对 Proxy 的操作封装在了一个叫做 reactive 的新函数中。
 
 #### reactive
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /* 
+    ref 的作用：
+      使得 数据，具有响应性。
+  
+    const xxx =ref(初始化的数据);
+  
+    JS使用： `xxx.value` 的原因：
+      -> 若 初始化的数据，是 基础数据类型， 无法绑定 setter ，所以无法实现 vue的数据响应性。
+      所以 `.value` 即给 基础数据类型，包装成 对象， `.value` 为其 属性，以便绑定 setter 钩子函数，
+          -> 最终实现出 数据的响应性。
+  
+  */
+</script>

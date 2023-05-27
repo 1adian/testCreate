@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <!-- App 中获取 store 的 state 和 getter -->
+    <h1>State - {{ num }}</h1>
+    <h1>Getter - {{ doubleNum }}</h1>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -9,9 +12,14 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
   name: "App",
-  computed: {},
+  computed: {
+    ...mapState(["num"]),
+    ...mapGetters(["doubleNum"]),
+  },
 };
 </script>
 <style lang="scss">
