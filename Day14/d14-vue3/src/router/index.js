@@ -1,8 +1,5 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -21,10 +18,9 @@ const routes = [
   },
 ];
 
-// new - 典型的  面向对象
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+// 典型的 面向函数 的编程范式
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 

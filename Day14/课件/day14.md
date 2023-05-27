@@ -4965,7 +4965,7 @@ https://element.eleme.cn/#/zh-CN/component/installation
 
   最大的亮点。对类型进行更加严格的校验。以后肯定是拥抱 TS 的前端时代。
 
-- 组合 API（Composition API）【重点关注 】
+- ** 组合式 API（Composition API）【重点关注 】**
 
   好处：能够更好的组织逻辑，封装逻辑，复用逻辑：
 
@@ -4976,12 +4976,12 @@ https://element.eleme.cn/#/zh-CN/component/installation
   - watch 和 watchEffect
   - Provide 和 inject
 
-### Vue3 与 Vue2 的关键差别：
+### Vue3 与 Vue2 的 关键差别：
 
 - 关于响应式
   - Vue2 使用 `Object.defineProperty`
   - Vue3 使用 `Proxy`
-- 关于编程范式：
+- 关于 编程范式：
   - Vue2 只支持「面向对象」的编程范式
   - Vue3 同时支持「面向对象」和「面向函数」两种编程范式
 - 关于组件库：
@@ -5015,6 +5015,8 @@ npm install -g @vue/cli
 # 创建项目
 vue create vue3-cli-base
 ```
+
+
 
 ### 1.2.2 vite 创建
 
@@ -5053,7 +5055,7 @@ npm run dev
 
 官方文档：https://vitejs.cn
 
-- 它是一个更加轻量（热更新速度快，打包构建速度快）的 vue 项目脚手架工具。
+- 它是一个更加轻量（热更新 速度快，打包构建速度快）的 vue 项目脚手架工具。
 
 - 相对于 vue-cli 它默认安装的插件非常少，随着开发过程依赖增多，需要自己额外配置。
 

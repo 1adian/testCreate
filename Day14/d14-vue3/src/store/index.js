@@ -1,12 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import example from "./modules/example";
-import { action } from "./actions";
+import { createStore } from "vuex";
 
-Vue.use(Vuex);
-
-// new - 典型的  面向对象
-export default new Vuex.Store({
+// 典型的 面向函数 的编程范式
+export default createStore({
   state: {
     // 根级别
     // 若 整个SPA 中的数据，都放到 一个 state 中，会造成 数据非常多，且不容易管理
@@ -26,14 +21,14 @@ export default new Vuex.Store({
       state.num += value; //
     },
   },
-
-  // 若 根节点的 actions 非常多，则可以将其 单独放置在一个文件中
-  // 为了方便代码的管理
-  actions: action,
-
-  // es6：ESM  ->  ES Module
-  // Module - 模块化
-  modules: {
-    example, // 注册是 example 的模块
+  actions: {
+    // 若 根节点的 actions 非常多，则可以将其 单独放置在一个文件中
+    // 为了方便代码的管理
+    delayNum(context, value) {
+      // 模拟 2S 之后 更改数据
+      setTimeout(() => {
+        context.commit("updateNum", value);
+      }, 2000);
+    },
   },
 });

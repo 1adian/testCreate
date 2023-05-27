@@ -12,7 +12,8 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
-new Vue({
+// 下述的 `new` 的典型的 「面向对象」的写法
+const vm = new Vue({
   router,
   store,
   render: (h) => h(App),

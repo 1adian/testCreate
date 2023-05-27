@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    vue3 对应的 UI组件库： `Element Plus`
+      官网：https://element-plus.gitee.io/zh-CN/guide/installation.html#%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81
+
+
+    强调： vue2 的写法/技术点，在 vue3 中，几乎都被 兼容。
+  */
+
+  /* 关于 Vue3 的易考点：
+   Vue2 的响应式原理：Object.defineProperty() 给数据 data 的属性，绑定 setter 。
+ 
+   vue3 的响应式原理：Proxy （主要）  给数据 data 的属性，绑定 setter。
+     ES6 ->  `Proxy`
+       Proxy 本质：是 「设计模式」， 「代理模式」。
+        ->  https://es6.ruanyifeng.com/#docs/proxy
+
+    
+  
+    Vue3 重写了虚拟DOM：
+      重写 虚拟 DOM，虚拟 DOM 的对比更快了（比 vue2 更快）
+
+
+    Vue3 实现了 `Tree-Shaking`：
+      vue2 中，若 vue提供的功能（如 filters / 钩子函数），实际开发没有用到这些功能，
+        但 在 `npm run build`，依然会将 这些代码 打包进 最终的代码中。
+          即  没有 `Tree-Shaking`。
+
+      vue3 如何实现 `Tree-Shaking`：
+        若 vue3 在实际开发项目中，没有用到 这些功能（如 钩子函数），
+          则可在 `npm run build` 时，将没有被用到的功能，不达到至 最终的代码中。
+            即 `Tree-Shaking`。
+        
+
+    Vue2 和 Vue3 在编程范式上的区别：
+      - Vue2 是典型的「面向对象」的编程范式
+
+      - Vue3：引入了「面向函数」的编程范式，即 Vue3 既支持 面向对象 又支持 面向函数。
+        支持「面向对象」的原因： 为了 兼容 vue2 的写法（选项式API - 即 vue2本来的代码写法，即选项式API）
+            选项式API -> Options API
+
+        支持「面向函数」的原因：
+          为了 实现 `组合式 API` 的写法。
+            组合式 API -> Composition API
+  */
+
+
+  /* 官网 如何 自学：
+    https://cn.vuejs.org/guide/essentials/event-handling.html
+
+    `文档` ->  `快速上手`
+      页面的左上角：
+        `选项式`： -> Options API  ->  Vue2 面向对象的写法
+        `组合式`： -> Composition API  ->  Vue3 独有， 面向函数的写法。
+  
+  */
+
+
+  /* 编程范式 介绍：
+    最常见的 编程范式：
+      - 面向过程：最原始的开发形式，不建议使用。
+        即任何功能开发，都 自上往下 代码编写，被称为「面向过程」。
+
+
+      - 面向函数（又被叫做： 函数式编程）
+        即所有的功能写法，都是通过「函数」的各种组织，才形成的代码，被称为「面向函数」。
+
+    
+      - 面向对象：
+        即页面的功能，都是 `new 构造函数` 而生成的功能，被称为「面向对象」。
+  
+          注：面向对象代码的典型特征： 1) `new`    2) `this.xxx`
+  */
+
+
+
+  /* vite：其含义 法语的 `快`。
+    vite 的作用：等同于 `vue-cli` (脚手架)
+
+    即可以创建 vue 项目（vite 默认支持的 功能很少，如 不支持 (router / vuex / scss / prettier / eslint）
+      需要的话，需要自己手动安装。
+
+    vite 相比脚手架的优势：「快」
+      关于 打包：（npm run build）
+        1. 脚手架默认使用 `webpack` 进行打包，若项目代码非常多，打包速度慢。
+        2. vite 使用 `esbuild` 进行打包，所以其打包速度比 webpack 快的多。
+  
+      关于 热加载（npm run serve / npm run dev）
+        若开发环境下，写了新的代码，也需要被浏览器识别。自动更新页面。
+          而 vite 做了大量的工作，使得 开发环境下，热加载的速度也比 脚手架 快的多。
+
+    vite 自学的资料：
+      https://www.bilibili.com/video/BV1BS4y1P7mU/?spm_id_from=333.337.search-card.all.click&vd_source=cd680c85f2441505e5b4c08abc17c414
+  */
+
+</script>
