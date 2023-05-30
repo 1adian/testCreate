@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <p>
+      <button @click="sendMsg">发送数据</button>
+    </p>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -9,9 +12,25 @@
 </template>
 
 <script>
+import { ref, getCurrentInstance } from "vue";
+
 export default {
   name: "App",
-  computed: {},
+  setup() {
+    const msg = ref("App 里的数据");
+
+    // 通过 getCurrentInstance 才能获取 全局实例
+    const { proxy } = getCurrentInstance();
+
+    const sendMsg = () => {
+      // eventBus 发射数据
+      proxy.$mitt.emit("send", msg);
+    };
+
+    return {
+      sendMsg,
+    };
+  },
 };
 </script>
 <style lang="scss">

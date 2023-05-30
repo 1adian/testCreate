@@ -6107,14 +6107,16 @@ emitter.emit("foo", { a: "b" });
    // mitt库默认导出的是一个函数，我们需要执行它从而得到事件总线的对象
    const mitter = mitt();
    const app = createApp(App);
-
+   
    // 挂载到 app 上
    app.config.globalProperties.$mitt = mitter;
-
+   
    app.mount("#app");
    ```
 
    也可以在单独的文件暴露出事件总线对象
+
+   （注：两种写法，二选一，不要混用；建议 使用 下面的写法）
 
    utils/eventbus.js:
 
@@ -6179,7 +6181,9 @@ emitter.emit("foo", { a: "b" });
 
 ## 2.9 组合式函数
 
-在 Vue 应用的概念中，“组合式函数”(Composables) 是一个利用 Vue 的组合式 API 来封装和复用**有状态逻辑**的函数。
+在 Vue 应用的概念中，“组合式函数”(Composables) 是一个利用 Vue 的 组合式 API  来 封装 和 复用 **有状态逻辑**的函数。
+
+强调：组合式函数，其可以封装 `有数据响应性` 的数据。
 
 或者叫做 自定义 Hook，
 
@@ -6187,7 +6191,7 @@ emitter.emit("foo", { a: "b" });
 
 Hook 本质是一个函数。
 
-组合式 API 的一部分灵感正来自于 React hooks，Vue 的组合式函数也的确在逻辑组合能力上与 React hooks 相近。
+组合式 API 的 一部分灵感 正来自于 React hooks，Vue 的组合式函数也的确在逻辑组合能力上与 React hooks 相近。
 
 自定义 Hook：使用 Vue3 的组合 API 封装的可复用的功能函数
 
@@ -6198,7 +6202,7 @@ Hook 本质是一个函数。
 基本步骤：
 
 - 展示鼠标坐标 x y {}
-  - 定义一个响应式数据对象，包含 x 和 y 属性。 ==>响应式数据对象
+  - 定义一个 响应式 数据对象，包含 x 和 y 属性。 ==>响应式数据对象
   - 在组件渲染完毕后，监听 window 的鼠标移动事件 ==>生命周期，挂载之后
   - 指定 move 函数为事件对应方法，在函数中修改坐标
   - 在 setup 返回数据，模版中使用
@@ -6222,17 +6226,23 @@ function useMouse() {
     x: 0,
     y: 0,
   });
-  // 2、监听document的鼠标移动事件  ==>事件绑定，
-  onMounted(() => {
-    window.addEventListener("mousemove", move);
-  });
-  // 3、move函数为事件对应方法
+ 
+    // 3、move函数为事件对应方法
   const move = (e) => {
     mouse.x = e.pageX;
     mouse.y = e.pageY;
   };
+  
+  // 2、监听document的鼠标移动事件  ==>事件绑定，
+  onMounted(() => {
+    window.addEventListener("mousemove", move);
+  });
+ 
+
   // 4、解绑事件
   onBeforeUnmount(() => {
+    // 组件被销毁时， 要清楚 绑定到 window 上的 move 函数
+    // 以避免 内存泄漏
     window.removeEventListener("mousemove", move);
   });
 
