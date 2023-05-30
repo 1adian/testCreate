@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    git 合作开发中，若 中途参与一个 线程的项目，其开发流程：
+      1. git clone 项目代码
+      2. npm install
+      3. npm run start/dev/serve/... 
+        -> 将项目运行起来
+  
+
+
+    组合式API：
+      - ref(数据)
+        作用：为 数据 绑定/实现 数据的响应性。
+          注：主要是为 基础数据，实现数据的响应性。
+            原因：基础数据 没有 property/key，即无法给其 绑定 setter 钩子函数，则无法实现数据的响应性。
+
+        用法：
+          const refXX = ref(数据);
+            JS 中，获取数据：  `refXX.value`
+
+            template 中，可以直接写 `refXX`  （即 省略了 `.value`
+            
+        强调： ref 也可以给 复杂数据类型，绑定 数据的响应性。
+          给复杂数据类型绑定响应性，其本质是 调用了 `reactive` 函数，给复杂数据类型 实现的数据响应性。
+
+
+      - reactive(只能是复杂数据类型)
+        作用：给复杂数据类型 实现的数据响应性。
+
+        用法：
+          const state = reactive(复杂数据类型);
+            注：reactive 本质是通过 `Proxy` 实现数据的 响应性。
+
+            JS中，可以直接 reactive.xxx属性 直接数据的响应性。
+            template 中 一样的用法。
+  */
+</script>
