@@ -5386,9 +5386,13 @@ Object.defineProperty(data, "count", {
         return Reflect.get(target, prop);
       },
       // 拦截设置属性值或添加新属性
+      // 只要执行 `proxyData.xxx = 新的值`，则会 触发 setter 函数
       set(target, prop, value) {
         console.log("触发了 setter 钩子");
-        return Reflect.set(target, prop, value);
+        
+      
+        // 其等同于 target[prop] = value;
+        return Reflect.set(target, prop, value); 
       },
       // 拦截删除属性
       deleteProperty(target, prop) {
@@ -5420,6 +5424,8 @@ ref 通过 `Object.defineProperty()` 的 getter 和 setter 实现响应式。
 reactive 通过 ES6 的 Proxy 实现响应式，并通过 Reflect 操作源对象内部的数据。
 
 ### `<script setup>`
+
+注：其本质 是 setup 函数的语法糖； 其好处：可以不需要 return，则 声明的 变量 和 方法，可以直接在 template 中获取的到。
 
 在 `setup()` 函数中手动暴露大量的状态和方法非常繁琐。幸运的是，我们可以通过使用构建工具来简化该操作。当使用单文件组件（SFC）时，我们可以使用 `<script setup>` 来大幅度地简化代码。（只写 Vue3 代码）
 
@@ -5557,7 +5563,7 @@ export default {
 
     // 配置型 写法
     keyword: {
-      immediate: true, //  立即监听
+      immediate: true, //  立即监听；即刷新页面，即 执行一次 handler
       deep: true, // 开启深层次检测，默认开启的是浅层次的监视
       handler(newVal, oldVal) {
         console.log("keyword变化了", newVal, oldVal);
@@ -5569,6 +5575,8 @@ export default {
 
 <style lang="scss" scoped></style>
 ```
+
+
 
 ### 组合式 API\_侦听器
 

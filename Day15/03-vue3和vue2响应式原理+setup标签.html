@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    vue2 Object.defineProperty 实现数据响应性原理的缺点：
+      -> 无法给 新增的 key ，实现数据响应性；
+        所以需要用到：  Vue.set() / this.$set()，以便给 新增的 key 实现数据响应性。
+
+
+    vue3 复杂数据类型，使用 Proxy，不需要逐个 给 data 的key 绑定 setter 的钩子函数；
+      可以直接对 对象 实现 setter 的钩子函数。
+  
+  */
+</script>
