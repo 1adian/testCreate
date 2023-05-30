@@ -6256,3 +6256,6 @@ const mouse = useMouse();
 ### vueUse 简介
 
 https://vueuse.org/
+
+- 作用：该三方库 封装了 大量的 Vue3 的 组合式函数；可以直接复用。
+- 安装：npm i @vueuse/core
