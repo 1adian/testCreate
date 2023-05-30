@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp } from "vue"; // 导入需要的函数，vue3 函数式写法，其各种功能，都需要通过 导入函数来实现对应的 功能
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";

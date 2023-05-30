@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  /*
+    Vue3 VS Vue2
+  
+    - Vue / React 等框架，要知道 其 三大支柱：
+      1）数据响应式：数据驱动视图， MVVM -> Model（Data）   <-  vm  ->      View（视图）
+        -> 技术原理： 即控制/监听对象的 key，若其key的数据发生改变，触发 `setter` 的钩子函数，从而 更改视图。
+          Vue2： Object.defineProperty
+          Vue3： Proxy （ES6 - 代理模式）
+      2）组件化：即提供 `组件`，其组件中 封装了 `js + css +html` 组成的代码
+      3）渐进式：核心要点：`Vue-core`，若后续需要其他的功能，
+        可 自行安装： sass、eslint、prettier、router、vuex
+  
+  
+    - Vue2 和 Vue3 写法/用法 上的区别：
+      - vue2 默认支持 JS（ vue2 对 TS 的支持，并不友好）
+        而，Vue3 原生支持 TS（因为 vue3 即是 用 TS写出来的）。
+
+      - 编程范式上：
+        - vue2 只支持 面向对象（ 选项式API / OptionsAPI ）
+          -> 面向对象的典型特征： 1）关键字：`new`   2）关键字：`this`，  this.xxx
+
+        - vue3 同时支持 面向对象 + 面向函数 （ 组合式API / CompostionAPI ）
+          -> 面向函数的典型特征：代码/业务逻辑，都是通过 函数实现的。
+            // 导入需要的函数，vue3 函数式写法，其各种功能，都需要通过 导入函数来实现对应的 功能
+
+
+      - vue2比较流行的组件库： `Element-UI`
+        vue3比较流行的组件库： `Element-Plus`
+          ，即 vue2的组件库，无法直接适配 vue3。
+
+
+      - Vue3的作者 - 尤雨溪，在开发 vue3 的过程中，顺便 开发了 `vite` 的工具。
+        vite 简介：
+          作用：约等于 vue-cli，即 脚手架。
+          即 开发环境下，提供 热加载功能（即本地也可以以 服务器的环境运行前端的代码）
+          而 生产环境下，提供了 代码打包的功能。
+
+
+        vite VS vue-cli 打包的情况：
+          vite 使用 `esbuild`，进行打包。（esbuild 特点：打包速度 比 webpack 快非常多）
+          vue-cli 使用 `webpack` 进行打包。
+          注：vite 前期（2022年之前）相对 功能 没有 webpack 全面。
+
+
+        vite VS vue-cli 开发环境下：
+          vite 直接使用 ES6 的 ESM 进行 模块化的功能。
+          vue-cli 使用 webpack 先将高版本（ES6+）的代码，编译成 低版本代码（ES5）。
+
+        注：
+          vite 默认支持 vue3。
+          vue-cli 既支持 vue2，又支持 vue3。
+
+
+        建议：初学者的学习线路：
+          一定要 先牢固掌握 vue2，再深入研究 vue3。
+          一定要 先牢固掌握 vue-cli，再深入研究 vite。
+  */
+</script>
