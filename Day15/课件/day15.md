@@ -5697,7 +5697,7 @@ watchEffect(() => {
 - `onBeforeUnmount` 卸载前
 - `onUnmounted` 卸载后
 
-![组件生命周期图示](/Users/mark/Downloads/day22课件/images/lifecycle.png)
+![组件生命周期图示](images/lifecycle.png)
 
 #### 组合式 API\_生命周期
 
@@ -5894,7 +5894,7 @@ const props = defineProps({
   msg: String,
 });
 
-console.log(props.foo);
+console.log(props.msg);
 </script>
 ```
 
