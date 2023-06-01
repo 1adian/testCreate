@@ -48,6 +48,8 @@
 
 <script>
 import { User, Lock, Search } from "@element-plus/icons-vue";
+// 注：其是 import api from "@/api/index.js";的简写
+import api from "@/api";
 export default {
   name: "LoginView",
   components: {
@@ -123,6 +125,12 @@ export default {
         // 如果 valid 为true 则表示，表单验证通过
         if (valid) {
           console.log("submit!");
+
+          api.user
+            .login(this.ruleForm.username, this.ruleForm.pass)
+            .then((res) => {
+              console.log("api-login", res);
+            });
         } else {
           // 表单验证未通过
           console.log("error submit!");

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+  /* 
+    ES6：  `?.` 运算符
+      作用：用于 替代 `.`，以避免以避免 undefined.xx 的报错情况
+  
+  */
+
+  var obj = {};
+
+  console.log(obj.xx); // -> `undefined`
+  // console.log(obj.xx.xx); // -> undefined.xx ->  直接报错
+
+  // ES6 为了解决 `undefined.xx.xx` 会报错的问题，提供了 `?.` 以避免 undefined.xx 的报错情况
+  console.log(obj?.xx?.xx?.xx?.yy) // 不报错，而返回 undefined
+</script>
