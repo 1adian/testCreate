@@ -23,7 +23,12 @@ const routes = [
     name: "login",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/LoginView.vue"),
-  },
+  }, // SetView.vue
+  {
+    path: "/set",
+    name: "set",
+    component: () => import("../views/SetView.vue"),
+  }, // .vue
 ];
 
 const router = createRouter({
