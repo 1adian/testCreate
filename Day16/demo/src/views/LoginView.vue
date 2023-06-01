@@ -48,6 +48,8 @@
 
 <script>
 import { User, Lock, Search } from "@element-plus/icons-vue";
+import { mapMutations } from "vuex";
+
 // 注：其是 import api from "@/api/index.js";的简写
 import api from "@/api";
 export default {
@@ -98,6 +100,8 @@ export default {
     };
   },
   methods: {
+    // 即在本组件中，可以 this.updateUserInfo 使用 mutation
+    ...mapMutations(["updateUserInfo"]),
     // 自定义 表单验证器
     validatePass2(rule, value, callback) {
       // console.log("value", value);
@@ -130,6 +134,12 @@ export default {
             .login(this.ruleForm.username, this.ruleForm.pass)
             .then((res) => {
               console.log("api-login", res);
+
+              // 将 res.data -> 用户的数据，存储在 vuex 中
+              this.updateUserInfo(res.data);
+
+              // 编程式导航跳转到 home
+              this.$router.push("/");
             });
         } else {
           // 表单验证未通过
