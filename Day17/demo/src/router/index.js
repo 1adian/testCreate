@@ -8,6 +8,20 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    children: [
+      {
+        path: "manager", // 其路径就是 `/manager`
+        name: "manager",
+        component: () => import("@/views/manager/ManagerIndexView.vue"),
+        children: [
+          {
+            path: "managerlist", // 其路径就是 `manager/managerlist`
+            name: "managerlist",
+            component: () => import("@/views/manager/ManagerListView.vue"),
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/about",

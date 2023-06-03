@@ -2,23 +2,27 @@
   <div>
     <el-menu
       :collapse="isCollapse"
-      default-active="2"
+      :default-active="defaultActive"
       class="el-menu-vertical-demo"
+      router
     >
-      <el-sub-menu index="1">
+      <!--  
+        :router="true" 
+        注：若 el-menu 设置 router，则 自动实现路由跳转
+          其跳转的 path 为 `index` 的值
+      -->
+      <el-menu-item index="/">
+        <el-icon><icon-menu /></el-icon>
+        <span>首页</span>
+      </el-menu-item>
+
+      <el-sub-menu index="/manager">
         <template #title>
           <el-icon><location /></el-icon>
-          <span>Navigator One</span>
+          <span>账号管理</span>
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
+        <el-menu-item index="/manager/managerlist">管理员列表</el-menu-item>
       </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <span>Navigator Two</span>
-      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -34,6 +38,23 @@ export default {
     },
   },
   components: { IconMenu, Location },
+  data() {
+    return {
+      defaultActive: "",
+    };
+  },
+  // 侦听器
+  watch: {
+    $route: {
+      // 设为 true，则 刷新页面的时候，也会执行一次回掉函数
+      immediate: true,
+      handler() {
+        // 刷新时，也将 fullPath 赋值给 defaultActive
+        // 作用：刷新时，也能高亮对应的 menu 按钮
+        this.defaultActive = this.$route.fullPath;
+      },
+    },
+  },
 };
 </script>
 

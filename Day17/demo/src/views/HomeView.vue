@@ -27,7 +27,10 @@
           </el-dropdown>
         </el-space>
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <!-- 子路由 - children 显示在此 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -41,7 +44,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-      flag: true,
+      flag: false,
       squareUrl:
         "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
     };
