@@ -229,8 +229,9 @@ export default {
 
       // 点击编辑，1. 打开抽屉
       this.drawer = true;
-      console.log("handleEdit", i, row);
 
+      this.formData.adminname = row.adminname;
+      this.formData.password = row.password;
       this.formData.role = String(row.role); // 获取到 该管理员的 角色/权限/role
     },
     handleDelete(i, row) {
