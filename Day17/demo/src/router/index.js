@@ -9,6 +9,7 @@ const routes = [
     name: "home",
     component: HomeView,
     children: [
+      // 管理员
       {
         path: "manager", // 其路径就是 `/manager`
         name: "manager",
@@ -18,6 +19,27 @@ const routes = [
             path: "managerlist", // 其路径就是 `manager/managerlist`
             name: "managerlist",
             component: () => import("@/views/manager/ManagerListView.vue"),
+          },
+        ],
+      },
+      // 轮播图
+      {
+        // 轮播图
+        path: "banner",
+        name: "banner",
+        component: () => import("@/views/banner/BannerIndexView.vue"),
+        children: [
+          {
+            path: "bannerlist",
+            name: "bannerlist",
+            label: "轮播图列表",
+            component: () => import("@/views/banner/BannerListView.vue"),
+          },
+          {
+            path: "banneradd",
+            name: "banneradd",
+            label: "轮播图添加",
+            component: () => import("@/views/banner/BannerAddView.vue"),
           },
         ],
       },
@@ -60,6 +82,7 @@ const isLogin = () => {
 router.beforeEach((to, from, next) => {
   // 去`/login` 页面之前：
   if (to.path === "/login") {
+    // 返回 true 表示登录了
     if (isLogin()) {
       // isLogin() -> false （表示未登录） -> 直接跳转到登录页面
       ElMessage("登录状态有效，不需要重复登录");
@@ -68,6 +91,11 @@ router.beforeEach((to, from, next) => {
       next("/");
       return;
     }
+    /* 
+      else -> 即表示 未登录
+      // 即跳转至登录页
+      router.push('/login');
+    */
   }
 
   // 表示 正常的 路由跳转

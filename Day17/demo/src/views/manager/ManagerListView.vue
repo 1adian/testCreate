@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="header">
+      <el-button type="primary" @click="addAdmin">
+        <el-icon><Plus /></el-icon>
+        添加管理员
+      </el-button>
+    </div>
     <el-table
       :data="computedTableData"
       style="width: 100%"
@@ -47,16 +53,81 @@
       layout="total, prev, pager, next"
       :total="tableData.length"
     />
+
+    <!-- 
+      抽屉：对 抽屉进行 DRY
+        使得 该组件同时支持：「新增」和「编辑」两种功能
+
+        思路：如何让 一个组件，同时 适配 两种功能 
+          -> 引入一个 type：
+            若 type 的值为 'add'，则为「新增」抽屉
+            若 type 的值为 'edit'，则为「编辑」抽屉
+     -->
+    <el-drawer v-model="drawer" direction="rtl">
+      <template #header>
+        <h4>{{ type === "add" ? "添加管理员" : "编辑管理员" }}</h4>
+      </template>
+      <template #default>
+        <el-form
+          label-position="right"
+          label-width="80px"
+          :model="formData"
+          style="max-width: 460px"
+        >
+          <el-form-item label="账户" v-if="type === 'add'">
+            <el-input v-model="formData.adminname" />
+          </el-form-item>
+          <el-form-item label="密码" v-if="type === 'add'">
+            <el-input v-model="formData.password" />
+          </el-form-item>
+          <el-form-item label="角色">
+            <el-select
+              v-model="formData.role"
+              class="m-2"
+              placeholder="请选择角色"
+            >
+              <el-option label="管理员" value="1" />
+              <el-option label="超级管理员" value="2" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </template>
+      <template #footer>
+        <div style="flex: auto">
+          <el-button @click="drawer = false">取消</el-button>
+          <!-- 添加管理员 -->
+          <el-button v-if="type === 'add'" type="primary" @click="handleConfirm"
+            >添加</el-button
+          >
+
+          <!-- 更新管理员 -->
+          <el-button v-if="type === 'edit'" type="primary" @click="handleUpdate"
+            >更新</el-button
+          >
+        </div>
+      </template>
+    </el-drawer>
   </div>
 </template>
 
 <script>
 import api from "@/api";
+import { Plus } from "@element-plus/icons-vue";
 export default {
   name: "ManagerListView",
-  components: {},
+  components: {
+    Plus,
+  },
   data() {
     return {
+      type: "", // 为了表示 抽屉的状态
+      // 新增管理员的数据
+      formData: {
+        adminname: "",
+        password: "",
+        role: "1",
+      },
+      drawer: false, // 抽屉
       pageSize: 5, // 分页，一页显示的数据条数
       currentPage: 1, // 当前页
 
@@ -87,7 +158,7 @@ export default {
       const endIndex = this.currentPage * this.pageSize;
 
       // 截取数组的范围：[startIndex, endIndex)
-      return this.tableData.slice(startIndex, endIndex);
+      return this.tableData?.slice(startIndex, endIndex);
     },
   },
   // vm组件实例创建完毕，则执行本钩子函数
@@ -96,15 +167,71 @@ export default {
     this.updateTable();
   },
   methods: {
+    // 调用 更新管理员的 接口
+    handleUpdate() {
+      api.user.updateAdmin(this.formData).then((res) => {
+        // TODO：提供了 role 成功提交到后端，但 拉取最新数据 role 不变
+        // 强调：`==` 数据数据类型的判断，直接判断数值 是否相等
+        if (res.code == 200) {
+          // 1. 关闭 抽屉
+          this.drawer = false;
+
+          // 2. 更新列表数据
+          this.updateTable();
+        }
+        console.log("this.formData", this.formData);
+        console.log("updateAdmin", res);
+      });
+    },
+
+    // 点击「添加管理员」按钮，触发本函数
+    addAdmin() {
+      this.type = "add"; // 让 抽屉的状态 适配「新增」
+
+      this.drawer = true; // 打开抽屉
+    },
+
+    // 新增用户，提交数据
+    handleConfirm() {
+      api.user.addAdmin(this.formData).then((res) => {
+        if (res.code == "200") {
+          // 表示 添加数据成功，
+          // 1. 关闭 抽屉
+          this.drawer = false;
+          // 2. 刷新 table 的数据
+          this.updateTable();
+          // 3. 清空 抽屉中的数据（）
+          this.formData = {
+            adminname: "",
+            password: "",
+            role: "1",
+          };
+        }
+      });
+    },
     // 只要执行了本函数，则更新table
     updateTable() {
       api.user.getManagerList().then((res) => {
-        this.tableData = res.data;
-        console.log("getManagerList", res);
+        // console.log(res);
+        // 数据请求成功，才进行后续的赋值操作
+        if (res.code == "200") {
+          this.tableData = res.data;
+        }
+
+        // 注：token 失效，则 res.data 返回值是 undefined，
+        // 且若代码还执行后续代码，如 undefined.slice() 则肯定报错
+        // this.tableData = res.data || [];
+        // console.log("getManagerList", res);
       });
     },
     handleEdit(i, row) {
+      this.type = "edit"; // 让 抽屉的状态 适配「编辑」
+
+      // 点击编辑，1. 打开抽屉
+      this.drawer = true;
       console.log("handleEdit", i, row);
+
+      this.formData.role = String(row.role); // 获取到 该管理员的 角色/权限/role
     },
     handleDelete(i, row) {
       console.log("handleDelete", i, row);

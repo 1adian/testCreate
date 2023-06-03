@@ -23,6 +23,14 @@
         </template>
         <el-menu-item index="/manager/managerlist">管理员列表</el-menu-item>
       </el-sub-menu>
+      <el-sub-menu index="/banner">
+        <template #title>
+          <el-icon><location /></el-icon>
+          <span>轮播图管理</span>
+        </template>
+        <el-menu-item index="/banner/bannerlist">轮播图列表</el-menu-item>
+        <el-menu-item index="/banner/banneradd">轮播图添加</el-menu-item>
+      </el-sub-menu>
     </el-menu>
   </div>
 </template>

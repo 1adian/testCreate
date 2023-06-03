@@ -16,3 +16,11 @@ export const deleteAdmin = (adminid) =>
   http.post("/admin/admin/delete", {
     adminid,
   });
+
+// 新增管理员
+export const addAdmin = (formData) => http.post("/admin/admin/add", formData);
+
+// admin/admin/update
+// 更新管理员
+export const updateAdmin = (formData) =>
+  http.post("/admin/admin/update", formData);

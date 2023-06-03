@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "@/router";
 
 // 信息弹窗
 import { ElMessage } from "element-plus";
@@ -61,6 +62,12 @@ http.interceptors.response.use((response) => {
   if (response.data?.data?.token) {
     // 强调：后端必须 data.data.token 的数据格式（即和后端的约定）
     localStorage.setItem("token", response.data.data.token);
+  }
+
+  // 若 code 是 10119 表示 token 失效
+  // 立即重定向至 登录页面
+  if (response.data.code === "10119") {
+    router.push("/login");
   }
 
   // 小弹窗信息
