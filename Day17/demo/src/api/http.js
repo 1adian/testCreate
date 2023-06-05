@@ -67,6 +67,7 @@ http.interceptors.response.use((response) => {
   // 若 code 是 10119 表示 token 失效
   // 立即重定向至 登录页面
   if (response.data.code === "10119") {
+    localStorage.removeItem("token");
     router.push("/login");
   }
 
