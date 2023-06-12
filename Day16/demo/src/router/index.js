@@ -8,6 +8,22 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    children : [
+      {
+        path:'manager',
+        name:'manger',
+        component :()=>import('@/views/manager/ManagerIndexView.vue'),
+
+      
+      children : [
+        {
+          path:'managerlist',
+          name:'list',
+          component :()=>import('@/views/manager/ManagerListView.vue')
+        },
+      ]
+    },
+    ]
   },
   {
     path: "/about",
